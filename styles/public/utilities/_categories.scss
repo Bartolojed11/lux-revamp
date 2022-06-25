@@ -1,0 +1,30 @@
+.categories-wrapper {
+    margin-top: 2.4rem;
+}
+
+.catgories-item {
+    box-shadow: $default-bshadow;
+    border-radius: $border-radius;
+    height: 7.9rem;
+    width: 6.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1.5rem;
+    margin: .5rem;
+}
+
+.catgories-item > a > img {
+    height: 3.6rem;
+    width: 3.6rem;
+    object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.catgories-item > label {
+    font-weight: 700;
+    color: $font-primary
+}
+

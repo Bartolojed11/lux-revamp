@@ -1,0 +1,31 @@
+@import
+	'public/variables',
+	'public/reset';
+
+@import 'bootstrap/dist/css/bootstrap.css';
+
+@import '@splidejs/react-splide/css';
+
+// Utilities
+@import 
+	'public/utilities/helpers',
+	'public/utilities/functions',
+	'public/utilities/btn',
+	'public/utilities/navbar',
+	'public/utilities/separator',
+	'public/utilities/carousell',
+	'public/utilities/card',
+	'public/utilities/categories',
+	'public/utilities/authModal',
+	'public/utilities/fonts',
+	'public/utilities/footer';
+
+
+
+// Pages
+@import 
+	'public/pages/home',
+	'public/pages/searchResult',
+	'public/pages/product',
+	'public/pages/cartPage',
+	'public/pages/placeOrder'

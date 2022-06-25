@@ -1,0 +1,154 @@
+.login-modal {
+  & {
+    top: 20%;
+    bottom: 0%;
+  }
+
+  & > .modal-dialog,
+  .modal-content {
+    height: 100vh;
+    margin: 0;
+  }
+
+  & .modal-content {
+    background-color: $primary-color;
+    border-radius: $border-radius * 2 $border-radius * 2 0 0;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
+  & .modal-header {
+    border: 0px;
+    @extend .xy-center;
+    flex-direction: column;
+  }
+
+  & .modal-title {
+    font-size: 2.4rem;
+    font-weight: 600;
+  }
+
+  & .login-form .username {
+    padding-left: 10%;
+    border-bottom: 0px;
+    border-radius: $border-radius $border-radius 0 0;
+  }
+
+  & .login-form .password {
+    padding-left: 10%;
+    border-radius: 0 0 $border-radius $border-radius;
+  }
+
+  & .form-group-username,
+  .form-group-password {
+    position: relative;
+  }
+
+  & .username-left-icon,
+  .password-left-icon {
+    position: absolute;
+    z-index: 2;
+    font-size: 1.6rem;
+  }
+
+  & .username-left-icon,  & .password-left-icon {
+    top: 24%;
+    left: 3%;
+  }
+
+  & .forgot-password-link {
+    text-align: right;
+    display: block;
+  }
+
+  .or-continue-with {
+    text-align: center;
+  }
+
+  & .no-account-yet {
+    text-align: center;
+  }
+
+  & .or-continue-with p,
+  & .no-account-yet p {
+    width: 100%;
+  }
+
+  & .or-continue-with p::before,
+  & .or-continue-with p::after,
+  & .no-account-yet p::before,
+  & .no-account-yet p::after {
+    content: "";
+    height: 0.1rem;
+    width: 5rem;
+    background-color: $secondary-color;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  & .no-account-yet p::before,
+  & .no-account-yet p::after {
+    width: 6rem;
+  }
+
+  & .or-continue-with p,
+  & .no-account-yet p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  & .continue-with-thirdparty {
+    @extend .xy-center;
+    gap: 0.9rem;
+    font-size: 1.8rem;
+  }
+}
+
+.fogotpass-form {
+  & .forgot-pass-username {
+    padding-left: 10%;
+    border-bottom: 0px;
+    border-radius: $border-radius;
+  }
+}
+
+.registration-form {
+  & .registration-username {
+    padding-left: 10%;
+    border-bottom: 0px;
+    border-radius: $border-radius;
+  }
+
+  & .password {
+    padding-left: 10%;
+    border-radius:$border-radius;
+  }
+
+  & .form-group-firstname,
+  .form-group-lastname {
+    position: relative;
+  }
+
+  & .registration-lastname, .registration-firstname {
+    padding-left: 10%;
+    border-bottom: 0px;
+    border-radius: $border-radius;
+  }
+
+  & .lastname-left-icon,
+  .firstname-left-icon {
+    position: absolute;
+    z-index: 2;
+    font-size: 1.6rem;
+    top: 24%;
+    left: 3%;
+  }
+
+  & .username-left-icon {
+    top: 24%;
+    left: 3%;
+  }
+//   registration-lastname
+// registration-firstname
+}

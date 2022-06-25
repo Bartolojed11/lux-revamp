@@ -1,0 +1,76 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 10;
+  padding: 1rem;
+  width: 100%;
+  background-color: $primary-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shop-logo-wrapper {
+  height: 4.5rem;
+  width: 4.5rem;
+  position: relative;
+}
+
+.navbar .shop-logo-wrapper {
+  height: 4.5rem;
+}
+
+span > img {
+  object-fit: contain;
+}
+
+.navbar-search-wrapper {
+  position: relative;
+  width: 75%;
+
+  & > form {
+    display: flex;
+    justify-content: end;
+  }
+}
+
+.search-icon {
+  position: absolute;
+  top: 0.7rem;
+  right: 1rem;
+}
+
+.navbar-search {
+  padding: 1rem;
+  font-size: 1.4rem;
+}
+
+.search-icon {
+  color: $primary-color;
+}
+
+.navbar-non-home {
+  padding: 1rem;
+  top: 0;
+}
+
+/* Checkout page header for mobile and tablet */
+.checkoutMobTabHeader {
+  background-color: $primary-color;
+  color: #fff;
+  @extend .vertical-center;
+  height: 5rem;
+  gap: 1rem;
+
+  & > a {
+    color: #fff;
+    @extend .vertical-center;
+    font-weight: 700;
+  }
+
+  & > h1 {
+    font-weight: 700;
+  }
+}

@@ -1,0 +1,42 @@
+.position-absolute {
+    position: absolute;
+}
+
+.w-full{
+    width: 100% !important; 
+}
+
+.xy-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+}
+
+.horizontal-center {
+    display: flex;
+    justify-content: center;
+}
+
+.v-separator {
+    vertical-align: middle;
+    height: 60%;
+    width: .1rem;
+    background-color: $font-secondary;
+}
+
+.margin-65 {
+    margin-top: 6.5rem;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.mr-auto {
+    margin-right: auto;
+}

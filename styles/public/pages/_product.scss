@@ -1,0 +1,110 @@
+.product-wrapper {
+    background-color: #fff;
+    height: min-content;
+    padding-bottom: 2rem;
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        position: fixed;
+        top: 2rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    & > .product-image__wrapper {
+        height: 27rem;
+        & > img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+            object-position: center;
+
+        }
+    }
+
+    & > .product-price-sale-wrapper {
+        background-color: #F3F3F3;
+        display: flex;
+        justify-content: space-between;
+        .product-price {
+            display: flex;
+            align-items: center;
+            &__discount {
+                text-decoration: line-through;
+                font-size: 1.2rem;
+                margin-right: 1rem;
+                color: $font-secondary;
+            }
+        }
+
+        .product-sale {
+            background-color: red;
+            color: #fff;
+            width: 12.1rem;
+            padding: .5rem 0;
+            text-align: center;
+            font-size: 2.4rem;
+
+        }
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+
+        & .product-actions {
+            margin-left: auto;
+        }
+    }
+
+    .rating {
+        display: flex;
+        justify-content: space-around;
+        &__stars {
+            color: $primary-color;
+        }
+    }
+
+    .sold-total::before {
+        content: '';
+        background-color: $font-secondary;
+        height: 1.4rem;
+        width: .1rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+.product-footer {
+    background-color: #fff;
+    position: fixed;
+    bottom: 0px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    height: 5.1rem;
+
+    display: flex;
+    &__chat {
+        width: 25%;
+        flex-direction: column;
+        @extend .xy-center;
+    }
+    &__cart {
+        width: 29%;
+        flex-direction: column;
+        @extend .xy-center;
+    }
+
+    &__buynow {
+        width: 45%;
+        height: 100%;
+        flex-direction: column;
+        @extend .xy-center;
+    }
+}

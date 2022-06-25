@@ -1,0 +1,50 @@
+html {
+    font-size: 62.5%;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	font-size:1.6rem;
+	color: $font-primary;
+	line-height: 1.5;
+	background-color: #F6F6F6;
+	margin: 0;
+}
+
+button {
+    font-size: 1.6rem;
+	color: $font-primary;
+}
+
+input {
+	font-size: 1.6rem;
+}
+
+.form-control {
+	font-size: 1.6rem;
+}
+
+.btn {
+	font-size: 1.6rem;
+}
+
+a {
+	text-decoration: none;
+	color: $font-primary;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin-bottom: 0;
+}
+
+* {
+	// outline: 1px solid #c9c8c8;
+}
+
+p {
+	font-size: 1.4rem;
+}
+
+span > .nxt-img {
+	object-fit: contain;
+}

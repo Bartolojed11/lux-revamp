@@ -1,0 +1,27 @@
+.product-card {
+    box-shadow: $default-bshadow;
+    border: 0px;
+    margin: .5rem;
+    min-width: 15rem;
+
+    
+    & img {
+        height: 11.6rem;
+        width: 100%;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    &__footer {
+        background-color: unset;
+        border-top: 0px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.4rem;
+    }
+
+    &__price {
+        color: $font-price;
+    }
+}
