@@ -1,5 +1,7 @@
-import { Card } from 'react-bootstrap'
 import { useRouter } from 'next/router'
+
+import { Card } from 'react-bootstrap'
+
 import shoes from './../public/images/products/shoes-item.png'
 
 export default function ProductCard(props) {
@@ -14,7 +16,7 @@ export default function ProductCard(props) {
         <div className='container-fluid'>
             <div className='row'>
                 <Card className='product-card col-lg-sm-6 cold-md-4 col-lg-3 col' onClick={() => goTo('slug')}>
-                    <Card.Img variant="top" src={shoes.src} />
+                    <Card.Img variant="top" alt={shoes.src} src={shoes.src} />
                     <Card.Body>
                         <Card.Title>Snicker I</Card.Title>
                         <Card.Footer className='product-card__footer'>
@@ -24,7 +26,7 @@ export default function ProductCard(props) {
                     </Card.Body>
                 </Card>
                 <Card className='product-card col-lg-sm-6 cold-md-4 col-lg-3 col' onClick={() => goTo('slug')}>
-                    <Card.Img variant="top" src={shoes.src} />
+                    <Card.Img variant="top" alt={shoes.src} src={shoes.src} />
                     <Card.Body>
                         <Card.Title>Card Title</Card.Title>
                         <Card.Footer className='product-card__footer'>
@@ -34,7 +36,7 @@ export default function ProductCard(props) {
                     </Card.Body>
                 </Card>
                 <Card className='product-card col-lg-sm-6 cold-md-4 col-lg-3 col' onClick={() => goTo('slug')}>
-                    <Card.Img variant="top" src={shoes.src} />
+                    <Card.Img variant="top" alt={shoes.src} src={shoes.src} />
                     <Card.Body>
                         <Card.Title>Snicker I</Card.Title>
                         <Card.Footer className='product-card__footer'>
@@ -44,7 +46,7 @@ export default function ProductCard(props) {
                     </Card.Body>
                 </Card>
                 <Card className='product-card col-lg-sm-6 cold-md-4 col-lg-3 col' onClick={() => goTo('slug')}>
-                    <Card.Img variant="top" src={shoes.src} />
+                    <Card.Img variant="top" alt={shoes.src} src={shoes.src} />
                     <Card.Body>
                         <Card.Title>Card Title</Card.Title>
                         <Card.Footer className='product-card__footer'>
@@ -55,7 +57,7 @@ export default function ProductCard(props) {
                 </Card>
                 <button className='shop-button' type='button'>See more</button>
             </div>
-            
+
         </div>
     )
 }

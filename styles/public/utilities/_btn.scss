@@ -48,7 +48,7 @@
     background-color: $secondary-color;
     color: #fff;
     border: 0px;
-    border-radius: $border-radius * 2;
+    border-radius: $border-radius $border-radius;
     padding: .8rem;
 
     &:hover {
@@ -61,6 +61,6 @@
 }
 
 .btn-light {
-    border-radius: $border-radius;
+    border-radius: $border-radius $border-radius;
     padding: .8rem;
 }

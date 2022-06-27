@@ -1,4 +1,4 @@
-export default function Separator({title}) {
+export default function Separator({ title }) {
     return (
         <div className=" container-fluid">
             <div className="title__wrapper container-fluid">

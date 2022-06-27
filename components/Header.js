@@ -1,19 +1,23 @@
-import Link from "next/link";
-import Logo from "./../public/images/logo/logo-large.png";
-import { Form } from "react-bootstrap";
-import { Router, Search } from "react-bootstrap-icons";
-import { useEffect, useState } from 'react'
+import Link from "next/link"
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 
+import { useEffect, useState } from 'react'
+
+import Logo from "./../public/images/logo/logo-large.png"
+import { Form } from "react-bootstrap"
+import { Search } from "react-bootstrap-icons"
+
+
+
 
 export default function Header({ nonHomePage = false }) {
-  const nonHomePageNavbar = "navbar-non-home";
+  const nonHomePageNavbar = "navbar-non-home"
 
   const [keyword, setKeyword] = useState('')
   const [searchUrl, setSearchUrl] = useState('')
 
-  const router = useRouter();
+  const router = useRouter()
 
   function searchProduct(e) {
     e.preventDefault()
@@ -62,5 +66,5 @@ export default function Header({ nonHomePage = false }) {
         </Form>
       </div>
     </nav>
-  );
+  )
 }

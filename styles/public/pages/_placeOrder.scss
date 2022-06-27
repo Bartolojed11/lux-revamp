@@ -26,8 +26,8 @@
    .totals {
     .totals-label, .totals-value {
         display: flex;
-        justify-content: end;
-    }    
+        justify-content: flex-end;
+    }
    }
 
     div.order_contents:not(:last-child)::after {
@@ -94,7 +94,7 @@
             &__right {
                 // @extend .horizontal-center;
                 @extend  .vertical-center;
-                justify-content: end;
+                justify-content: flex-end;
             }
     
             .group-quantity-actions {

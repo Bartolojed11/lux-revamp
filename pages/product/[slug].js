@@ -13,14 +13,14 @@ export default function Product() {
                     <ChevronLeft />
                 </button>
 
-                <button className="round-button" type="button" onClick={() => router.push('/cart-page')}>
+                <button className="round-button" type="button" onClick={() => router.push('/my-cart')}>
                     <Bag />
                 </button>
             </div>
             <div className="product-image__wrapper">
-                <img src={shoes.src} />
+                <img src={shoes.src} alt="img"/>
             </div>
-            <div className="product-price-sale-wrapper">
+            <div className="product-price-wrapper">
                 <div className="product-price container-fluid">
                     <span className="product-price__discount">P400</span>
                     <span className="product-price__original">P300</span>
@@ -29,7 +29,7 @@ export default function Product() {
                     SALE
                 </div>
             </div>
-            <div className="product-info container-fluid mt-2 mb-4">
+            <div className="product-info container-fluid mb-4">
                 <h1>Snickers I</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius non massa vel euismod. </p>
             </div>

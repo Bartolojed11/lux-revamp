@@ -1,4 +1,5 @@
-import { Splide, SplideSlide } from '@splidejs/react-splide';
+import { Splide, SplideSlide } from '@splidejs/react-splide'
+
 import shoes from './../public/images/categories/Sneakers.png'
 import furniture from './../public/images/categories/Furniture.png'
 import kitchen from './../public/images/categories/Kitchen.png'

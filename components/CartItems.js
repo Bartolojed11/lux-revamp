@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import {InputGroup, SplitButton, Dropdown, FormControl} from 'react-bootstrap'
 import { Dash, Plus } from 'react-bootstrap-icons';
 
@@ -71,8 +72,8 @@ const CartItems = () => {
             <Items/>
         </>
         
-    );
-};
+    )
+}
 
 
-export default CartItems;
+export default CartItems

@@ -1,8 +1,8 @@
-import { Carousel } from 'react-bootstrap';
+import { Carousel } from 'react-bootstrap'
 
-import waifuPink from './../public/images/banners/waifu-pink.jpg';
-import waifuRed from './../public/images/banners/waifu-red.jpg';
-import waifuWhite from './../public/images/banners/waifu-white.png';
+import waifuPink from './../public/images/banners/waifu-pink.jpg'
+import waifuRed from './../public/images/banners/waifu-red.jpg'
+import waifuWhite from './../public/images/banners/waifu-white.png'
 
 
 export default function Banner() {

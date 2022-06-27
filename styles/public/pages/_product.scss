@@ -23,10 +23,12 @@
         }
     }
 
-    & > .product-price-sale-wrapper {
+    & > .product-price-wrapper {
         background-color: #F3F3F3;
         display: flex;
         justify-content: space-between;
+        padding: .5rem 0;
+
         .product-price {
             display: flex;
             align-items: center;
@@ -42,10 +44,10 @@
             background-color: red;
             color: #fff;
             width: 12.1rem;
-            padding: .5rem 0;
+            
             text-align: center;
             font-size: 2.4rem;
-
+            height: 80%;
         }
     }
 
@@ -56,14 +58,23 @@
 
         & .product-actions {
             margin-left: auto;
+            display: flex;
+            gap: .6rem;
+            justify-content: center;
+            align-items: center;
         }
     }
 
     .rating {
         display: flex;
+        align-items: center;
         justify-content: space-around;
+        gap: 1rem;
         &__stars {
             color: $primary-color;
+            display: flex;
+            align-items: center;
+            gap: .6rem;
         }
     }
 
@@ -78,6 +89,10 @@
         display: inline-block;
         vertical-align: middle;
     }
+
+    .product-info {
+        margin-top: 1.5rem;
+    }
 }
 
 .product-footer {
@@ -87,12 +102,16 @@
     display: flex;
     width: 100%;
     align-items: center;
-    height: 5.1rem;
+    height: 5.2rem;
+    & label {
+        font-size: 1.4rem;
+    }
 
     display: flex;
     &__chat {
         width: 25%;
         flex-direction: column;
+        padding: .5rem 0;
         @extend .xy-center;
     }
     &__cart {
@@ -104,6 +123,7 @@
     &__buynow {
         width: 45%;
         height: 100%;
+        font-weight: 600;
         flex-direction: column;
         @extend .xy-center;
     }

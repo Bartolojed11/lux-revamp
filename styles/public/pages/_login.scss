@@ -1,0 +1,36 @@
+.login-page {
+  background-color: $primary-color;
+  height: 100vh;
+
+  & .login-form {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5rem;
+
+    & .email {
+      padding-left: 10%;
+      border-bottom: 0px;
+      border-radius: $border-radius $border-radius 0 0;
+    }
+
+    & .password {
+      padding-left: 10%;
+      border-radius: 0 0 $border-radius $border-radius;
+    }
+
+    & .form-group-email,
+    & .form-group-password {
+      position: relative;
+    }
+
+    & .email-left-icon,
+    & .password-left-icon {
+      position: absolute;
+      z-index: 2;
+      font-size: 1.6rem;
+      top: 33%;
+      left: 3%;
+    }
+  }
+}

@@ -1,8 +1,7 @@
-import React from "react";
-import MobileTabCheckoutHeader from "../../components/MobileTabCheckoutHeader";
-import Link from "next/link";
-import pubRoutes from "../../routes/public-routes";
-import ItemOrdered from "../../components/ItemsOrderedDetails";
+import Link from "next/link"
+
+// import MobileTabCheckoutHeader from "./../components/MobileTabCheckoutHeader"
+// import ItemOrdered from "./../components/ItemsOrderedDetails"
 
 const PlaceOrder = () => {
   function DeliveryAddress() {
@@ -14,32 +13,33 @@ const PlaceOrder = () => {
         </div>
         <div>Lorem, Ipsum, Dolor City, Negros Occidental, Lorem Ipsum</div>
       </div>
-    );
+    )
   }
 
   function PlaceOrderFooter() {
 
     return (
-        <div className='place-order-footer'>
-            <div className='place-order-footer__total-wrapper'>
-                <div>Total</div>
-                <div id='totalPrice'>P100</div>
-            </div>
-            <button type="button" className='btn-shop-primary btn-checkout'>Place Order</button>
+      <div className='place-order-footer'>
+        <div className='place-order-footer__total-wrapper'>
+          <div>Total</div>
+          <div className='totalPrice'>P100</div>
         </div>
+        <button type="button" className='btn-shop-primary btn-checkout'>Place Order</button>
+      </div>
     )
-}
+  }
 
   return (
-    <div className="place-order__wrapper">
-      <MobileTabCheckoutHeader />
-      <div className="container-fluid">
-        <DeliveryAddress />
-        <ItemOrdered/>
-      </div>
-      <PlaceOrderFooter/>
-    </div>
-  );
-};
+    <></>
+    // <div className="place-order__wrapper">
+    //   <MobileTabCheckoutHeader />
+    //   <div className="container-fluid">
+    //     <DeliveryAddress />
+    //     <ItemOrdered />
+    //   </div>
+    //   <PlaceOrderFooter />
+    // </div>
+  )
+}
 
-export default PlaceOrder;
+export default PlaceOrder
