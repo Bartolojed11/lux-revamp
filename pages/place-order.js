@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-// import MobileTabCheckoutHeader from "./../components/MobileTabCheckoutHeader"
+// import MobileDetailTab from "./../components/MobileDetailTab"
 // import ItemOrdered from "./../components/ItemsOrderedDetails"
 
 const PlaceOrder = () => {
@@ -32,7 +32,7 @@ const PlaceOrder = () => {
   return (
     <></>
     // <div className="place-order__wrapper">
-    //   <MobileTabCheckoutHeader />
+    //   <MobileDetailTab />
     //   <div className="container-fluid">
     //     <DeliveryAddress />
     //     <ItemOrdered />

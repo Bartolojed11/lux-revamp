@@ -1,3 +1,5 @@
+import Head from 'next/head'
+
 import { Bag, ChatDots, ChevronLeft, Heart, Link, SlashSquareFill, StarFill } from "react-bootstrap-icons"
 import { useRouter } from 'next/router'
 
@@ -8,6 +10,13 @@ export default function Product() {
 
     return (
         <div className="product-wrapper">
+
+            <Head>
+                <title>Product | Slug</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
+
+
             <div className="product-wrapper__header">
                 <button className="round-button" type="button" onClick={() => router.back()}>
                     <ChevronLeft />
@@ -18,7 +27,7 @@ export default function Product() {
                 </button>
             </div>
             <div className="product-image__wrapper">
-                <img src={shoes.src} alt="img"/>
+                <img src={shoes.src} alt="img" />
             </div>
             <div className="product-price-wrapper">
                 <div className="product-price container-fluid">

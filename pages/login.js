@@ -2,7 +2,6 @@ import Link from "next/link"
 import { useState } from 'react'
 
 import { Form } from "react-bootstrap"
-import { Person } from "react-bootstrap-icons"
 import { BsShieldLock } from "react-icons/bs"
 import { MdOutlineMail } from "react-icons/md"
 

@@ -21,8 +21,9 @@
 
 .cart-footer, .place-order-footer {
     @extend .vertical-center;
-    height: 4rem;
-    justify-content: space-between;
+    height: 5rem;
+    gap: 1rem;
+    justify-content: flex-end;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -41,12 +42,18 @@
     }
 
     .btn-checkout {
-        height: 4rem;
+        height: 5rem;
         padding: 0 2rem;
+        color: #fff;
+        font-weight: 600;
     }
 
     .place-order-footer__total-wrapper {
         padding: 0 2rem;
         justify-content: flex-end;
+    }
+
+    .total-order-price {
+        color: $font-price;
     }
 }

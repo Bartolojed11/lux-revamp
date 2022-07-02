@@ -1,3 +1,5 @@
+import Head from 'next/head'
+
 // Components
 import Header from './../components/Header'
 import Banner from './../components/Banner'
@@ -10,6 +12,10 @@ const Home = () => {
 
   return (
     <>
+      <Head>
+        <title>Home</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Header />
       <Banner />
       <Categories />

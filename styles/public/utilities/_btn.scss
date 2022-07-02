@@ -37,6 +37,12 @@
 .btn-shop-primary {
     background-color: $primary-color;
     border: 0px;
+    color: #fff;
+
+    &:hover {
+        color: #fff;
+        background-color: darken($primary-color, 1%)
+    }
 }
 
 .btn-crystal {
