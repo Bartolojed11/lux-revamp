@@ -28,21 +28,24 @@ const MyAddress = (params) => {
 
     function AddressCard(props) {
         const { completeAddress, isDefault } = props.props
-        return <Card className={isDefault ? 'default-address mb-3' : 'mb-3'}>
+        let addressClasses = isDefault ? 'default-address ' : ''
+        addressClasses += "mb-3 address-card-body"
+
+        return <Card className={addressClasses}>
             <Card.Body>
                 {completeAddress}
 
-            <div className="address-card-bottom">
-                <div>
-                    { isDefault && <small className='default-address-label'>Default address</small>}
-                    { !isDefault && <button className='btn-crystal set-default'>Set as default</button>}
-                </div>
+                <div className="address-card-bottom">
+                    <div>
+                        {isDefault && <small className='default-address-label'>Default address</small>}
+                        {!isDefault && <button className='btn-crystal set-default'>Set as default</button>}
+                    </div>
 
-                <div>
-                    <button className='btn-crystal font-price address-edit-btn'>Edit</button>
-                    { !isDefault && <button className='btn-crystal font-danger address-delete-btn'>Delete</button>}
+                    <div>
+                        <button className='btn-crystal font-price address-edit-btn'>Edit</button>
+                        {!isDefault && <button className='btn-crystal font-danger address-delete-btn'>Delete</button>}
+                    </div>
                 </div>
-            </div>
             </Card.Body>
         </Card>
     }

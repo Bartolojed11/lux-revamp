@@ -1,6 +1,7 @@
 .place-order__wrapper {
-    height: 100vh;
+    min-height: 100vh;
     background-color: #fff;
+    margin-bottom: 5rem;
     
    .delivery-address, .totals {
         border: .1rem solid #94FFB7;
@@ -12,6 +13,9 @@
 
     .delivery-address {
        margin-top: 1.2rem;
+       margin-left: 2rem;
+       margin-right: 2rem;
+       border: .3rem dashed #94FFB7;
 
        &__header {
         @extend .vertical-center;

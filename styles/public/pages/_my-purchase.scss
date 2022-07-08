@@ -1,0 +1,157 @@
+.my-purchase-page {
+  background-color: #fff;
+  height: 110vh;
+}
+
+.container-fluid .date-ordered-info {
+  padding: 0.4rem;
+  border-bottom: 0.4rem solid #f6f6f6;
+}
+
+.purchase-header {
+  background-color: #f6f6f6;
+  .search-wrapper {
+    padding: 1rem 1.6rem;
+    position: relative;
+
+    .purchase-search {
+      border-radius: $border-radius;
+      border: 0px;
+    }
+
+    .search-icon {
+      top: 1.5rem;
+      right: 2.5rem;
+      & > button > svg {
+        color: $font-price;
+      }
+    }
+  }
+
+  .purchase-navigations {
+    display: flex;
+    justify-content: space-around;
+    overflow: scroll;
+  }
+}
+
+.purchase-navigations > button {
+  width: 100%;
+  font-size: 12px;
+}
+
+.pn-active {
+  border-bottom: 2px solid $font-price;
+}
+
+.shipping-info-container {
+  background-color: #dffee9;
+  border: 0.1rem solid #94ffb7;
+
+  & > span {
+    padding: 0.4rem;
+  }
+
+  .shipping-info {
+    @extend .just-between;
+    border-top: 0.1rem solid #94ffb7;
+    font-size: 1.4rem;
+    padding: 0.3rem 0.4rem;
+    margin-top: 0.4rem;
+  }
+}
+
+.purchase-total-container {
+  @extend .just-between;
+  padding: 1rem .4rem;
+}
+
+.purchase-message-container {
+  @extend .just-between;
+  padding: 1rem .4rem;
+}
+
+.purchase-card-wrapper {
+  .purchase-card-header {
+    @extend .just-between;
+    padding: 0.8rem 0;
+  }
+
+  .purchase-card-item-container {
+    border-bottom: 1px solid #f6f6f6;
+    border-top: 1px solid #f6f6f6;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    .purchase-item-img {
+      width: 100%;
+    }
+    .purchase-item-details {
+      & > p {
+        font-size: 1.2rem;
+        margin-bottom: 0;
+      }
+
+      & > .purchase-item-name {
+        font-size: 1.4rem;
+        font-weight: 600;
+      }
+
+      @extend .horizontal-center;
+      flex-direction: column;
+    }
+
+    .purchase-item-price-wrapper {
+      @extend .vertical-center;
+      font-size: 11rem;
+
+      .purchase-item-price {
+        color: $font-price;
+
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.payment-card {
+  padding: 1rem 0 1rem 0rem;
+  border-bottom: 0.1rem solid #f6f6f6;
+  border-top: 0.4rem solid #f6f6f6;
+
+  & .payment-card-header {
+    padding: 0 0.4rem 1rem 0.4rem;
+  }
+
+  & .payment-card-options {
+    @extend .just-between;
+    flex-wrap: wrap;
+
+    & > button {
+      @extend .vertical-center;
+      gap: 0.2rem;
+
+      font-size: 1.2rem;
+      padding: 0.7rem 1.2rem;
+      border: 0.1rem solid #f6f6f6;
+
+      & > img {
+        height: 2rem;
+        width: 2rem;
+        object-fit: contain;
+      }
+    }
+  }
+}
+
+.payment-details-card {
+  padding: 0 0.4rem 1rem 0.4rem;
+  border-bottom: .4rem solid #f6f6f6;
+  & .payment-details-card-header {
+    padding: 1rem 0;
+  }
+}
+
+.delivery-container {
+  
+}
