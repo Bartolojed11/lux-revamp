@@ -116,6 +116,7 @@
     }
     &__cart {
         width: 29%;
+        height: 100%;
         flex-direction: column;
         @extend .xy-center;
     }

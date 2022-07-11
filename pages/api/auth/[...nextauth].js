@@ -59,6 +59,7 @@ export default NextAuth({
           role: user.data.role,
           gender: user.data.gender,
           status: user.data.status,
+          user_id: user.data.id,
         };
       }
 
@@ -74,6 +75,7 @@ export default NextAuth({
       session.user.role = token.role
       session.user.gender = token.gender
       session.user.status = token.status
+      session.user.user_id = token.user_id
       return session;
     },
   },

@@ -19,7 +19,7 @@ export default function ProductCard(props) {
             <div className='row'>
                 {
                     products.map((product) => {
-                        console.log(product);
+
                         return <>
                         <Card className='product-card col-lg-sm-6 cold-md-4 col-lg-3 col' onClick={() => goTo(product.url)}>
                             <Card.Img variant="top" alt={shoes.src} src={shoes.src} />

@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useSession } from "next-auth/react"
 
 import { Bag, ChatDots, ChevronLeft, Heart, Link, SlashSquareFill, StarFill } from "react-bootstrap-icons"
 import { useRouter } from 'next/router'
@@ -6,7 +7,7 @@ import { useRouter } from 'next/router'
 import shoes from './../../public/images/products/shoes-item.png'
 
 export default function Product({ product }) {
-    console.log("🚀 ~ file: [url].js ~ line 9 ~ Product ~ product", product)
+
     const router = useRouter()
 
     return (
@@ -68,12 +69,23 @@ export default function Product({ product }) {
                 </div>
             </div>
 
-            <Footer />
+            <Footer {...product} />
         </div>
     )
 }
 
-function Footer() {
+function Footer(product) {
+    const { data: session, status } = useSession()
+    let user = {}
+
+    if (status === 'authenticated') {
+        user = {
+
+            user_id: session.user.user_id,
+            email: session.user.email
+        }
+    }
+
     return (
         <div className="product-footer">
             <div className="product-footer__chat">
@@ -83,17 +95,42 @@ function Footer() {
             <div className="v-separator">
 
             </div>
-            <div className="product-footer__cart">
+            <button type="button" className="btn-crystal product-footer__cart" onClick={() => addToCart(product, user)}>
                 <Bag />
                 <label>Add to cart</label>
-            </div>
+            </button>
             <button type="button" className="product-footer__buynow btn-shop-primary">Buy now</button>
         </div>
     )
 }
 
 
+function addToCart(product, user) {
+    const url = process.env.apiExternalRoute + 'cart'
 
+    const cart = {
+        "user_id": user.user_id,
+        "email": user.email,
+        "cart_items": {
+            "product_id": product._id,
+            "quantity": 1,
+            "amount": product.price,
+            "total_amount": product.price
+        }
+    }
+
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cart)
+    }
+
+    fetch(url, requestOptions)
+        .then(response => response.json())
+        .then((response) => {
+            console.log("🚀 ~ file: [url].js ~ line 131 ~ .then ~ response", response)            
+        })
+}
 
 // This function gets called at build time on server-side.
 // It may be called again, on a serverless function, if
@@ -103,7 +140,6 @@ export async function getStaticProps(context) {
     const response = await fetch(process.env.apiExternalRoute + 'products/' + url)
     const json = await response.json()
     const { product } = json.data || {}
-    console.log(product)
     return {
         props: {
             product,
