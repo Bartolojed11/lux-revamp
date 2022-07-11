@@ -7,7 +7,7 @@ import { Person } from "react-bootstrap-icons"
 import Footer from './../components/Footer'
 
 // utils
-import { handleInputChange } from "../utils/form"
+import { stateSetter } from "../utils/form"
 
 const ForgotPassword = () => {
 
@@ -29,7 +29,7 @@ const ForgotPassword = () => {
                         className="forgot-pass-email"
                         type="email"
                         placeholder="Email"
-                        onChange={ () => handleInputChange(event, setFormData) }
+                        onChange={ handleInputChange }
                         value={formData.email}
                     />
                     <Person className="email-left-icon" />

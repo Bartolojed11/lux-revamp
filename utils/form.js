@@ -1,4 +1,4 @@
-export function handleInputChange(event, setter) {
+export function stateSetter(event, setter) {
     // name, value and type this are attributes of input field
     const {name, value, type, checked} = event.target
 

@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { useState } from 'react'
 import { signIn, getCsrfToken } from "next-auth/react"
-import { useSession, unstable_getServerSession } from "next-auth/next"
+import { useRouter } from 'next/router'
 
 import { Form } from "react-bootstrap"
 import { BsShieldLock } from "react-icons/bs"
@@ -12,14 +12,18 @@ import Footer from './../components/Footer'
 import OtherAuth from './../components/OtherAuth'
 
 // utils
-import { handleInputChange } from "../utils/form"
+import { stateSetter } from "../utils/form"
 
 const Login = (props) => {
-
+  const router = useRouter()
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
+
+  function handleInputChange(event) {
+    stateSetter(event, setFormData)
+  }
 
   async function handleSubmit(event) {
     event.preventDefault()
@@ -33,7 +37,7 @@ const Login = (props) => {
       console.log("🚀 ~ file: login.js ~ line 37 ~ handleSubmit ~ res", res)
 
     } else {
-      console.log('no error')
+      router.push('/')
     }
   }
 
@@ -47,7 +51,7 @@ const Login = (props) => {
             className="email"
             type="email"
             placeholder="Email"
-            onChange={() => handleInputChange(event, setFormData)}
+            onChange={handleInputChange}
             name="email"
             value={formData.email}
           />
@@ -63,7 +67,7 @@ const Login = (props) => {
             className="password"
             type="password"
             placeholder="Password"
-            onChange={() => handleInputChange(event, setFormData)}
+            onChange={handleInputChange}
             name="password"
             defaultValue={formData.password}
           />

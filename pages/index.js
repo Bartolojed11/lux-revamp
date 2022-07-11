@@ -8,8 +8,9 @@ import Separator from './../components/Separator'
 import ProductCard from './../components/ProductCard'
 import Footer from './../components/Footer'
 
-const Home = () => {
 
+const Home = (props) => {
+  const { products } = props
   return (
     <>
       <Head>
@@ -20,12 +21,32 @@ const Home = () => {
       <Banner />
       <Categories />
       <Separator title="Top Products" />
-      <ProductCard />
+      <ProductCard products={products} />
       <Separator title="Discover" />
-      <ProductCard />
+      <ProductCard products={products} />
       <Footer />
     </>
   )
 }
+
+// This function gets called at build time on server-side.
+// It may be called again, on a serverless function, if
+// revalidation is enabled and a new request comes in
+export async function getStaticProps() {
+  const response = await fetch(process.env.apiExternalRoute + 'products')
+  const json = await response.json()
+  const { products } = json.data || {}
+
+  return {
+    props: {
+      products,
+    },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every 10 seconds
+    revalidate: 10, // In seconds
+  }
+}
+
 
 export default Home

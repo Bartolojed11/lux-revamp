@@ -5,14 +5,15 @@ import { useRouter } from 'next/router'
 
 import shoes from './../../public/images/products/shoes-item.png'
 
-export default function Product() {
+export default function Product({ product }) {
+    console.log("🚀 ~ file: [url].js ~ line 9 ~ Product ~ product", product)
     const router = useRouter()
 
     return (
         <div className="product-wrapper">
 
             <Head>
-                <title>Product | Slug</title>
+                <title>Product | {product.name}</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
 
@@ -32,15 +33,15 @@ export default function Product() {
             <div className="product-price-wrapper">
                 <div className="product-price container-fluid">
                     <span className="product-price__discount">P400</span>
-                    <span className="product-price__original">P300</span>
+                    <span className="product-price__original">P{product.price}</span>
                 </div>
                 <div className="product-sale">
                     SALE
                 </div>
             </div>
             <div className="product-info container-fluid mb-4">
-                <h1>Snickers I</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius non massa vel euismod. </p>
+                <h1>{product.name}</h1>
+                <p>{product.description || ''}</p>
             </div>
             <div className="product-wrapper__footer container-fluid">
                 <div className="rating">
@@ -89,4 +90,47 @@ function Footer() {
             <button type="button" className="product-footer__buynow btn-shop-primary">Buy now</button>
         </div>
     )
+}
+
+
+
+
+// This function gets called at build time on server-side.
+// It may be called again, on a serverless function, if
+// revalidation is enabled and a new request comes in
+export async function getStaticProps(context) {
+    const { url } = context.params
+    const response = await fetch(process.env.apiExternalRoute + 'products/' + url)
+    const json = await response.json()
+    const { product } = json.data || {}
+    console.log(product)
+    return {
+        props: {
+            product,
+        },
+        // Next.js will attempt to re-generate the page:
+        // - When a request comes in
+        // - At most once every 10 seconds
+        revalidate: 10, // In seconds
+    }
+}
+
+
+// This function gets called at build time on server-side.
+// It may be called again, on a serverless function, if
+// the path has not been generated.
+export async function getStaticPaths() {
+
+    const response = await fetch(process.env.apiExternalRoute + 'products')
+    const json = await response.json()
+    const { products } = json.data || {}
+
+    // Get the paths we want to pre-render based on posts
+    const paths = products.map((product) => {
+        return {
+            params: { url: product.url.toString() }
+        }
+    })
+
+    return { paths, fallback: false }
 }
