@@ -37,9 +37,11 @@ export default NextAuth({
         // If no error and we have user data, return it
         if (res.ok && user) {
           return user
+        } else {
+          // Return an object that will pass error information through to the client-side.
+          throw new Error( JSON.stringify({ errors: user.error, message: user.message, status: false }))
         }
-        // Return null if user data could not be retrieved
-        return null
+
       }
     })
   ],
@@ -54,12 +56,14 @@ export default NextAuth({
         return {
           ...token,
           accessToken: user.data.token,
-          name: user.data.name,
+          first_name: user.data.first_name,
+          last_name: user.data.last_name,
           email: user.data.email,
           role: user.data.role,
           gender: user.data.gender,
           status: user.data.status,
           user_id: user.data.id,
+          phone_number: user.phone_number
         };
       }
 
@@ -69,13 +73,16 @@ export default NextAuth({
 
     // set the sessions values
     async session({ session, token }) {
+      
       session.user.accessToken = token.accessToken
       session.user.email = token.email
-      session.user.name = token.name
+      session.user.first_name = token.first_name
+      session.user.last_name = token.last_name
       session.user.role = token.role
       session.user.gender = token.gender
       session.user.status = token.status
       session.user.user_id = token.user_id
+      session.user.phone_number = token.phone_number
       return session;
     },
   },

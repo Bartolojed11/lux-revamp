@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from "next/link"
+import { useSession } from "next-auth/react"
 
 import { MdListAlt } from "react-icons/md"
 import { GoLocation } from "react-icons/go"
@@ -13,6 +14,14 @@ import DefaultProfile from './../public/images/profile/default.png'
 
 
 const Profile = () => {
+    const { data: session, status } = useSession()
+    let fullname = ''
+    let phone = ''
+
+    if (status === 'authenticated') {
+        fullname = session.user.first_name + ' ' + session.user.last_name
+        phone = session.user.phone_number
+    }
 
     function ProfileDetails() {
         return <Card className="profile-details-card">
@@ -21,11 +30,14 @@ const Profile = () => {
                     <img src={DefaultProfile.src} alt="Default Profile Picture" />
                 </div>
                 <div className="my-profile-details">
-                    <Card.Title className="profile-details-title">Jane Doe</Card.Title>
-                    <p>09352087125</p>
+                    <Card.Title className="profile-details-title">{fullname}</Card.Title>
+                    <p>{phone} 09352087125</p>
                 </div>
-
-                <button className="btn btn-shop-primary fit-content mlr-center ">Edit</button>
+                <div className="mlr-center">
+                <button className="btn btn-shop-primary fit-content mr-4">Edit</button>
+                Logout
+                </div>
+                
                 <div className="my-profile-navigations">
                     <Link href="/my-purchase">
                         <a className='purchase-link'><MdListAlt className='my-purchase-icon' />My Purchases</a>

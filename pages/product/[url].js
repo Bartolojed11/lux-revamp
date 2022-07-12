@@ -1,10 +1,14 @@
 import Head from 'next/head'
 import { useSession } from "next-auth/react"
 
+// Third parties
 import { Bag, ChatDots, ChevronLeft, Heart, Link, SlashSquareFill, StarFill } from "react-bootstrap-icons"
 import { useRouter } from 'next/router'
 
 import shoes from './../../public/images/products/shoes-item.png'
+
+// utils
+import { toastSuccess, toastError } from "../../utils/toasts"
 
 export default function Product({ product }) {
 
@@ -128,7 +132,11 @@ function addToCart(product, user) {
     fetch(url, requestOptions)
         .then(response => response.json())
         .then((response) => {
-            console.log("🚀 ~ file: [url].js ~ line 131 ~ .then ~ response", response)            
+            if (response.status === 'success') {
+                toastSuccess(response.message)
+            } else {
+                toastError(response.message)
+            }
         })
 }
 

@@ -54,7 +54,7 @@ const MyAddress = (params) => {
         <div className="address-page">
 
             <Head>
-                <title>My Profile</title>
+                <title>My Addresses</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
 

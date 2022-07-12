@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 import { Form, Button } from "react-bootstrap"
 import { Person, People } from "react-bootstrap-icons"
@@ -38,10 +39,9 @@ const SignUp = () => {
             .then(response => response.json())
             .then((response) => {
                 // Trigger useEffect
-                console.log(response)
                 if (response.status === 'success') {
                     router.push('/login')
-                } 
+                }
             })
     }
 
@@ -51,6 +51,10 @@ const SignUp = () => {
 
     return (
         <div className="signup-page">
+            <Head>
+                <title>Sign up</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <Form className="signup-form" method="post" onSubmit={handleSubmit}>
                 <h1 className="text-center">Welcome!</h1>
                 <p className="text-center">Lorem ipsum</p>
@@ -74,11 +78,12 @@ const SignUp = () => {
                     <Form.Control
                         className="password"
                         type="password"
-                        placeholder=''
+                        placeholder='password'
                         name="password"
                         defaultValue={formData.password}
                         onChange={handleInputChange}
                     />
+                    
                 </Form.Group>
 
                 <Form.Group
@@ -89,35 +94,35 @@ const SignUp = () => {
                     <Form.Control
                         className="password"
                         type="password"
-                        placeholder=''
+                        placeholder='confirm password'
                         name="passwordConfirm"
                         defaultValue={formData.passwordConfirm}
                         onChange={handleInputChange}
                     />
                 </Form.Group>
 
-                <Form.Group className="form-group-first_name mb-3" controlId="formBasicEmail">
+                <Form.Group className="form-group-firstname mb-3" controlId="formBasicEmail">
                     <Form.Control
-                        className="signup-first_name"
+                        className="signup-firstname"
                         type="text"
-                        placeholder="first_name"
+                        placeholder="First name"
                         name="first_name"
                         defaultValue={formData.first_name}
                         onChange={handleInputChange}
                     />
-                    <Person className="first_name-left-icon" />
+                    <Person className="firstname-left-icon" />
                 </Form.Group>
 
-                <Form.Group className="form-group-last_name mb-3" controlId="formBasicEmail">
+                <Form.Group className="form-group-lastname mb-3" controlId="formBasicEmail">
                     <Form.Control
-                        className="signup-last_name"
+                        className="signup-lastname"
                         type="text"
-                        placeholder="last_name"
+                        placeholder="Last name"
                         name="last_name"
                         defaultValue={formData.last_name}
                         onChange={handleInputChange}
                     />
-                    <People className="last_name-left-icon" />
+                    <People className="lastname-left-icon" />
                 </Form.Group>
 
                 <button className="btn btn-shop-secondary btn-full-width mb-3">

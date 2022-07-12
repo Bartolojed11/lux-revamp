@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import Head from 'next/head'
 
 import CartItems from '../components/CartItems'
 import MobileDetailTab from '../components/MobileDetailTab'
@@ -44,6 +45,10 @@ const CartPage = () => {
 
     return (
         <div className='cart_page'>
+            <Head>
+                <title>Shopping Cart</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <MobileDetailTab  header="Shopping Cart"/>
             <CartHeader />
             <div className='container-fluid cart'>

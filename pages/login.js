@@ -2,7 +2,9 @@ import Link from "next/link"
 import { useState } from 'react'
 import { signIn, getCsrfToken } from "next-auth/react"
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
+// Third parties
 import { Form } from "react-bootstrap"
 import { BsShieldLock } from "react-icons/bs"
 import { MdOutlineMail } from "react-icons/md"
@@ -13,6 +15,8 @@ import OtherAuth from './../components/OtherAuth'
 
 // utils
 import { stateSetter } from "../utils/form"
+import { toastSuccess, toastError } from "../utils/toasts"
+
 
 const Login = (props) => {
   const router = useRouter()
@@ -34,15 +38,25 @@ const Login = (props) => {
       password: formData.password
     });
     if (res?.error) {
-      console.log("🚀 ~ file: login.js ~ line 37 ~ handleSubmit ~ res", res)
-
+      const error = JSON.parse(res?.error)
+      toastError(error.message)
     } else {
-      router.push('/')
+      toastSuccess("Login succssfully!")
+      setTimeout(() => {
+        router.push('/')
+      }, 3000)
+      
     }
   }
 
   return (
+    
     <div className="login-page">
+    
+      <Head>
+        <title>Login</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head> 
       <Form className="login-form" method="post" onSubmit={handleSubmit} >
         <h1 className="text-center">Welcome!</h1>
         <p className="text-center">Lorem ipsum</p>
