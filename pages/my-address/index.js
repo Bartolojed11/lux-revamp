@@ -1,13 +1,17 @@
 import { useState } from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import Link from "next/link"
 
 import Card from 'react-bootstrap/Card'
 
 // My Components
-import MobileDetailTab from '../components/MobileDetailTab'
-import Footer from './../components/Footer'
+import MobileDetailTab from '../../components/MobileDetailTab'
+import Footer from '../../components/Footer'
 
 const MyAddress = (params) => {
+
+    const router = useRouter()
     const [addresses, setAddresses] = useState([
         {
             id: 1,
@@ -42,7 +46,7 @@ const MyAddress = (params) => {
                     </div>
 
                     <div>
-                        <button className='btn-crystal font-price address-edit-btn'>Edit</button>
+                        <Link href="/my-address/1"><a className='btn-crystal font-price address-edit-btn'>Edit</a></Link>
                         {!isDefault && <button className='btn-crystal font-danger address-delete-btn'>Delete</button>}
                     </div>
                 </div>
@@ -60,7 +64,9 @@ const MyAddress = (params) => {
 
             <MobileDetailTab header="My addresses" />
             <div className="container-fluid mt-4">
-                <button type="button" className='btn btn-shop-primary mb-4'>Add address</button>
+                <button type="button" className='btn btn-shop-primary mb-4'
+                onClick={() => router.push('/my-address/add') }
+                >Add address</button>
                 {
                     addresses.map(address => {
                         return (

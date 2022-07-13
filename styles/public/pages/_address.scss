@@ -1,27 +1,47 @@
 .address-page {
-    & .default-address {
-        border: 1px solid $primary-color;
-    }
+  & .default-address {
+    border: 1px solid $primary-color;
+  }
 
-    & .default-address-label {
-        font-size: 10px;
-        font-style: italic;
-        color: #636363;
-    }
+  & .default-address-label {
+    font-size: 10px;
+    font-style: italic;
+    color: #636363;
+  }
 
-    .set-default {
-        font-weight: 600;
-        font-size: 1.4rem;
-    }
+  .set-default {
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
 
-    .address-edit-btn, .address-delete-btn {
-        font-weight: 600;
-        font-size: 1.4rem;
-    }
+  .address-edit-btn,
+  .address-delete-btn {
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
 
-    .address-card-bottom {
-        margin-top: 1rem;
-        @extend .vertical-center;
-        justify-content: space-between;
-    }
+  .address-card-bottom {
+    margin-top: 1rem;
+    @extend .vertical-center;
+    justify-content: space-between;
+  }
 }
+
+.add-address-page {
+  & > .add-address-details-card {
+    margin-top: 2rem;
+    margin-bottom: 8rem;
+    padding: 2rem;
+  }
+}
+
+
+
+.update-address-page {
+    & > .update-address-details-card {
+      margin-top: 2rem;
+      margin-bottom: 8rem;
+      padding: 2rem;
+    }
+  }
+  

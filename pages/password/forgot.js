@@ -4,10 +4,10 @@ import { Form } from "react-bootstrap"
 import { Person } from "react-bootstrap-icons"
 
 // Components
-import Footer from './../components/Footer'
+import Footer from '../../components/Footer'
 
 // utils
-import { stateSetter } from "../utils/form"
+import { stateSetter } from "../../utils/form"
 
 const ForgotPassword = () => {
 

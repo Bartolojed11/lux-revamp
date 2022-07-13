@@ -87,7 +87,7 @@ const Login = (props) => {
           />
         </Form.Group>
         <Link
-          href="/forgot-password"
+          href="/password/forgot"
         >
           <a className="forgot-password-link mt-3">Forgot Password</a>
         </Link>

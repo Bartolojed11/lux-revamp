@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-import { Form, Button } from "react-bootstrap"
+import { Form } from "react-bootstrap"
 import { Person, People } from "react-bootstrap-icons"
 import { BsShieldLock } from "react-icons/bs"
 import { MdOutlineMail } from "react-icons/md";

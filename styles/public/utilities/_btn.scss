@@ -38,6 +38,7 @@
     background-color: $primary-color;
     border: 0px;
     color: #fff;
+    padding: .8rem 1.5rem;
 
     &:hover {
         color: #fff;
@@ -69,4 +70,8 @@
 .btn-light {
     border-radius: $border-radius $border-radius;
     padding: .8rem;
+}
+
+.btn-no-padd {
+    padding: 0 !important;
 }

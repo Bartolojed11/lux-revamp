@@ -1,0 +1,16 @@
+.profile-page {
+    @extend .profile-page;
+
+    & input, & label, .form-select {
+        font-size: 1.4rem;
+    }
+
+    & input[type="date"], select {
+        padding-top: .8rem;
+        padding-bottom: .8rem;
+    }
+
+    .profile-details-card {
+        padding: 2rem 1.6rem;
+    }
+}
