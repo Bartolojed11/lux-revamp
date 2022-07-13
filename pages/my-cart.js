@@ -17,7 +17,7 @@ const CartPage = () => {
                     <div>Total</div>
                     <div className='total-order-price'>P100</div>
                 </div>
-                <button type="button" onClick={() => router.push("place-order")} className='btn-shop-primary btn-checkout'>Checkout (<span>0</span>)</button>
+                <button type="button" onClick={() => router.push("order/place")} className='btn-shop-primary btn-checkout'>Checkout (<span>0</span>)</button>
             </div>
         )
     }
