@@ -59,11 +59,11 @@ export default NextAuth({
           first_name: user.data.first_name,
           last_name: user.data.last_name,
           email: user.data.email,
-          role: user.data.role,
           gender: user.data.gender,
           status: user.data.status,
           user_id: user.data.id,
-          phone_number: user.phone_number
+          phone_number: user.phone_number,
+          birthday: user.birthday
         };
       }
 
@@ -78,11 +78,11 @@ export default NextAuth({
       session.user.email = token.email
       session.user.first_name = token.first_name
       session.user.last_name = token.last_name
-      session.user.role = token.role
       session.user.gender = token.gender
       session.user.status = token.status
       session.user.user_id = token.user_id
       session.user.phone_number = token.phone_number
+      session.user.birthday = token.birthday
       return session;
     },
   },
