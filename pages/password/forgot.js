@@ -19,6 +19,10 @@ const ForgotPassword = () => {
         event.preventDefault()
     }
 
+    const handleInputChange = function(event) {
+        stateSetter(event, formData)
+    }
+
     return (
         <div className="forgotpass-page">
             <Form className="fogotpass-form">

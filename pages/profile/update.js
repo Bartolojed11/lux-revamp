@@ -38,7 +38,7 @@ const UpdateProfile = (params) => {
                 }
             })
         }
-    }, [status])
+    }, [status, session])
 
 
     return <>
