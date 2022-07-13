@@ -20,7 +20,7 @@ const PlaceOrder = () => {
             <div className="delivery-address">
                 <div className="delivery-address__header">
                     <span className="font-600 vertical-center"><IoLocationSharp className='font-red'/>Delivery Address</span>
-                    <Link href="/change-address"><a className='font-underline font-14'>Change Address</a></Link>
+                    <Link href="/my-address/select"><a className='font-underline font-14'>Change Address</a></Link>
                 </div>
                 <div className='font-14'>Lorem, Ipsum, Dolor City, Negros Occidental, Lorem Ipsum</div>
             </div>

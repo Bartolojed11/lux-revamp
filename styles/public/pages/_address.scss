@@ -35,13 +35,32 @@
   }
 }
 
-
-
 .update-address-page {
-    & > .update-address-details-card {
-      margin-top: 2rem;
-      margin-bottom: 8rem;
-      padding: 2rem;
+  & > .update-address-details-card {
+    margin-top: 2rem;
+    margin-bottom: 8rem;
+    padding: 2rem;
+  }
+}
+
+.select-address-page {
+  & > .container-fluid > .card > .card-body {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .address-option {
+    display: flex;
+    width: 100%;
+    margin-bottom: 1.5rem;
+
+    & > div:first-child {
+      width: 20%;
+      @extend .xy-center;
+    }
+
+    & > div:nth-child(2) {
+      width: 80%;
     }
   }
-  
+}
