@@ -1,16 +1,22 @@
 import { useState } from 'react';
+import { useEffect } from 'react'
 
 import {InputGroup, SplitButton, Dropdown, FormControl} from 'react-bootstrap'
 import { Dash, Plus } from 'react-bootstrap-icons';
 
 import shoes from './../public/images/products/shoes-item.png'
 
-const CartItems = () => {
-    let [qty, setQty] = useState(1)
+const CartItem = (props) => {
+    // let [myCartItems, setMyCartItems] = useState(props.cart_items || [])
     
-    function Items() {
 
-        return (
+    // useEffect(function() {
+    //     setMyCartItems(props.cart_items)
+    // }, [props._id])
+
+
+    return (
+        <>
             <div className='cart_product_wrapper'>
                 <div className='cart_product'>
                     <div className='cart_product__items'>
@@ -20,15 +26,15 @@ const CartItems = () => {
                         </div>
                         <div className='cart_product__right'>
                             <div className="cart_product__item_details">
-                                <p className='cart_product__item_name'>Snicker I</p>
-                                <p className='cart_product__item_price'>P100</p>
+                                <p className='cart_product__item_name'>{props.product[0].name}</p>
+                                <p className='cart_product__item_price'>P{props.total_amount}</p>
                             </div>
                             <div className="cart_product__qty_controls">
                                 <InputGroup className="group-quantity-actions">
                                     <button type="button" className='btn_minus_qty'>
                                         <Dash/>
                                     </button>
-                                    <FormControl className='input_qty'  min="1" defaultValue={qty}/>
+                                    <FormControl className='input_qty'  min="1" defaultValue={props.quantity}/>
                                     <button type="button" className='btn_add_qty'>
                                         <Plus />
                                     </button>
@@ -38,18 +44,10 @@ const CartItems = () => {
                     </div>
                 </div>
             </div>
-        )
-    }
-
-
-    return (
-        <>
-            <Items/>
-            <Items/>
         </>
         
     )
 }
 
 
-export default CartItems
+export default CartItem

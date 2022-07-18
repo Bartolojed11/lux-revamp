@@ -80,14 +80,10 @@ export default function Product({ product }) {
 
 function Footer(product) {
     const { data: session, status } = useSession()
-    let user = {}
+    let token = {}
 
     if (status === 'authenticated') {
-        user = {
-
-            user_id: session.user.user_id,
-            email: session.user.email
-        }
+        token = session.user.accessToken
     }
 
     return (
@@ -99,7 +95,7 @@ function Footer(product) {
             <div className="v-separator">
 
             </div>
-            <button type="button" className="btn-crystal product-footer__cart" onClick={() => addToCart(product, user)}>
+            <button type="button" className="btn-crystal product-footer__cart" onClick={() => addToCart(product, token)}>
                 <Bag />
                 <label>Add to cart</label>
             </button>
@@ -109,12 +105,10 @@ function Footer(product) {
 }
 
 
-function addToCart(product, user) {
+function addToCart(product, token) {
     const url = process.env.apiExternalRoute + 'cart'
 
     const cart = {
-        "user_id": user.user_id,
-        "email": user.email,
         "cart_items": {
             "product_id": product._id,
             "quantity": 1,
@@ -125,7 +119,11 @@ function addToCart(product, user) {
 
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+            
+        },
         body: JSON.stringify(cart)
     }
 

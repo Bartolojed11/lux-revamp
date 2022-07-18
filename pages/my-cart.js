@@ -1,23 +1,60 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Head from 'next/head'
+import { useSession } from "next-auth/react"
 
-import CartItems from '../components/CartItems'
+import { useState } from 'react'
+
+import CartItem from '../components/CartItem'
 import MobileDetailTab from '../components/MobileDetailTab'
+import { useEffect } from 'react'
 
 
 const CartPage = () => {
+    let [myCartItems, setMyCartItems] = useState([])
+    
 
-    function CartFooter() {
+    let [fetchTriggered, setFetchTriggered] = useState(false)
+    
+    let [selectedProducts, setSelectedProducts] = useState([])
+    let [selectedTotalAmount, setSelectedTotalAmount] = useState(0)
+
+    const { data: session, status } = useSession()
+    const url = process.env.apiExternalRoute + 'cart'
+    let token = {}
+
+    useEffect(() => {
+        if (status === 'authenticated' && ! fetchTriggered) {
+            token = session.user.accessToken
+
+            const requestOptions = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+    
+                }
+            }
+    
+            fetch(url, requestOptions)
+                .then(response => response.json())
+                .then((response) => {
+                    setFetchTriggered(true)
+                    setMyCartItems(response.data.user_cart.cart_items)
+                })
+        }
+        
+    }, [token])
+
+    function CartFooter({totalAmount, totalItemsSelected}) {
         const router = useRouter()
 
         return (
             <div className='cart-footer'>
                 <div className='cart-footer__total-wrapper'>
                     <div>Total</div>
-                    <div className='total-order-price'>P100</div>
+                    <div className='total-order-price'>P{totalAmount || 0}</div>
                 </div>
-                <button type="button" onClick={() => router.push("order/place")} className='btn-shop-primary btn-checkout'>Checkout (<span>0</span>)</button>
+                <button type="button" onClick={() => router.push("order/place")} className='btn-shop-primary btn-checkout'>Checkout (<span>{totalItemsSelected}</span>)</button>
             </div>
         )
     }
@@ -42,19 +79,26 @@ const CartPage = () => {
             </div>
         </>
     }
-
+    
     return (
         <div className='cart_page'>
             <Head>
                 <title>Shopping Cart</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <MobileDetailTab  header="Shopping Cart"/>
+            <MobileDetailTab header="Shopping Cart" />
             <CartHeader />
             <div className='container-fluid cart'>
-                <CartItems />
+                {
+                    myCartItems.map((item) => {
+                        return <>
+                            <CartItem {...item}/>
+                        </>
+                    })
+                }
+                
             </div>
-            <CartFooter />
+            <CartFooter totalItemsSelected={selectedProducts.length} totalAmount={selectedTotalAmount} />
         </div>
     )
 }
