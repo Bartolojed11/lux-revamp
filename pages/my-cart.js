@@ -12,10 +12,9 @@ import { useEffect } from 'react'
 
 const CartPage = () => {
     let [myCartItems, setMyCartItems] = useState([])
-    
-
     let [fetchTriggered, setFetchTriggered] = useState(false)
-    
+    let [changesCount, setChangesCount] = useState(0)
+
     let [selectedProducts, setSelectedProducts] = useState([])
     let [selectedTotalAmount, setSelectedTotalAmount] = useState(0)
 
@@ -24,17 +23,17 @@ const CartPage = () => {
     let token = {}
 
     useEffect(() => {
-        if (status === 'authenticated' && ! fetchTriggered) {
+        if (status === 'authenticated' && !fetchTriggered) {
             token = session.user.accessToken
 
             const requestOptions = {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + token
-    
+
                 }
             }
-    
+
             fetch(url, requestOptions)
                 .then(response => response.json())
                 .then((response) => {
@@ -42,10 +41,10 @@ const CartPage = () => {
                     setMyCartItems(response.data.user_cart.cart_items)
                 })
         }
-        
+
     }, [token])
 
-    function CartFooter({totalAmount, totalItemsSelected}) {
+    function CartFooter({ totalAmount, totalItemsSelected }) {
         const router = useRouter()
 
         return (
@@ -79,7 +78,77 @@ const CartPage = () => {
             </div>
         </>
     }
-    
+
+
+    function updateSelectedProducts(data) {
+        setChangesCount(changesCount => changesCount + 1)
+
+        let products = [...selectedProducts]
+        let oldSelected = {}
+        let newSelected = {}
+        let isDuplicate = false
+        
+        if (selectedProducts.length === 0) {
+            if (data.product_selected) {
+                products = [...selectedProducts]
+                setSelectedProducts((selectedProducts) => {
+                    return [...selectedProducts, data]
+                })
+            }
+        } else {
+            // Update data for same product and set duplicate to true so that
+            // the setter will not add the duplicate product again on setSelectedProducts()
+            selectedProducts.forEach((product, ndx) => {
+                newSelected = product
+
+                if (data.product_id === product.product_id) {
+                    products[ndx] = data
+                    isDuplicate = true
+                }
+
+                if (Object.keys(oldSelected).length === 0) {
+                    oldSelected = product
+                    return
+                }
+
+                if (newSelected.product_id === oldSelected.product_id) {
+                    isDuplicate = true
+                }
+                products = [...products]
+                oldSelected = product
+            })
+
+            // return only the products that are selected
+            products = products.filter((product) => {
+                return product.product_selected === true
+            })
+            
+            setSelectedProducts(() => {
+                if (isDuplicate) {
+                    return [...products]
+                } else {
+                    return [...products, data]
+                }
+            })
+        }
+    }
+
+    useEffect(function () {
+        let selectedAmount = 0
+         selectedProducts.map((product) => {
+            selectedAmount += product.total_amount
+            setSelectedTotalAmount((selectedTotalAmount) => {
+                selectedTotalAmount = selectedAmount
+                return selectedAmount
+            })
+        })
+
+        if (selectedProducts.length === 0) {
+            setSelectedTotalAmount(0)
+        }
+
+    }, [changesCount])
+
     return (
         <div className='cart_page'>
             <Head>
@@ -92,13 +161,19 @@ const CartPage = () => {
                 {
                     myCartItems.map((item) => {
                         return <>
-                            <CartItem {...item}/>
+                            <CartItem
+                                updateSelectedProducts={updateSelectedProducts}
+                                {...item} />
                         </>
                     })
                 }
-                
+
             </div>
-            <CartFooter totalItemsSelected={selectedProducts.length} totalAmount={selectedTotalAmount} />
+            <CartFooter
+                totalItemsSelected={0}
+                totalAmount={selectedTotalAmount}
+
+            />
         </div>
     )
 }
