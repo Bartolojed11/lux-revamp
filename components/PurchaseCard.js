@@ -1,13 +1,14 @@
-const PurchaseCard = (props) => {
-    const { header } = props
-    const { items } = props
+import { useState, useEffect } from 'react'
+import shoes from './../public/images/products/shoes-item.png'
 
+const PurchaseCard = (props) => {
+    const { header, items, totalAmount } = props
 
     function Items(item) {
         return <>
             <div className="purchase-card-item-container row">
                 <div className="col-3">
-                    <img className="purchase-item-img" src={item.image.src} alt={item.slug} />
+                    <img className="purchase-item-img" src={shoes.src} alt={item.slug} />
                 </div>
 
                 <div className="col-7 purchase-item-details">
@@ -16,14 +17,15 @@ const PurchaseCard = (props) => {
                 </div>
 
                 <div className="col-2 purchase-item-price-wrapper">
-                    <p className="purchase-item-price">P{item.price}</p>
+                    <p className="purchase-item-price">P{item.total_amount}</p>
                 </div>
 
             </div>
         </>
     }
 
-    function PurchaseCardFooter() {
+    function PurchaseCardFooter({totalAmount}) {
+
         return <>
             <div className="shipping-info-container">
                 <span>Shipping Details</span>
@@ -38,12 +40,12 @@ const PurchaseCard = (props) => {
             </div>
             <div className="purchase-total-container">
                 <span className="">Order Total(<span className="font-12">2 items</span>)</span>
-                <span className="font-price">P100</span>
+                <span className="font-price">P{totalAmount}</span>
             </div>
         </>
     }
 
-
+    
     return <>
         <div className="purchase-card-wrapper mb-3">
             <div className="purchase-card-header">
@@ -57,7 +59,7 @@ const PurchaseCard = (props) => {
                     })
                 }
             </div>
-            <PurchaseCardFooter />
+            <PurchaseCardFooter totalAmount={totalAmount}/>
         </div>
     </>
 }

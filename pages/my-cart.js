@@ -44,8 +44,14 @@ const CartPage = () => {
 
     }, [token])
 
-    function CartFooter({ totalAmount, totalItemsSelected }) {
+    function CartFooter({ totalAmount, selectedProducts }) {
         const router = useRouter()
+
+        function placeOrder(selectedProducts) {
+            localStorage.removeItem('selected_products');
+            localStorage.setItem('selected_products', JSON.stringify(selectedProducts));
+            router.push('order/place')
+        }
 
         return (
             <div className='cart-footer'>
@@ -53,7 +59,7 @@ const CartPage = () => {
                     <div>Total</div>
                     <div className='total-order-price'>P{totalAmount || 0}</div>
                 </div>
-                <button type="button" onClick={() => router.push("order/place")} className='btn-shop-primary btn-checkout'>Checkout (<span>{totalItemsSelected}</span>)</button>
+                <button type="button" onClick={() => placeOrder(selectedProducts)} className='btn-shop-primary btn-checkout'>Checkout (<span>{selectedProducts.length}</span>)</button>
             </div>
         )
     }
@@ -83,11 +89,9 @@ const CartPage = () => {
     function updateSelectedProducts(data) {
         setChangesCount(changesCount => changesCount + 1)
 
-        let products = [...selectedProducts]
-        let oldSelected = {}
-        let newSelected = {}
+        let products = []
         let isDuplicate = false
-        
+
         if (selectedProducts.length === 0) {
             if (data.product_selected) {
                 products = [...selectedProducts]
@@ -96,33 +100,19 @@ const CartPage = () => {
                 })
             }
         } else {
-            // Update data for same product and set duplicate to true so that
-            // the setter will not add the duplicate product again on setSelectedProducts()
-            selectedProducts.forEach((product, ndx) => {
-                newSelected = product
-
-                if (data.product_id === product.product_id) {
-                    products[ndx] = data
+            // return only the products that are selected
+            products = selectedProducts.map(function (product) {
+                if (product.product_id === data.product_id) {
                     isDuplicate = true
+                    product = data
                 }
-
-                if (Object.keys(oldSelected).length === 0) {
-                    oldSelected = product
-                    return
-                }
-
-                if (newSelected.product_id === oldSelected.product_id) {
-                    isDuplicate = true
-                }
-                products = [...products]
-                oldSelected = product
+                return product
             })
 
-            // return only the products that are selected
             products = products.filter((product) => {
                 return product.product_selected === true
             })
-            
+
             setSelectedProducts(() => {
                 if (isDuplicate) {
                     return [...products]
@@ -135,7 +125,7 @@ const CartPage = () => {
 
     useEffect(function () {
         let selectedAmount = 0
-         selectedProducts.map((product) => {
+        selectedProducts.map((product) => {
             selectedAmount += product.total_amount
             setSelectedTotalAmount((selectedTotalAmount) => {
                 selectedTotalAmount = selectedAmount
@@ -170,7 +160,7 @@ const CartPage = () => {
 
             </div>
             <CartFooter
-                totalItemsSelected={0}
+                selectedProducts={selectedProducts}
                 totalAmount={selectedTotalAmount}
 
             />
