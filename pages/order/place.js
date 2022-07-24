@@ -21,11 +21,13 @@ const PlaceOrder = () => {
     const [totalAmount, setTotalAmount] = useState(0)
 
     const { data: session, status } = useSession()
-    let token = {}
+    let [token, setToken] = useState()
 
-    if (status === 'authenticated') {
-        token = session.user.accessToken
-    }
+    useEffect(() => {
+        if (status === 'authenticated') {
+            setToken(session.user.accessToken)
+        }
+    }, [token, status])
 
     const router = useRouter()
     
@@ -87,7 +89,7 @@ const PlaceOrder = () => {
             .then((response) => {
                 if (response.status === 'success') {
                     toastSuccess(response.message)
-                    router.push('/order/success')
+                    router.push(`/order/success?ref=${response.data.order.ref_num}`)
                 } else {
                     toastError(response.message)
                 }

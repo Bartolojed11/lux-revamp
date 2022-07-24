@@ -13,6 +13,7 @@ import { useEffect } from 'react'
 const CartPage = () => {
     let [myCartItems, setMyCartItems] = useState([])
     let [fetchTriggered, setFetchTriggered] = useState(false)
+
     let [changesCount, setChangesCount] = useState(0)
 
     let [selectedProducts, setSelectedProducts] = useState([])
@@ -20,18 +21,20 @@ const CartPage = () => {
 
     const { data: session, status } = useSession()
     const url = process.env.apiExternalRoute + 'cart'
-    let token = {}
+    let [token, setToken] = useState()
 
     useEffect(() => {
-        if (status === 'authenticated' && !fetchTriggered) {
-            token = session.user.accessToken
+        if (status === 'authenticated') {
+            setToken(session.user.accessToken)
+        }
 
+        if (token !== undefined && !fetchTriggered) {
             const requestOptions = {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + token
-
                 }
+
             }
 
             fetch(url, requestOptions)
@@ -42,7 +45,8 @@ const CartPage = () => {
                 })
         }
 
-    }, [token])
+    }, [status, token])
+
 
     function CartFooter({ totalAmount, selectedProducts }) {
         const router = useRouter()
