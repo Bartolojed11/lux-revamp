@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSession } from "next-auth/react"
+import Head from 'next/head'
 
 import { Form } from "react-bootstrap"
 import { Search } from "react-bootstrap-icons"
@@ -15,6 +17,38 @@ import shoes from './../public/images/products/shoes-item.png'
 const MyPurchase = () => {
 
     const [orderKeyword, setorderKeyword] = useState('')
+    const [myOrders, setMyOrders] = useState([])
+    const [fetchTriggered, setFetchTriggered] = useState(false)
+
+    const { data: session, status } = useSession()
+    const [token, setToken] = useState()
+
+    const url = process.env.apiExternalRoute + 'orders/user'
+
+
+    useEffect(() => {
+        if (status === 'authenticated') {
+            setToken(session.user.accessToken)
+        }
+
+        if (token !== undefined && !fetchTriggered) {
+            const requestOptions = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                }
+
+            }
+
+            fetch(url, requestOptions)
+                .then(response => response.json())
+                .then((response) => {
+                    setFetchTriggered(true)
+                    setMyOrders(response.data.orders)
+                })
+        }
+
+    }, [status, token])
 
     function searchOrder(event) {
         event.preventDefault()
@@ -27,6 +61,10 @@ const MyPurchase = () => {
 
     function PurchaseHeader() {
         return <>
+            <Head>
+                <title>My Purchases</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <div className='purchase-header'>
                 <div className="search-wrapper">
                     <Form action="/search/" method="get" onSubmit={searchOrder}>
@@ -64,33 +102,30 @@ const MyPurchase = () => {
             <MobileDetailTab header="My Purchases" />
             <PurchaseHeader page="my-purchase" />
             <div className='container-fluid'>
-                <PurchaseCard header={
-                    {
-                        title: 'Reference no.',
-                        value: 'NJ1873KAS2K'
-                    }
+                {
+                    myOrders !== undefined && myOrders.map((order) => {
+                        return <>
+                            <PurchaseCard header={
+                                {
+                                    title: 'Reference no.',
+                                    value: order.ref_num
+                                }
+                            }
+
+                                items={[...order.ordered_items]}
+
+                                totalAmount={order.total_amount}
+
+                            />
+                            <div className="flex just-between date-ordered-info">
+                                <span>Date Ordered</span>
+                                <span><i>Jan 21, 2022</i></span>
+                            </div>
+                        </>
+                    })
                 }
 
-                    items={[{
-                        slug: 'test',
-                        image: shoes,
-                        name: 'Snickers 1',
-                        quantity: 3,
-                        price: 100
-                    },
-                    {
-                        slug: 'test-2',
-                        image: shoes,
-                        name: 'Snickers 1',
-                        quantity: 3,
-                        price: 100
-                    }]}
 
-                />
-                <div className="flex just-between date-ordered-info">
-                    <span>Date Ordered</span>
-                    <span><i>Jan 21, 2022</i></span>
-                </div>
             </div>
 
             <Footer />

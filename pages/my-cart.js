@@ -3,11 +3,10 @@ import Link from 'next/link'
 import Head from 'next/head'
 import { useSession } from "next-auth/react"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import CartItem from '../components/CartItem'
 import MobileDetailTab from '../components/MobileDetailTab'
-import { useEffect } from 'react'
 
 
 const CartPage = () => {
