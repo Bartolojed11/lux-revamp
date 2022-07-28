@@ -2,13 +2,14 @@ import Head from 'next/head'
 import Link from "next/link"
 import { useSession } from "next-auth/react"
 
+// Third parties And Icons
 import Card from 'react-bootstrap/Card'
-import { BsPencilSquare } from "react-icons/bs"
+import { BsPencilSquare, BsShieldLock } from "react-icons/bs"
 import { IoLogOutOutline } from "react-icons/io5"
-import { BsShieldLock } from "react-icons/bs"
 import { MdListAlt } from "react-icons/md"
 import { GoLocation } from "react-icons/go"
 
+// Components
 import MobileDetailTab from '../../components/MobileDetailTab'
 import Footer from '../../components/Footer'
 

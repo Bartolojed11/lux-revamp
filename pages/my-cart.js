@@ -2,9 +2,9 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Head from 'next/head'
 import { useSession } from "next-auth/react"
-
 import { useState, useEffect } from 'react'
 
+// Components
 import CartItem from '../components/CartItem'
 import MobileDetailTab from '../components/MobileDetailTab'
 

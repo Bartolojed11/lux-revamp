@@ -2,8 +2,10 @@ import { useSession } from "next-auth/react"
 import { useState } from 'react'
 import Head from 'next/head'
 
+// Third parties And Icons
 import Form from 'react-bootstrap/Form'
 
+// Components
 import MobileDetailTab from '../../components/MobileDetailTab'
 import Footer from '../../components/Footer'
 

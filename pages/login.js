@@ -1,10 +1,10 @@
 import Link from "next/link"
 import { useState } from 'react'
-import { signIn, getCsrfToken } from "next-auth/react"
+import { signIn } from "next-auth/react"
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-// Third parties
+// Third parties And Icons
 import { Form } from "react-bootstrap"
 import { BsShieldLock } from "react-icons/bs"
 import { MdOutlineMail } from "react-icons/md"

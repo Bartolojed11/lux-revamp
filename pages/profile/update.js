@@ -2,22 +2,22 @@ import { useSession } from "next-auth/react"
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
 
+// Third parties And Icons
 import Form from 'react-bootstrap/Form'
 
+// Components
 import MobileDetailTab from '../../components/MobileDetailTab'
 import Footer from '../../components/Footer'
 
 // utils
 import { stateSetter } from "../../utils/form"
 
-const UpdateProfile = (params) => {
+const UpdateProfile = () => {
     const { data: session, status } = useSession()
     const [formData, setFormData] = useState({})
 
     function handleSubmit(event) {
         event.preventDefault()
-
-
     }
 
     function handleOnChange(event) {

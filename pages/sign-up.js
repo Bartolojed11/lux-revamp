@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
+// Third parties And Icons
 import { Form } from "react-bootstrap"
 import { Person, People } from "react-bootstrap-icons"
 import { BsShieldLock } from "react-icons/bs"
