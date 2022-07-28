@@ -75,3 +75,11 @@
 .btn-no-padd {
     padding: 0 !important;
 }
+
+button:hover, button:focus {
+    outline: none;
+}
+
+.no-border-radius {
+    border-radius: 0;
+}

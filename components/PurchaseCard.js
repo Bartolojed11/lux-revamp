@@ -28,10 +28,10 @@ const PurchaseCard = (props) => {
 
         return <>
             <div className="shipping-info-container">
-                <span>Shipping Details</span>
+                <span className="font-12">Shipping Details</span>
                 <div className="shipping-info">
                     <span className="font-12">Receive by Jan 7 - 12</span>
-                    <span className="shipping-fee">P50</span>
+                    <span className="shipping-fee font-12">P50</span>
                 </div>
             </div>
             <div className="purchase-message-container">
@@ -47,9 +47,9 @@ const PurchaseCard = (props) => {
 
     
     return <>
-        <div className="purchase-card-wrapper mb-3">
+        <div className="purchase-card-wrapper">
             <div className="purchase-card-header">
-                <span className="font-14 font-600">{header?.title || ''}</span>
+                <span className="font-14 font-600 uppercase">{header?.title || ''}</span>
                 <span className="font-14 font-600 font-price">{header?.value || ''}</span>
             </div>
             <div className="purchase-card-items">

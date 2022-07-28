@@ -84,10 +84,10 @@ const MyPurchase = () => {
                 </div>
 
                 <div className="purchase-navigations">
-                    <button type="button" className="btn btn-crystal pn-active">To Pay</button>
-                    <button type="button" className="btn btn-crystal">To Ship</button>
-                    <button type="button" className="btn btn-crystal">To Receive</button>
-                    <button type="button" className="btn btn-crystal">Completed</button>
+                    <button type="button" className="btn no-border-radius btn-crystal pn-active">To Pay</button>
+                    <button type="button" className="btn no-border-radius btn-crystal">To Ship</button>
+                    <button type="button" className="btn no-border-radius btn-crystal">To Receive</button>
+                    <button type="button" className="btn no-border-radius btn-crystal">Completed</button>
                 </div>
             </div>
         </>
@@ -104,7 +104,7 @@ const MyPurchase = () => {
             <div className='container-fluid'>
                 {
                     myOrders !== undefined && myOrders.map((order) => {
-                        return <>
+                        return <div key={order._id}>
                             <PurchaseCard header={
                                 {
                                     title: 'Reference no.',
@@ -121,7 +121,7 @@ const MyPurchase = () => {
                                 <span>Date Ordered</span>
                                 <span><i>Jan 21, 2022</i></span>
                             </div>
-                        </>
+                        </div>
                     })
                 }
 

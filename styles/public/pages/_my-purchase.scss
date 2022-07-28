@@ -1,11 +1,27 @@
 .my-purchase-page {
   background-color: #fff;
-  height: 110vh;
+  min-height: 100vh;
+  margin-bottom: 8rem;
 }
 
 .container-fluid .date-ordered-info {
   padding: 0.4rem;
-  border-bottom: 0.4rem solid #f6f6f6;
+  padding-bottom: 1rem;
+
+  position: relative;
+  &::after {
+    content: '';
+    background-color: #f6f6f6;
+    height: .4rem;
+    position: absolute;
+    left: -2rem;
+    right: -2rem;
+    bottom: 0;
+  }
+
+  & > span {
+    font-size: 1.2rem;
+  }
 }
 
 .purchase-header {
@@ -56,19 +72,18 @@
     @extend .just-between;
     border-top: 0.1rem solid #94ffb7;
     font-size: 1.4rem;
-    padding: 0.3rem 0.4rem;
+    padding: 0.5rem 0.4rem;
     margin-top: 0.4rem;
   }
 }
 
-.purchase-total-container {
-  @extend .just-between;
-  padding: 1rem .4rem;
-}
 
-.purchase-message-container {
+.purchase-message-container, .purchase-total-container {
   @extend .just-between;
-  padding: 1rem .4rem;
+  padding: .8rem .4rem;
+  & > span {
+    font-size: 1.2rem
+  }
 }
 
 .purchase-card-wrapper {
