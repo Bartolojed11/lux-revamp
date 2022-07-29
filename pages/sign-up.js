@@ -14,6 +14,7 @@ import OtherAuth from './../components/OtherAuth'
 
 // utils
 import { stateSetter } from "../utils/form"
+import { requestOptions } from "../utils/requestOptions"
 
 const SignUp = () => {
     const router = useRouter()
@@ -30,13 +31,7 @@ const SignUp = () => {
     function handleSubmit(event) {
         event.preventDefault()
 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        }
-
-        fetch(url, requestOptions)
+        fetch(url, requestOptions('POST', formData))
             .then(response => response.json())
             .then((response) => {
                 // Trigger useEffect

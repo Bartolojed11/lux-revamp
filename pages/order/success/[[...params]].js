@@ -14,6 +14,9 @@ import { BsCheckCircle } from "react-icons/bs"
 
 import shoes from './../../../public/images/products/shoes-item.png'
 
+// utils
+import { requestOptions } from "../../../utils/requestOptions"
+
 
 const Success = () => {
     const router = useRouter()
@@ -32,15 +35,7 @@ const Success = () => {
 
         if (token !== undefined && ref !== undefined && !fetchTriggered) {
 
-            const requestOptions = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
-
-                }
-            }
-
-            fetch(process.env.apiExternalRoute + 'orders/' + ref, requestOptions)
+            fetch(process.env.apiExternalRoute + 'orders/' + ref, requestOptions('GET', {}, {token: token}))
                 .then(response => response.json())
                 .then((response) => {
                     setFetchTriggered(true)

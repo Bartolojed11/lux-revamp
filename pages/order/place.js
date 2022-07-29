@@ -12,6 +12,7 @@ import PaymentDetailsCard from '../../components/PaymentDetailsCard'
 
 // utils
 import { toastSuccess, toastError } from "../../utils/toasts"
+import { requestOptions } from "../../utils/requestOptions"
 
 // Icons
 import { IoLocationSharp } from "react-icons/io5";
@@ -30,7 +31,7 @@ const PlaceOrder = () => {
     }, [token, status])
 
     const router = useRouter()
-    
+
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -74,17 +75,7 @@ const PlaceOrder = () => {
             }
         }
 
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
-
-            },
-            body: JSON.stringify(order)
-        }
-
-        fetch(url, requestOptions)
+        fetch(url, requestOptions('POST', order, { token: token }))
             .then(response => response.json())
             .then((response) => {
                 if (response.status === 'success') {

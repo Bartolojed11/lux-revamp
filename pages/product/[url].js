@@ -9,6 +9,7 @@ import shoes from './../../public/images/products/shoes-item.png'
 
 // utils
 import { toastSuccess, toastError } from "../../utils/toasts"
+import { requestOptions } from "../../utils/requestOptions"
 
 export default function Product({ product }) {
 
@@ -117,17 +118,7 @@ function addToCart(product, token) {
         }
     }
 
-    const requestOptions = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-            
-        },
-        body: JSON.stringify(cart)
-    }
-
-    fetch(url, requestOptions)
+    fetch(url, requestOptions('POST', cart, { token: token }))
         .then(response => response.json())
         .then((response) => {
             if (response.status === 'success') {
@@ -163,7 +154,7 @@ export async function getStaticProps(context) {
 // the path has not been generated.
 export async function getStaticPaths() {
 
-    const response = await fetch(process.env.apiExternalRoute + 'products')
+    const response = await fetch(process.env.apiExternalRoute + 'products/search')
     const json = await response.json()
     const { products } = json.data || {}
 

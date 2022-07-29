@@ -8,6 +8,9 @@ import { useState, useEffect } from 'react'
 import CartItem from '../components/CartItem'
 import MobileDetailTab from '../components/MobileDetailTab'
 
+// utils
+import { requestOptions } from './../utils/requestOptions'
+
 
 const CartPage = () => {
     let [myCartItems, setMyCartItems] = useState([])
@@ -28,15 +31,7 @@ const CartPage = () => {
         }
 
         if (token !== undefined && !fetchTriggered) {
-            const requestOptions = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
-                }
-
-            }
-
-            fetch(url, requestOptions)
+            fetch(url, requestOptions('GET', {}, { token: token }))
                 .then(response => response.json())
                 .then((response) => {
                     setFetchTriggered(true)

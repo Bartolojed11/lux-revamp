@@ -33,7 +33,7 @@ const Home = (props) => {
 // It may be called again, on a serverless function, if
 // revalidation is enabled and a new request comes in
 export async function getStaticProps() {
-  const response = await fetch(process.env.apiExternalRoute + 'products')
+  const response = await fetch(process.env.apiExternalRoute + 'products/search')
   const json = await response.json()
   const { products } = json.data || {}
 

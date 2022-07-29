@@ -15,6 +15,9 @@ import Footer from './../components/Footer'
 
 import shoes from './../public/images/products/shoes-item.png'
 
+// utils
+import { requestOptions } from './../utils/requestOptions'
+
 const MyPurchase = () => {
 
     const [orderKeyword, setorderKeyword] = useState('')
@@ -33,15 +36,7 @@ const MyPurchase = () => {
         }
 
         if (token !== undefined && !fetchTriggered) {
-            const requestOptions = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
-                }
-
-            }
-
-            fetch(url, requestOptions)
+            fetch(url, requestOptions('GET', {}, { token: token }))
                 .then(response => response.json())
                 .then((response) => {
                     setFetchTriggered(true)
