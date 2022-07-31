@@ -15,6 +15,95 @@ export default function Product({ product }) {
 
     const router = useRouter()
 
+
+    function Footer({ product, router }) {
+        const { data: session, status } = useSession()
+        let token = {}
+
+        if (status === 'authenticated') {
+            token = session.user.accessToken
+        }
+
+        return (
+            <div className="product-footer">
+                <div className="product-footer__chat">
+                    <ChatDots />
+                    <label>Chat</label>
+                </div>
+                <div className="v-separator">
+
+                </div>
+                <button type="button" className="btn-crystal product-footer__cart" onClick={() => addToCart(product, token)}>
+                    <Bag />
+                    <label>Add to cart</label>
+                </button>
+                <button type="button" className="product-footer__buynow btn-shop-primary" onClick={() => buyNow(product, token, router)}>Buy now</button>
+            </div>
+        )
+    }
+
+
+    async function addToCart(product, token, buyNow = false) {
+        const url = process.env.apiExternalRoute + 'cart'
+        const cart = {
+            "cart_items": {
+                "product_id": product._id,
+                "quantity": 1,
+                "amount": product.price,
+                "total_amount": product.price
+            }
+        }
+
+        fetch(url, requestOptions('POST', cart, { token: token }))
+            .then(response => response.json())
+            .then((response) => {
+                if (response.status === 'success') {
+                    if (!buyNow) {
+                        toastSuccess(response.message)
+                    }
+
+                } else {
+                    toastError(response.message)
+                }
+            })
+    }
+
+    async function buyNow(product, token, router) {
+        await addToCart(product, token, true)
+
+        const productFromStorage = getProductFromLocalStorage(product._id)
+        let qty = productFromStorage.quantity || 0
+        let total_amount = productFromStorage.total_amount || 0
+        qty += 1
+        total_amount += product.price
+
+        localStorage.removeItem('selected_products');
+        localStorage.setItem('selected_products', JSON.stringify([{
+            product_selected: true,
+            product_id: product._id,
+            name: product.name,
+            quantity: qty,
+            amount: product.price,
+            total_amount: total_amount
+        }]))
+        router.push('/order/place')
+    }
+
+    function getProductFromLocalStorage(product_id) {
+        let products = JSON.parse(localStorage.getItem('selected_products'));
+
+        let selected_product = {}
+        if (products !== null) {
+            for (const product of products) {
+                if (product.product_id === product_id) {
+                    selected_product = product
+                }
+            }
+        }
+
+        return selected_product
+    }
+
     return (
         <div className="product-wrapper">
 
@@ -74,59 +163,9 @@ export default function Product({ product }) {
                 </div>
             </div>
 
-            <Footer {...product} />
+            <Footer product={product} router={router} />
         </div>
     )
-}
-
-function Footer(product) {
-    const { data: session, status } = useSession()
-    let token = {}
-
-    if (status === 'authenticated') {
-        token = session.user.accessToken
-    }
-
-    return (
-        <div className="product-footer">
-            <div className="product-footer__chat">
-                <ChatDots />
-                <label>Chat</label>
-            </div>
-            <div className="v-separator">
-
-            </div>
-            <button type="button" className="btn-crystal product-footer__cart" onClick={() => addToCart(product, token)}>
-                <Bag />
-                <label>Add to cart</label>
-            </button>
-            <button type="button" className="product-footer__buynow btn-shop-primary">Buy now</button>
-        </div>
-    )
-}
-
-
-function addToCart(product, token) {
-    const url = process.env.apiExternalRoute + 'cart'
-
-    const cart = {
-        "cart_items": {
-            "product_id": product._id,
-            "quantity": 1,
-            "amount": product.price,
-            "total_amount": product.price
-        }
-    }
-
-    fetch(url, requestOptions('POST', cart, { token: token }))
-        .then(response => response.json())
-        .then((response) => {
-            if (response.status === 'success') {
-                toastSuccess(response.message)
-            } else {
-                toastError(response.message)
-            }
-        })
 }
 
 // This function gets called at build time on server-side.

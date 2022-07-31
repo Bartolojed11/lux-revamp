@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react"
 import Head from 'next/head'
 
 // Third parties And Icons
+import Moment from 'moment'
 import { Form } from "react-bootstrap"
 import { Search } from "react-bootstrap-icons"
 
@@ -115,7 +116,7 @@ const MyPurchase = () => {
                             />
                             <div className="flex just-between date-ordered-info">
                                 <span>Date Ordered</span>
-                                <span><i>Jan 21, 2022</i></span>
+                                <span><i>{Moment(order.date_ordered).format("MMM D, YYYY")}</i></span>
                             </div>
                         </div>
                     })
