@@ -1,11 +1,13 @@
 import Head from 'next/head'
 import { useSession  } from "next-auth/react"
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 // Third parties
 import { Bag, ChatDots, ChevronLeft, Heart, Link, SlashSquareFill, StarFill } from "react-bootstrap-icons"
 import { useSelector, useDispatch } from 'react-redux'
+
+// Redux
 import { increment, initialCartCount } from '../../redux/features/cartCounterSlice'
 
 import shoes from './../../public/images/products/shoes-item.png'
@@ -13,7 +15,6 @@ import shoes from './../../public/images/products/shoes-item.png'
 // utils
 import { toastSuccess, toastError } from "../../utils/toasts"
 import { requestOptions } from "../../utils/requestOptions"
-import { useEffect } from 'react'
 
 export default function Product({ product }) {
 
@@ -33,7 +34,8 @@ export default function Product({ product }) {
 
     useEffect(() => {
         const url = process.env.apiExternalRoute + 'cart/count'
-        if (token !== undefined) {
+        if (status === 'authenticated' && token !== '') {
+            
             fetch(url, requestOptions('GET', {}, { token: token }))
             .then(response => response.json())
             .then((response) => {
@@ -43,7 +45,7 @@ export default function Product({ product }) {
             })
         }
 
-    }, [token])
+    }, [status, token])
 
 
     function Footer({ product, router, token }) {
