@@ -1,29 +1,52 @@
 import Head from 'next/head'
-import { useSession } from "next-auth/react"
+import { useSession  } from "next-auth/react"
+import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 // Third parties
 import { Bag, ChatDots, ChevronLeft, Heart, Link, SlashSquareFill, StarFill } from "react-bootstrap-icons"
-import { useRouter } from 'next/router'
+import { useSelector, useDispatch } from 'react-redux'
+import { increment, initialCartCount } from '../../redux/features/cartCounterSlice'
 
 import shoes from './../../public/images/products/shoes-item.png'
 
 // utils
 import { toastSuccess, toastError } from "../../utils/toasts"
 import { requestOptions } from "../../utils/requestOptions"
+import { useEffect } from 'react'
 
 export default function Product({ product }) {
 
     const router = useRouter()
+    const cartCount = useSelector((state) => state.cartCounter.cart_count)
+    let [token, setToken] = useState('')
 
+    const { data: session, status } = useSession()
 
-    function Footer({ product, router }) {
-        const { data: session, status } = useSession()
-        let token = {}
-
+    useEffect(() => {
         if (status === 'authenticated') {
-            token = session.user.accessToken
+            setToken(session.user.accessToken)
+        }
+    }, [status])
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        const url = process.env.apiExternalRoute + 'cart/count'
+        if (token !== undefined) {
+            fetch(url, requestOptions('GET', {}, { token: token }))
+            .then(response => response.json())
+            .then((response) => {
+                if (response.status === 'success') {
+                    dispatch(initialCartCount(response.total_count))
+                }
+            })
         }
 
+    }, [token])
+
+
+    function Footer({ product, router, token }) {
         return (
             <div className="product-footer">
                 <div className="product-footer__chat">
@@ -58,6 +81,7 @@ export default function Product({ product }) {
             .then(response => response.json())
             .then((response) => {
                 if (response.status === 'success') {
+                    dispatch(increment())
                     if (!buyNow) {
                         toastSuccess(response.message)
                     }
@@ -118,7 +142,8 @@ export default function Product({ product }) {
                     <ChevronLeft />
                 </button>
 
-                <button className="round-button" type="button" onClick={() => router.push('/my-cart')}>
+                <button className="round-button header-cart-container" type="button" onClick={() => router.push('/my-cart')}>
+                    <div className="header-cart-count">{cartCount}</div>
                     <Bag />
                 </button>
             </div>
@@ -163,7 +188,7 @@ export default function Product({ product }) {
                 </div>
             </div>
 
-            <Footer product={product} router={router} />
+            <Footer product={product} router={router} token={token}/>
         </div>
     )
 }

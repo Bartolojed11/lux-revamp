@@ -3,6 +3,9 @@ import { SessionProvider } from "next-auth/react"
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
 
+// Redux
+import { store } from '../redux/store'
+import { Provider } from 'react-redux'
 
 import './../styles/public.scss'
 
@@ -10,7 +13,7 @@ import './../styles/public.scss'
 import Logo from './../public/images/logo/logo.png'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
-  
+
   const DynamicComponent = dynamic(() =>
     import('react-hot-toast').then((mod) => mod.Toaster)
   )
@@ -24,7 +27,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       <Suspense fallback={`Loading...`}>
         <DynamicComponent />
       </Suspense>
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </SessionProvider>
   )
 }

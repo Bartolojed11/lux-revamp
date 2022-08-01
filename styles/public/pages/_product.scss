@@ -11,6 +11,25 @@
         padding-left: 2rem;
         padding-right: 2rem;
     }
+    
+    .header-cart-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & > .header-cart-count {
+            position: absolute;
+            top: 1px;
+            right: 0;
+            height: 16px;
+            width: 16px;
+            background-color: #ff4300;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 50%;
+        }
+    }
 
     & > .product-image__wrapper {
         height: 27rem;
