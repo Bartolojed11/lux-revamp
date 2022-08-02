@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Card } from 'react-bootstrap'
 
@@ -9,6 +9,12 @@ export default function ProductCard(props) {
     const router = useRouter()
     const product_url = '/product/'
     const [products, setProducts] = useState(props.products || [])
+    const { searchQuery } = props
+    
+    useEffect(() => {
+        setProducts(props.products)
+    }, [searchQuery])
+    console.log('useEffect outside')
 
     function goTo(slug) {
         router.push(`${product_url}${slug}`)

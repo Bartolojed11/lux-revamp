@@ -1,10 +1,11 @@
 import Head from 'next/head'
-import { useSession  } from "next-auth/react"
+import { useSession } from "next-auth/react"
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
+import Link from "next/link"
 
 // Third parties
-import { Bag, ChatDots, ChevronLeft, Heart, Link, SlashSquareFill, StarFill } from "react-bootstrap-icons"
+import { Bag, ChatDots, ChevronLeft, Heart, SlashSquareFill, StarFill } from "react-bootstrap-icons"
 import { useSelector, useDispatch } from 'react-redux'
 
 // Redux
@@ -35,14 +36,14 @@ export default function Product({ product }) {
     useEffect(() => {
         const url = process.env.apiExternalRoute + 'cart/count'
         if (status === 'authenticated' && token !== '') {
-            
+
             fetch(url, requestOptions('GET', {}, { token: token }))
-            .then(response => response.json())
-            .then((response) => {
-                if (response.status === 'success') {
-                    dispatch(initialCartCount(response.total_count))
-                }
-            })
+                .then(response => response.json())
+                .then((response) => {
+                    if (response.status === 'success') {
+                        dispatch(initialCartCount(response.total_count))
+                    }
+                })
         }
 
     }, [status, token])
@@ -190,7 +191,7 @@ export default function Product({ product }) {
                 </div>
             </div>
 
-            <Footer product={product} router={router} token={token}/>
+            <Footer product={product} router={router} token={token} />
         </div>
     )
 }

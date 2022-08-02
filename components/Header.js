@@ -9,9 +9,7 @@ import { Form } from "react-bootstrap"
 import { Search } from "react-bootstrap-icons"
 
 
-
-
-export default function Header({ nonHomePage = false }) {
+export default function Header() {
   const nonHomePageNavbar = "navbar-non-home"
 
   const [keyword, setKeyword] = useState('')
@@ -32,7 +30,7 @@ export default function Header({ nonHomePage = false }) {
   // This is done to capture the last character inputted on the input field
   useEffect(() => {
     setSearchUrl(() => {
-      return `/search?keyword=${keyword}`
+      return `/search?name=${keyword}`
     })
   }, [keyword])
 
