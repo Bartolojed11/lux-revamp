@@ -12,7 +12,7 @@ import Footer from './../components/Footer'
 const Home = (props) => {
   const { products } = props
   return (
-    <>
+    <div className="home-page">
       <Head>
         <title>Home</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -25,7 +25,7 @@ const Home = (props) => {
       <Separator title="Discover" />
       <ProductCard products={products} />
       <Footer />
-    </>
+    </div>
   )
 }
 
