@@ -23,8 +23,10 @@
     margin-right: auto;
 }
 
-.catgories-item > label {
-    font-weight: 700;
-    color: $font-primary
+.catgories-item > span {
+    font-weight: 400;
+    color: $font-primary;
+    line-height: 1.6rem;
+
 }
 

@@ -32,13 +32,13 @@ span > img {
 
   & > form {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
   }
 }
 
 .search-icon {
   position: absolute;
-  top: 0.7rem;
+  top: 0.5rem;
   right: 1rem;
 }
 

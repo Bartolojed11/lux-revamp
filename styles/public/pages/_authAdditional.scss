@@ -1,0 +1,47 @@
+.forgot-password-link {
+  text-align: right;
+  display: block;
+}
+
+.or-continue-with {
+  text-align: center;
+}
+
+.no-account-yet {
+  text-align: center;
+}
+
+.or-continue-with p,
+.no-account-yet p {
+  width: 100%;
+}
+
+.or-continue-with p::before,
+.or-continue-with p::after,
+.no-account-yet p::before,
+.no-account-yet p::after {
+  content: "";
+  height: 0.1rem;
+  width: 5rem;
+  background-color: $secondary-color;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.no-account-yet p::before,
+.no-account-yet p::after {
+  width: 6rem;
+}
+
+.or-continue-with p,
+.no-account-yet p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.continue-with-thirdparty {
+  @extend .xy-center;
+  gap: 0.9rem;
+  font-size: 1.8rem;
+}

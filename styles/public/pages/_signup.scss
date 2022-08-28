@@ -1,0 +1,47 @@
+.signup-page {
+  background-color: $primary-color;
+  height: 100vh;
+
+  .signup-form {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5rem;
+
+    & .form-group-firstname,
+    & .form-group-lastname,
+    & .form-group-email,
+    & .form-group-password {
+      position: relative;
+    }
+
+    & .signup-email {
+      padding-left: 10%;
+      border-bottom: 0px;
+      border-radius: $border-radius;
+    }
+
+    & .password {
+      padding-left: 10%;
+      border-radius: $border-radius;
+    }
+
+    & .signup-lastname,
+    & .signup-firstname {
+      padding-left: 10%;
+      border-bottom: 0px;
+      border-radius: $border-radius;
+    }
+
+    & .email-left-icon,
+    & .password-left-icon,
+    & .lastname-left-icon,
+    & .firstname-left-icon {
+      position: absolute;
+      z-index: 2;
+      font-size: 1.6rem;
+      top: 33%;
+      left: 3%;
+    }
+  }
+}

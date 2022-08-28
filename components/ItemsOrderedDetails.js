@@ -1,18 +1,18 @@
 const ItemsOrderedDetails = () => {
-  const public_path = process.env.REACT_APP_PUBLIC_URL;
-  const img = "shoes-item.png";
-  
+  const public_path = process.env.REACT_APP_PUBLIC_URL
+  const img = "shoes-item.png"
+
   function Totals() {
-      return (
-        <div className="totals row">
-            <div className="col-9 font-12 totals-label">Shipping Total</div>
-            <div className="col-3 font-12 totals-value">P100</div>
-            <div className="col-9 font-12 totals-label">Sub Total</div>
-            <div className="col-3 font-12 totals-value">P100</div>
-            <div className="col-9 font-12 totals-label">Total</div>
-            <div className="col-3 font-12 totals-value">P100</div>
-        </div>
-      )
+    return (
+      <div className="totals row">
+        <div className="col-9 font-12 totals-label">Shipping Total</div>
+        <div className="col-3 font-12 totals-value">P100</div>
+        <div className="col-9 font-12 totals-label">Sub Total</div>
+        <div className="col-3 font-12 totals-value">P100</div>
+        <div className="col-9 font-12 totals-label">Total</div>
+        <div className="col-3 font-12 totals-value">P100</div>
+      </div>
+    )
   }
 
   return (
@@ -58,11 +58,11 @@ const ItemsOrderedDetails = () => {
         </div>
       </div>
       <div className="container-fluid">
-        <Totals/>
+        <Totals />
       </div>
-      
-    </div>
-  );
-};
 
-export default ItemsOrderedDetails;
+    </div>
+  )
+}
+
+export default ItemsOrderedDetails

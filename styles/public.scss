@@ -11,12 +11,13 @@
 	'public/utilities/helpers',
 	'public/utilities/functions',
 	'public/utilities/btn',
+	'public/utilities/inputs',
 	'public/utilities/navbar',
 	'public/utilities/separator',
+	'public/utilities/spaces',
 	'public/utilities/carousell',
 	'public/utilities/card',
 	'public/utilities/categories',
-	'public/utilities/authModal',
 	'public/utilities/fonts',
 	'public/utilities/footer';
 
@@ -25,7 +26,21 @@
 // Pages
 @import 
 	'public/pages/home',
+	'public/pages/authAdditional',
+	'public/pages/profile',
+	'public/pages/address',
+	'public/pages/update-profile',
+	'public/pages/login',
+	'public/pages/signup',
+	'public/pages/forgotpass',
 	'public/pages/searchResult',
 	'public/pages/product',
+	'public/pages/my-purchase',
 	'public/pages/cartPage',
-	'public/pages/placeOrder'
+	'public/pages/order';
+
+
+.container-fluid {
+	padding-right: 2rem;
+	padding-left: 2rem;
+}

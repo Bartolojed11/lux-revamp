@@ -1,0 +1,68 @@
+.profile-page {
+  min-height: 82vh;
+  @extend .vertical-center;
+
+  & .profile-details-card {
+    width: 100%;
+    height: 100%;
+    padding: 2rem 1rem;
+  }
+
+  .profile-details-title {
+    font-size: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .my-profile-picture {
+    text-align: center;
+    height: 10rem;
+    & > img {
+      height: 100%;
+      border-radius: 50%;
+    }
+  }
+
+  & .profile-details-body {
+    position: relative;
+    text-align: center;
+    @extend .horizontal-center;
+    flex-direction: column;
+  }
+
+  .my-profile-navigations__wrapper {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .my-profile-navigations {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    gap: 0.8rem;
+
+    .purchase-link {
+      margin-left: 2rem;
+      gap: 0.3rem;
+      @extend .vertical-center;
+    }
+    .address-link {
+      margin-right: 2rem;
+      gap: 0.3rem;
+      @extend .vertical-center;
+    }
+
+    .my-purchase-icon,
+    .my-address-icon {
+      font-size: 2rem;
+    }
+
+    .my-purchase-icon {
+      color: $primary-color;
+    }
+
+    .my-address-icon {
+      color: $red;
+    }
+  }
+}
