@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import Head from 'next/head'
 import { useSession } from "next-auth/react"
 
 // Components
-import MobileDetailTab from '../../components/MobileDetailTab'
-import PurchaseCard from '../../components/PurchaseCard'
-import PaymentCard from '../../components/PaymentCard'
-import PaymentDetailsCard from '../../components/PaymentDetailsCard'
+import MobileDetailTab from './../../components/MobileDetailTab'
+import PurchaseCard from './../../components/PurchaseCard'
+import PaymentCard from './../../components/PaymentCard'
+import PaymentDetailsCard from './../../components/PaymentDetailsCard'
+import HtmlHeader from './../../components/Header'
 
 // utils
 import { toastSuccess, toastError } from "../../utils/toasts"
@@ -62,7 +62,7 @@ const PlaceOrder = () => {
 
     function placeOrder(selectedProducts, token, router) {
 
-        const url = process.env.apiExternalRoute + 'orders'
+        const url = process.env.apiUrl + 'orders'
 
         const order = {
             "ordered_items": selectedProducts,
@@ -90,10 +90,7 @@ const PlaceOrder = () => {
 
     return (
         <div className='place-order__wrapper'>
-            <Head>
-                <title>Place order</title>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-            </Head>
+            <HtmlHeader title='Place order' />
             <MobileDetailTab header="Checkout Order" />
             <DeliveryAddress />
             <div className='container-fluid'>

@@ -2,7 +2,6 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { useSession } from "next-auth/react"
-import Head from 'next/head'
 
 // Third parties And Icons
 import Moment from 'moment'
@@ -13,6 +12,7 @@ import { Search } from "react-bootstrap-icons"
 import MobileDetailTab from './../components/MobileDetailTab'
 import PurchaseCard from './../components/PurchaseCard'
 import Footer from './../components/Footer'
+import HtmlHeader from './../components/Header'
 
 import shoes from './../public/images/products/shoes-item.png'
 
@@ -28,7 +28,7 @@ const MyPurchase = () => {
     const { data: session, status } = useSession()
     const [token, setToken] = useState()
 
-    const url = process.env.apiExternalRoute + 'orders/user'
+    const url = process.env.apiUrl + 'orders/user'
 
 
     useEffect(() => {
@@ -58,10 +58,7 @@ const MyPurchase = () => {
 
     function PurchaseHeader() {
         return <>
-            <Head>
-                <title>My Purchases</title>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-            </Head>
+            <HtmlHeader title="My Purchases" />
             <div className='purchase-header'>
                 <div className="search-wrapper">
                     <Form action="/search/" method="get" onSubmit={searchOrder}>

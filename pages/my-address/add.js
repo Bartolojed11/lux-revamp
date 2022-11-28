@@ -1,6 +1,5 @@
 import { useSession } from "next-auth/react"
 import { useState } from 'react'
-import Head from 'next/head'
 
 // Third parties And Icons
 import Form from 'react-bootstrap/Form'
@@ -8,6 +7,7 @@ import Form from 'react-bootstrap/Form'
 // Components
 import MobileDetailTab from './../../components/MobileDetailTab'
 import Footer from './../../components/Footer'
+import HtmlHeader from './../../components/Header'
 
 // utils
 import { stateSetter } from "./../../utils/form"
@@ -34,10 +34,7 @@ const AddAddress = (params) => {
 
     return <>
         <MobileDetailTab header="Add Address" />
-        <Head>
-            <title>Add Address</title>
-            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        </Head>
+        <HtmlHeader title="Add Address" />
         <div className="container-fluid add-address-page">
             <div className="add-address-details-card card">
                 <Form onSubmit={handleSubmit} method="post">

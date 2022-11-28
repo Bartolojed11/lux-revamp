@@ -1,6 +1,5 @@
 import { useSession } from "next-auth/react"
 import { useEffect, useState } from 'react'
-import Head from 'next/head'
 
 // Third parties And Icons
 import Form from 'react-bootstrap/Form'
@@ -8,6 +7,7 @@ import Form from 'react-bootstrap/Form'
 // Components
 import MobileDetailTab from './../../components/MobileDetailTab'
 import Footer from './../../components/Footer'
+import HtmlHeader from './../../components/Header'
 
 // utils
 import { stateSetter } from "./../../utils/form"
@@ -46,13 +46,9 @@ const EditAddress = ({ address }) => {
         stateSetter(event, setFormData)
     }
 
-
     return <>
         <MobileDetailTab header="Update Address" />
-        <Head>
-            <title>Update Address</title>
-            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        </Head>
+        <HtmlHeader title='Update Address' />
         <div className="container-fluid update-address-page">
             <div className="update-address-details-card card">
                 <Form onSubmit={handleSubmit} method="post">
@@ -144,7 +140,7 @@ const EditAddress = ({ address }) => {
 // revalidation is enabled and a new request comes in
 // export async function getStaticProps(context) {
 //     const { id } = context.params
-//     // const response = await fetch(process.env.apiExternalRoute + 'products/' + url)
+//     // const response = await fetch(process.env.apiUrl + 'products/' + url)
 //     // const json = await response.json()
 //     // const { address } = json.data || {}
 //     const address = {}
@@ -165,7 +161,7 @@ const EditAddress = ({ address }) => {
 // // the path has not been generated.
 // export async function getStaticPaths() {
 
-//     const response = await fetch(process.env.apiExternalRoute + 'products')
+//     const response = await fetch(process.env.apiUrl + 'products')
 //     const json = await response.json()
 //     const { address } = json.data || {}
 

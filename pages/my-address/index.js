@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Link from "next/link"
 
 import Card from 'react-bootstrap/Card'
 
 // My Components
-import MobileDetailTab from '../../components/MobileDetailTab'
-import Footer from '../../components/Footer'
+import MobileDetailTab from './../../components/MobileDetailTab'
+import Footer from './../../components/Footer'
+import HtmlHeader from './../../components/Header'
 
 const MyAddress = (params) => {
 
@@ -56,12 +56,7 @@ const MyAddress = (params) => {
 
     return <>
         <div className="address-page">
-
-            <Head>
-                <title>My Addresses</title>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-            </Head>
-
+            <HtmlHeader title='My Addresses' />
             <MobileDetailTab header="My addresses" />
             <div className="container-fluid mt-4">
                 <button type="button" className='btn btn-shop-primary mb-4'

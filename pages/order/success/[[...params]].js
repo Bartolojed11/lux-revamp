@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import Head from 'next/head'
 import { useSession } from "next-auth/react"
 
 // Components
-import MobileDetailTab from '../../../components/MobileDetailTab'
-import PurchaseCard from '../../../components/PurchaseCard'
-import Footer from '../../../components/Footer'
+import MobileDetailTab from './../../../components/MobileDetailTab'
+import PurchaseCard from './../../../components/PurchaseCard'
+import Footer from './../../../components/Footer'
+import HtmlHeader from './../../../components/Header'
 
 // icons
 import { BsCheckCircle } from "react-icons/bs"
@@ -35,7 +35,7 @@ const Success = () => {
 
         if (token !== undefined && ref !== undefined && !fetchTriggered) {
 
-            fetch(process.env.apiExternalRoute + 'orders/' + ref, requestOptions('GET', {}, {token: token}))
+            fetch(process.env.apiUrl + 'orders/' + ref, requestOptions('GET', {}, { token: token }))
                 .then(response => response.json())
                 .then((response) => {
                     setFetchTriggered(true)
@@ -66,10 +66,7 @@ const Success = () => {
 
     return (
         <div className='success-order__wrapper'>
-            <Head>
-                <title>Successful Order</title>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-            </Head>
+            <HtmlHeader title='Successful Order' />
             <MobileDetailTab header="Successful Order" />
 
             <div className='container-fluid success-order-container'>

@@ -4,7 +4,8 @@ import { Form } from "react-bootstrap"
 import { Person } from "react-bootstrap-icons"
 
 // Components
-import Footer from '../../components/Footer'
+import Footer from './../../components/Footer'
+import HtmlHeader from './../../components/Header'
 
 // utils
 import { stateSetter } from "../../utils/form"
@@ -25,6 +26,7 @@ const ForgotPassword = () => {
 
     return (
         <div className="forgotpass-page">
+            <HtmlHeader title='Forgot Password' />
             <Form className="fogotpass-form">
                 <h1 className="text-center">Welcome!</h1>
                 <p className="text-center">Lorem ipsum</p>

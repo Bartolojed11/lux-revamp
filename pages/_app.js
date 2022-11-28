@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { SessionProvider } from "next-auth/react"
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
@@ -9,9 +8,6 @@ import { Provider } from 'react-redux'
 
 import './../styles/public.scss'
 
-// Images
-import Logo from './../public/images/logo/logo.png'
-
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
   const DynamicComponent = dynamic(() =>
@@ -20,10 +16,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
   return (
     <SessionProvider session={session}>
-      < Head >
-        <link rel="shortcut icon" href={Logo.src} />
-      </Head >
-
       <Suspense fallback={`Loading...`}>
         <DynamicComponent />
       </Suspense>

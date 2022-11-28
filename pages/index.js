@@ -1,23 +1,18 @@
-import Head from 'next/head'
-
 // Components
-import Header from './../components/Header'
+import Navbar from './../components/Navbar'
 import Banner from './../components/Banner'
 import Categories from './../components/Categories'
 import Separator from './../components/Separator'
 import ProductCard from './../components/ProductCard'
 import Footer from './../components/Footer'
-
+import HtmlHeader from './../components/Header'
 
 const Home = (props) => {
   const { products } = props
   return (
     <div className="home-page">
-      <Head>
-        <title>Home</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
-      <Header />
+      <HtmlHeader/>
+      <Navbar />
       <Banner />
       <Categories />
       <Separator title="Top Products" />
@@ -33,7 +28,7 @@ const Home = (props) => {
 // It may be called again, on a serverless function, if
 // revalidation is enabled and a new request comes in
 export async function getStaticProps() {
-  const response = await fetch(process.env.apiExternalRoute + 'products/search')
+  const response = await fetch(process.env.apiUrl + 'products/search')
   const json = await response.json()
   const { products } = json.data || {}
 

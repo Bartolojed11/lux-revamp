@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 // Components
-import Header from '../../components/Header'
+import Navbar from '../../components/Navbar'
 import ProductCard from '../../components/ProductCard'
 import Footer from '../../components/Footer'
 
@@ -9,7 +9,7 @@ const Search = ({ products, searchQuery }) => {
 
   return (
     <>
-      <Header />
+      <Navbar />
       <div className='container-fluid margin-65 search-result-page'>
         <p className='search-result-label'>Search result for "{searchQuery}"</p>
       </div>
@@ -23,7 +23,7 @@ export default Search
 
 export async function getServerSideProps(context) {
   const { name } = context.query
-  const response = await fetch(process.env.apiExternalRoute + 'products/search?name=' + name)
+  const response = await fetch(process.env.apiUrl + 'products/search?name=' + name)
   const json = await response.json()
   const { products } = json.data || []
 

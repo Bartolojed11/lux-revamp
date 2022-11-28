@@ -1,14 +1,13 @@
 import { useState } from 'react'
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Link from "next/link"
-
 
 import Card from 'react-bootstrap/Card'
 
 // My Components
 import MobileDetailTab from '../../components/MobileDetailTab'
-import Footer from '../../components/Footer'
+import Footer from './../../components/Footer'
+import HtmlHeader from './../../components/Header'
 
 const Select = (params) => {
 
@@ -33,12 +32,7 @@ const Select = (params) => {
 
     return <>
         <div className="select-address-page">
-
-            <Head>
-                <title>Select Address</title>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-            </Head>
-
+            <HtmlHeader title='Select Address' />
             <MobileDetailTab header="Select Address" />
             <div className="container-fluid mt-4">
                 <Card>

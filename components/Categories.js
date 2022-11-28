@@ -19,7 +19,7 @@ export default function Categories() {
     let [categories, setCategories] = useState([])
 
     useEffect(() => {
-        const url = process.env.apiExternalRoute + 'categories'
+        const url = process.env.apiUrl + 'categories'
 
         fetch(url, requestOptions('GET'))
             .then(response => response.json())

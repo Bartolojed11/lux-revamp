@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import Head from 'next/head'
 import { useSession } from "next-auth/react"
 import { useState, useEffect } from 'react'
 
 // Components
 import CartItem from '../components/CartItem'
 import MobileDetailTab from '../components/MobileDetailTab'
+import HtmlHeader from './../components/Header'
 
 // utils
 import { requestOptions } from './../utils/requestOptions'
@@ -22,7 +22,7 @@ const CartPage = () => {
     let [selectedTotalAmount, setSelectedTotalAmount] = useState(0)
 
     const { data: session, status } = useSession()
-    const url = process.env.apiExternalRoute + 'cart'
+    const url = process.env.apiUrl + 'cart'
     let [token, setToken] = useState()
 
     useEffect(() => {
@@ -139,10 +139,7 @@ const CartPage = () => {
 
     return (
         <div className='cart_page'>
-            <Head>
-                <title>Shopping Cart</title>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-            </Head>
+            <HtmlHeader title='Shopping Cart' />
             <MobileDetailTab header="Shopping Cart" />
             <CartHeader />
             <div className='container-fluid cart'>

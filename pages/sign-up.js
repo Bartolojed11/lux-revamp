@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import Head from 'next/head'
 
 // Third parties And Icons
 import { Form } from "react-bootstrap"
@@ -11,6 +10,7 @@ import { MdOutlineMail } from "react-icons/md";
 // Components
 import Footer from './../components/Footer'
 import OtherAuth from './../components/OtherAuth'
+import HtmlHeader from './../components/Header'
 
 // utils
 import { stateSetter } from "../utils/form"
@@ -26,7 +26,7 @@ const SignUp = () => {
         last_name: ''
     })
 
-    const url = process.env.apiExternalRoute + 'users'
+    const url = process.env.apiUrl + 'users'
 
     function handleSubmit(event) {
         event.preventDefault()
@@ -47,10 +47,7 @@ const SignUp = () => {
 
     return (
         <div className="signup-page">
-            <Head>
-                <title>Sign up</title>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-            </Head>
+            <HtmlHeader title='Sign up' />
             <Form className="signup-form" method="post" onSubmit={handleSubmit}>
                 <h1 className="text-center">Welcome!</h1>
                 <p className="text-center">Lorem ipsum</p>

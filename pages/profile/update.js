@@ -1,13 +1,13 @@
 import { useSession } from "next-auth/react"
 import { useState, useEffect } from 'react'
-import Head from 'next/head'
 
 // Third parties And Icons
 import Form from 'react-bootstrap/Form'
 
 // Components
-import MobileDetailTab from '../../components/MobileDetailTab'
-import Footer from '../../components/Footer'
+import MobileDetailTab from './../../components/MobileDetailTab'
+import Footer from './../../components/Footer'
+import HtmlHeader from './../../components/Header'
 
 // utils
 import { stateSetter } from "../../utils/form"
@@ -43,10 +43,7 @@ const UpdateProfile = () => {
 
     return <>
         <MobileDetailTab header="Update Profile" />
-        <Head>
-            <title>Update Profile</title>
-            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        </Head>
+        <HtmlHeader title='Update Profile' />
         <div className="container-fluid profile-page">
             <div className="profile-details-card card">
                 <Form>

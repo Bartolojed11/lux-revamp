@@ -10,8 +10,9 @@ import { MdListAlt } from "react-icons/md"
 import { GoLocation } from "react-icons/go"
 
 // Components
-import MobileDetailTab from '../../components/MobileDetailTab'
-import Footer from '../../components/Footer'
+import MobileDetailTab from './../../components/MobileDetailTab'
+import Footer from './../../components/Footer'
+import HtmlHeader from './../../components/Header'
 
 import DefaultProfile from '../../public/images/profile/default.png'
 
@@ -79,10 +80,7 @@ const Profile = () => {
     }
 
     return <>
-        <Head>
-            <title>My Profile</title>
-            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        </Head>
+        <HtmlHeader title='My Profile' />
         <MobileDetailTab header="Profile" />
         <div className="container-fluid profile-page">
             <ProfileDetails />

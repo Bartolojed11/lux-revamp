@@ -16,6 +16,10 @@ import shoes from './../../public/images/products/shoes-item.png'
 // utils
 import { toastSuccess, toastError } from "../../utils/toasts"
 import { requestOptions } from "../../utils/requestOptions"
+import { fn } from 'moment/moment'
+
+// Components
+import HtmlHeader from './../components/Header'
 
 export default function Product({ product }) {
 
@@ -34,7 +38,7 @@ export default function Product({ product }) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        const url = process.env.apiExternalRoute + 'cart/count'
+        const url = process.env.apiUrl + 'cart/count'
         if (status === 'authenticated' && token !== '') {
 
             fetch(url, requestOptions('GET', {}, { token: token }))
@@ -70,7 +74,7 @@ export default function Product({ product }) {
 
 
     async function addToCart(product, token, buyNow = false) {
-        const url = process.env.apiExternalRoute + 'cart'
+        const url = process.env.apiUrl + 'cart'
         const cart = {
             "cart_items": {
                 "product_id": product._id,
@@ -133,12 +137,7 @@ export default function Product({ product }) {
 
     return (
         <div className="product-wrapper">
-
-            <Head>
-                <title>Product | {product.name}</title>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-            </Head>
-
+            <HtmlHeader title={`Product | ${product.name}`} />
 
             <div className="product-wrapper__header">
                 <button className="round-button" type="button" onClick={() => router.back()}>
@@ -201,7 +200,7 @@ export default function Product({ product }) {
 // revalidation is enabled and a new request comes in
 export async function getStaticProps(context) {
     const { url } = context.params
-    const response = await fetch(process.env.apiExternalRoute + 'products/' + url)
+    const response = await fetch(process.env.apiUrl + 'products/' + url)
     const json = await response.json()
     const { product } = json.data || {}
     return {
@@ -221,7 +220,7 @@ export async function getStaticProps(context) {
 // the path has not been generated.
 export async function getStaticPaths() {
 
-    const response = await fetch(process.env.apiExternalRoute + 'products/search')
+    const response = await fetch(process.env.apiUrl + 'products/search')
     const json = await response.json()
     const { products } = json.data || {}
 

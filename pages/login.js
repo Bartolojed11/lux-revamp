@@ -2,7 +2,6 @@ import Link from "next/link"
 import { useState } from 'react'
 import { signIn } from "next-auth/react"
 import { useRouter } from 'next/router'
-import Head from 'next/head'
 
 // Third parties And Icons
 import { Form } from "react-bootstrap"
@@ -12,6 +11,7 @@ import { MdOutlineMail } from "react-icons/md"
 // My Components
 import Footer from './../components/Footer'
 import OtherAuth from './../components/OtherAuth'
+import HtmlHeader from './../components/Header'
 
 // utils
 import { stateSetter } from "../utils/form"
@@ -45,18 +45,14 @@ const Login = (props) => {
       setTimeout(() => {
         router.push('/')
       }, 3000)
-      
+
     }
   }
 
   return (
-    
+
     <div className="login-page">
-    
-      <Head>
-        <title>Login</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head> 
+      <HtmlHeader title="Login" />
       <Form className="login-form" method="post" onSubmit={handleSubmit} >
         <h1 className="text-center">Welcome!</h1>
         <p className="text-center">Lorem ipsum</p>

@@ -29,7 +29,7 @@ export default function Footer() {
 
     const dispatch = useDispatch()
     useEffect(() => {
-        const url = process.env.apiExternalRoute + 'cart/count'
+        const url = process.env.apiUrl + 'cart/count'
         if (status === 'authenticated' && token !== '') {
             fetch(url, requestOptions('GET', {}, { token: token }))
             .then(response => response.json())
