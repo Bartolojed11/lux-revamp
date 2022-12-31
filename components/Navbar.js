@@ -37,15 +37,13 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <Link href="/">
-        <a className="shop-logo-wrapper">
+      <Link href="/" className="shop-logo-wrapper">
           <Image
             src={Logo}
             alt="shop-logo"
-            layout="fill"
+            fill
             className="nxt-img"
           />
-        </a>
       </Link>
       <div className="navbar-search-wrapper">
         <Form action="/search/" method="get" onSubmit={searchProduct}>
