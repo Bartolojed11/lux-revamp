@@ -1,8 +1,8 @@
 import { Carousel } from 'react-bootstrap'
 
-import waifuPink from './../public/images/banners/waifu-pink.jpg'
-import waifuRed from './../public/images/banners/waifu-red.jpg'
-import waifuWhite from './../public/images/banners/waifu-white.png'
+import adidas from './../public/images/banners/adidas.jpg'
+import newBalance from './../public/images/banners/new-balance.jpg'
+import nike from './../public/images/banners/nike.jpg'
 
 
 export default function Banner() {
@@ -11,7 +11,7 @@ export default function Banner() {
     <Carousel.Item className="carousel-custom">
       <img
         className="d-block w-100"
-        src={waifuRed.src}
+        src={newBalance.src}
         alt="First slide"
       />
       <Carousel.Caption>
@@ -22,7 +22,7 @@ export default function Banner() {
     <Carousel.Item  className="carousel-custom">
       <img
         className="d-block w-100"
-        src={waifuPink.src}
+        src={adidas.src}
         alt="Second slide"
       />
   
@@ -34,7 +34,7 @@ export default function Banner() {
     <Carousel.Item  className="carousel-custom">
       <img
         className="d-block w-100"
-        src={waifuWhite.src}
+        src={nike.src}
         alt="Third slide"
       />
   
