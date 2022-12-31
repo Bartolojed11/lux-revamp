@@ -84,7 +84,6 @@ export default function Product({ product }) {
                     if (!buyNow) {
                         toastSuccess(response.message)
                     }
-
                 } else {
                     toastError(response.message)
                 }

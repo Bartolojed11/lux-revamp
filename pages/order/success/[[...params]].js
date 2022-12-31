@@ -15,7 +15,7 @@ import shoes from './../../../public/images/products/shoes-item.png'
 // utils
 import { requestOptions } from "../../../utils/requestOptions"
 
-import { useAuth } from './../hooks/useAuth'
+import { useAuth } from './../../../hooks/useAuth'
 
 const Success = () => {
     const router = useRouter()

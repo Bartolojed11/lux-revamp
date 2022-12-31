@@ -25,7 +25,6 @@ const UpdateProfile = () => {
     const { isAuthenticated, user } = useAuth()
 
     function handleSubmit(event) {
-        console.log("🚀 ~ file: update.js:28 ~ handleSubmit ~ formData", formData)
         event.preventDefault()
     }
 
@@ -35,7 +34,6 @@ const UpdateProfile = () => {
 
     useEffect(() => {
         if (isAuthenticated) {
-            console.log("🚀 ~ file: update.js:38 ~ useEffect ~ user", user)
             setFormData({
                 ...formData,
                 first_name: user.first_name,

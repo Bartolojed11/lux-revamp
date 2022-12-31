@@ -15,7 +15,6 @@ export function useAuth() {
 
   const user = useMemo(() => {
     if (isAuthenticated) {
-      console.log(session.user)
       return {
         first_name: session.user.first_name,
         last_name: session.user.last_name,

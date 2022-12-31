@@ -17,7 +17,7 @@ import { requestOptions } from "../../utils/requestOptions"
 import { IoLocationSharp } from "react-icons/io5";
 
 // hooks
-import { useAuth } from './../hooks/useAuth'
+import { useAuth } from './../../hooks/useAuth'
 
 const PlaceOrder = () => {
     const [selectedProducts, setSelectedProducts] = useState([])
@@ -72,6 +72,7 @@ const PlaceOrder = () => {
             .then((response) => {
                 if (response.status === 'success') {
                     toastSuccess(response.message)
+                    localStorage.removeItem('selected_products');
                     router.push(`/order/success?ref=${response.data.order.ref_num}`)
                 } else {
                     toastError(response.message)
