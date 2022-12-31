@@ -13,22 +13,17 @@ import { Bag, Heart, HouseDoor, Person } from "react-bootstrap-icons";
 // utils
 import { requestOptions } from "../utils/requestOptions";
 
+// hooks
+import { useAuth } from './../hooks/useAuth'
+
 export default function Footer() {
   const cartCount = useSelector((state) => state.cartCounter.cart_count);
-  let [token, setToken] = useState("");
-
-  const { data: session, status } = useSession();
-
-  useEffect(() => {
-    if (status === "authenticated") {
-      setToken(session.user.accessToken);
-    }
-  }, [status]);
-
+  const { isAuthenticated, token } = useAuth()
   const dispatch = useDispatch();
+
   useEffect(() => {
     const url = process.env.apiUrl + "cart/count";
-    if (status === "authenticated" && token !== "") {
+    if (isAuthenticated && token !== "") {
       fetch(url, requestOptions("GET", {}, { token: token }))
         .then((response) => response.json())
         .then((response) => {
@@ -37,7 +32,7 @@ export default function Footer() {
           }
         });
     }
-  }, [status, token]);
+  }, [isAuthenticated, token]);
 
   return (
     <div className="footer">
@@ -47,7 +42,7 @@ export default function Footer() {
       <Link href="/favorites">
         <Heart />
       </Link>
-      <Link href={status === "authenticated" ? "/profile" : "/login"}>
+      <Link href={isAuthenticated ? "/profile" : "/login"}>
         <Person />
       </Link>
       <Link href="/my-cart" className="cart__link lineheight-0">

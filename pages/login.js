@@ -84,9 +84,8 @@ const Login = (props) => {
         </Form.Group>
         <Link
           href="/password/forgot"
-        >
-          <a className="forgot-password-link mt-3">Forgot Password</a>
-        </Link>
+          className="forgot-password-link mt-3"
+        >Forgot Password</Link>
         <button className="btn btn-shop-secondary btn-full-width mb-3" type="submit">
           Login
         </button>

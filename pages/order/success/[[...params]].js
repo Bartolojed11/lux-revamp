@@ -1,7 +1,5 @@
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { useSession } from "next-auth/react"
 
 // Components
 import MobileDetailTab from './../../../components/MobileDetailTab'
@@ -17,6 +15,7 @@ import shoes from './../../../public/images/products/shoes-item.png'
 // utils
 import { requestOptions } from "../../../utils/requestOptions"
 
+import { useAuth } from './../hooks/useAuth'
 
 const Success = () => {
     const router = useRouter()
@@ -24,15 +23,9 @@ const Success = () => {
 
     const [myOrders, setMyOrders] = useState([])
     const [fetchTriggered, setFetchTriggered] = useState(false)
-    const { data: session, status } = useSession()
-    const [token, setToken] = useState()
-
+    const { token } = useAuth()
 
     useEffect(function () {
-        if (status === 'authenticated') {
-            setToken(session.user.accessToken)
-        }
-
         if (token !== undefined && ref !== undefined && !fetchTriggered) {
 
             fetch(process.env.apiUrl + 'orders/' + ref, requestOptions('GET', {}, { token: token }))
@@ -45,13 +38,10 @@ const Success = () => {
                         setMyOrders(response.data.order)
 
                     }
-
                 })
         }
 
-    }, [ref, token, status, fetchTriggered])
-
-
+    }, [ref, token, fetchTriggered])
 
     function OrderStatus() {
         return <div className="order-status__wrapper">

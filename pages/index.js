@@ -9,6 +9,7 @@ import HtmlHeader from './../components/Header'
 
 const Home = (props) => {
   const { products } = props
+
   return (
     <div className="home-page">
       <HtmlHeader/>

@@ -1,8 +1,4 @@
-import { useRouter } from 'next/router'
-import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { useSession } from "next-auth/react"
-
 // Third parties And Icons
 import Moment from 'moment'
 import { Form } from "react-bootstrap"
@@ -19,23 +15,16 @@ import shoes from './../public/images/products/shoes-item.png'
 // utils
 import { requestOptions } from './../utils/requestOptions'
 
-const MyPurchase = () => {
+import { useAuth } from './../hooks/useAuth'
 
+const MyPurchase = () => {
+    const { token } = useAuth()
     const [orderKeyword, setorderKeyword] = useState('')
     const [myOrders, setMyOrders] = useState([])
     const [fetchTriggered, setFetchTriggered] = useState(false)
-
-    const { data: session, status } = useSession()
-    const [token, setToken] = useState()
-
     const url = process.env.apiUrl + 'orders/user'
 
-
     useEffect(() => {
-        if (status === 'authenticated') {
-            setToken(session.user.accessToken)
-        }
-
         if (token !== undefined && !fetchTriggered) {
             fetch(url, requestOptions('GET', {}, { token: token }))
                 .then(response => response.json())
@@ -45,7 +34,7 @@ const MyPurchase = () => {
                 })
         }
 
-    }, [status, token])
+    }, [token])
 
     function searchOrder(event) {
         event.preventDefault()

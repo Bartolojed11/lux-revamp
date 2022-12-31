@@ -45,28 +45,20 @@ const Profile = () => {
                 <div className='my-profile-navigations__wrapper'>
                     <div className="my-profile-navigations">
                         <Link href="/profile/update">
-                            <a>
                                 <BsPencilSquare className="font-price" />
                                 <span className="ml16">Update Profile</span>
-                            </a>
                         </Link>
                         <Link href="/password/change">
-                            <a>
                                 <BsShieldLock className="font-price" />
                                 <span className="ml16">Change Password</span>
-                            </a>
                         </Link>
                         <Link href="/my-purchase">
-                            <a>
                                 <MdListAlt className="font-price" />
                                 <span className="ml16">My Purchases</span>
-                            </a>
                         </Link>
                         <Link href="/my-address">
-                            <a>
                                 <GoLocation className="font-price" />
                                 <span className="ml16">My Addresses</span>
-                            </a>
                         </Link>
                         <button type="button" onClick={logout} className="btn btn-crystal logout btn-no-padd">
                             <IoLogOutOutline className="font-price" /><span className="ml16">Logout</span>

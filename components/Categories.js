@@ -37,7 +37,7 @@ export default function Categories() {
                 {
                     categories.length > 0 && categories.map((category) => {
                         return <SplideSlide className='catgories-item' key={category.name}>
-                            <Link href={category.url}><a><img src={shoes.src} alt="Image 1" /></a></Link>
+                            <Link href={category.url}><img src={shoes.src} alt="Image 1" /></Link>
                             <span>{category.name}</span>
                         </SplideSlide>;
                     })

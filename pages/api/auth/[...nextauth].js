@@ -26,7 +26,7 @@ export default NextAuth({
         // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
-        const res = await fetch(`${process.env.apiUrl}users/login`, {
+        const res = await fetch(`${process.env.apiUrl}auth/login`, {
           method: 'POST',
           body: JSON.stringify(payload),
           headers: { "Content-Type": "application/json" }

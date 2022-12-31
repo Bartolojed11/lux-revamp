@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { useSession } from "next-auth/react"
 import { useState, useEffect } from 'react'
 
 // Components
@@ -11,6 +10,8 @@ import HtmlHeader from './../components/Header'
 // utils
 import { requestOptions } from './../utils/requestOptions'
 
+// hooks
+import { useAuth } from './../hooks/useAuth'
 
 const CartPage = () => {
     let [myCartItems, setMyCartItems] = useState([])
@@ -21,25 +22,21 @@ const CartPage = () => {
     let [selectedProducts, setSelectedProducts] = useState([])
     let [selectedTotalAmount, setSelectedTotalAmount] = useState(0)
 
-    const { data: session, status } = useSession()
     const url = process.env.apiUrl + 'cart'
-    let [token, setToken] = useState()
+    const { token } = useAuth()
 
     useEffect(() => {
-        if (status === 'authenticated') {
-            setToken(session.user.accessToken)
-        }
-
         if (token !== undefined && !fetchTriggered) {
             fetch(url, requestOptions('GET', {}, { token: token }))
                 .then(response => response.json())
                 .then((response) => {
                     setFetchTriggered(true)
-                    setMyCartItems(response.data.user_cart.cart_items)
+                    setMyCartItems(response.data.user_cart.cart_items || [])
                 })
+                    
         }
 
-    }, [status, token])
+    }, [token])
 
 
     function CartFooter({ totalAmount, selectedProducts }) {
@@ -67,11 +64,11 @@ const CartPage = () => {
             <div className='cart-header'>
                 <div className='cart-navigations'>
                     <Link href="/my-cart">
-                        <a>All<span className='total-cart-items'>(2)</span></a>
+                        All<span className='total-cart-items'>(2)</span>
                     </Link>
 
                     <Link href="/my-cart">
-                        <a>Buy Again</a>
+                        Buy Again
                     </Link>
                 </div>
                 <div className="cart-header__separator"></div>

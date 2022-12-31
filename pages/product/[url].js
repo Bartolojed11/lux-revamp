@@ -19,27 +19,20 @@ import { requestOptions } from "../../utils/requestOptions"
 import { fn } from 'moment/moment'
 
 // Components
-import HtmlHeader from './../components/Header'
+import HtmlHeader from './../../components/Header'
+
+// hooks
+import { useAuth } from './../../hooks/useAuth'
 
 export default function Product({ product }) {
-
     const router = useRouter()
     const cartCount = useSelector((state) => state.cartCounter.cart_count)
-    let [token, setToken] = useState('')
-
-    const { data: session, status } = useSession()
-
-    useEffect(() => {
-        if (status === 'authenticated') {
-            setToken(session.user.accessToken)
-        }
-    }, [status])
-
+    const { isAuthenticated, token } = useAuth()
     const dispatch = useDispatch()
 
     useEffect(() => {
         const url = process.env.apiUrl + 'cart/count'
-        if (status === 'authenticated' && token !== '') {
+        if (isAuthenticated && token !== undefined) {
 
             fetch(url, requestOptions('GET', {}, { token: token }))
                 .then(response => response.json())
@@ -50,7 +43,7 @@ export default function Product({ product }) {
                 })
         }
 
-    }, [status, token])
+    }, [isAuthenticated, token])
 
 
     function Footer({ product, router, token }) {

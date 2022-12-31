@@ -46,7 +46,7 @@ const MyAddress = (params) => {
                     </div>
 
                     <div>
-                        <Link href="/my-address/1"><a className='btn-crystal font-price address-edit-btn'>Edit</a></Link>
+                        <Link href="/my-address/1" className='btn-crystal font-price address-edit-btn'>Edit</Link>
                         {!isDefault && <button className='btn-crystal font-danger address-delete-btn'>Delete</button>}
                     </div>
                 </div>
