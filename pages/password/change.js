@@ -1,4 +1,3 @@
-import { useSession } from "next-auth/react"
 import { useState } from 'react'
 
 // Third parties And Icons
@@ -80,8 +79,6 @@ const ChangePassword = (params) => {
         </div>
         <Footer />
     </>
-
-
 }
 
 export default ChangePassword

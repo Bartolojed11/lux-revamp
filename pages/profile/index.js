@@ -1,6 +1,4 @@
-import Head from 'next/head'
 import Link from "next/link"
-import { useSession } from "next-auth/react"
 
 // Third parties And Icons
 import Card from 'react-bootstrap/Card'
@@ -13,20 +11,13 @@ import { GoLocation } from "react-icons/go"
 import MobileDetailTab from './../../components/MobileDetailTab'
 import Footer from './../../components/Footer'
 import HtmlHeader from './../../components/Header'
-
 import DefaultProfile from '../../public/images/profile/default.png'
 
-
+// hooks
+import { useAuth } from './../../hooks/useAuth'
 
 const Profile = () => {
-    const { data: session, status } = useSession()
-    let fullname = ''
-    let phone = ''
-
-    if (status === 'authenticated') {
-        fullname = session.user.first_name + ' ' + session.user.last_name
-        phone = session.user.phone_number
-    }
+    const { user } = useAuth()
 
     function logout() {
 
@@ -39,8 +30,8 @@ const Profile = () => {
                     <img src={DefaultProfile.src} alt="Default Profile Picture" />
                 </div>
                 <div className="my-profile-details mb-4">
-                    <Card.Title className="profile-details-title">{fullname}</Card.Title>
-                    <p>{phone} 09352087125</p>
+                    <Card.Title className="profile-details-title">{(user && user.fullname) || ''}</Card.Title>
+                    <p>{(user && user.phone) || ''}</p>
                 </div>
                 <div className='my-profile-navigations__wrapper'>
                     <div className="my-profile-navigations">

@@ -1,4 +1,3 @@
-import { useSession } from "next-auth/react"
 import { useState, useEffect } from 'react'
 
 // Third parties And Icons
@@ -12,11 +11,21 @@ import HtmlHeader from './../../components/Header'
 // utils
 import { stateSetter } from "../../utils/form"
 
+// hooks
+import { useAuth } from './../../hooks/useAuth'
+
 const UpdateProfile = () => {
-    const { data: session, status } = useSession()
-    const [formData, setFormData] = useState({})
+    const [formData, setFormData] = useState({
+        first_name: '',
+        last_name: '',
+        phone_number: '',
+        gender: '',
+        birthday: ''
+    })
+    const { isAuthenticated, user } = useAuth()
 
     function handleSubmit(event) {
+        console.log("🚀 ~ file: update.js:28 ~ handleSubmit ~ formData", formData)
         event.preventDefault()
     }
 
@@ -25,20 +34,18 @@ const UpdateProfile = () => {
     }
 
     useEffect(() => {
-        if (status === 'authenticated') {
-            setFormData(formData => {
-                return {
-                    ...formData,
-                    first_name: session.user.first_name,
-                    last_name: session.user.last_name,
-                    phone_number: session.user.phone_number,
-                    gender: session.user.gender,
-                    birthday: session.user.birthday,
-
-                }
+        if (isAuthenticated) {
+            console.log("🚀 ~ file: update.js:38 ~ useEffect ~ user", user)
+            setFormData({
+                ...formData,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                phone_number: user.phone_number,
+                gender: user.gender,
+                birthday: user.birthday,
             })
         }
-    }, [status, session])
+    }, [isAuthenticated])
 
 
     return <>
@@ -46,7 +53,7 @@ const UpdateProfile = () => {
         <HtmlHeader title='Update Profile' />
         <div className="container-fluid profile-page">
             <div className="profile-details-card card">
-                <Form>
+                <Form  method="post" onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>First name</Form.Label>
                         <Form.Control
@@ -101,10 +108,6 @@ const UpdateProfile = () => {
                             value={formData.phone_number}
                         />
                     </Form.Group>
-
-
-
-
 
                     <div className="text-center">
                         <button className="btn btn-shop-primary" type="submit">

@@ -9,11 +9,24 @@ export function useAuth() {
   }, [status]);
   
   const token = useMemo(() => {
-    console.log("🚀 ~ file: useAuth.js:15 ~ token ~ isAuthenticated", isAuthenticated)
     if (isAuthenticated) return session.user.accessToken
     return undefined
   }, [status]);
+
+  const user = useMemo(() => {
+    if (isAuthenticated) {
+      console.log(session.user)
+      return {
+        first_name: session.user.first_name,
+        last_name: session.user.last_name,
+        phone: session.user.phone_number,
+        fullname: session.user.first_name + ' ' + session.user.last_name,
+        gender: session.user.gender,
+        birthday: session.user.birthday
+      }
+    }
+  })
     
 
-  return {isAuthenticated, token};
+  return {isAuthenticated, token, user};
 }

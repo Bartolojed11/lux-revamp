@@ -1,4 +1,3 @@
-import { useSession } from "next-auth/react"
 import { useEffect, useState } from 'react'
 
 // Third parties And Icons

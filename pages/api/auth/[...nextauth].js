@@ -73,7 +73,6 @@ export default NextAuth({
 
     // set the sessions values
     async session({ session, token }) {
-      
       session.user.accessToken = token.accessToken
       session.user.email = token.email
       session.user.first_name = token.first_name

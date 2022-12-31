@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { useSession } from "next-auth/react"
 
 // Components
 import MobileDetailTab from './../../components/MobileDetailTab'
@@ -17,21 +16,14 @@ import { requestOptions } from "../../utils/requestOptions"
 // Icons
 import { IoLocationSharp } from "react-icons/io5";
 
+// hooks
+import { useAuth } from './../hooks/useAuth'
+
 const PlaceOrder = () => {
     const [selectedProducts, setSelectedProducts] = useState([])
     const [totalAmount, setTotalAmount] = useState(0)
-
-    const { data: session, status } = useSession()
-    let [token, setToken] = useState()
-
-    useEffect(() => {
-        if (status === 'authenticated') {
-            setToken(session.user.accessToken)
-        }
-    }, [token, status])
-
+    const { token } = useAuth()
     const router = useRouter()
-
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
