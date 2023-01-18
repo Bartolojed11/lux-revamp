@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import Link from "next/link"
@@ -189,7 +188,7 @@ export default function Product({ product }) {
 // This function gets called at build time on server-side.
 // It may be called again, on a serverless function, if
 // revalidation is enabled and a new request comes in
-export async function getStaticProps(context) {
+export async function getStaticProps(context) { 
     const { url } = context.params
     const response = await fetch(process.env.apiUrl + 'products/' + url)
     const json = await response.json()

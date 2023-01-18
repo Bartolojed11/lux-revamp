@@ -2,8 +2,12 @@
     position: absolute;
 }
 
-.w-full{
+.w-full {
     width: 100% !important; 
+}
+
+.just-evenly {
+    justify-content: space-evenly;
 }
 
 .xy-center {

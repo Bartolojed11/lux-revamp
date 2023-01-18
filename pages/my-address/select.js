@@ -47,8 +47,9 @@ const Select = (params) => {
                                 </>
                             })
                         }
-                        <div className="text-center mt-4">
+                        <div className="text-center mt-4 xy-center just-evenly">
                             <button type="button" className="btn btn-shop-primary">Select Address</button>
+                            <button type="button" className="btn btn-shop-secondary btn-primary-radius">Add Address</button>
                         </div>
 
                     </Card.Body>
