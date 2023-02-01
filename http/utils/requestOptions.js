@@ -3,6 +3,10 @@ export function requestOptions(method = 'GET', payload = {}, options = {}) {
     let body
     const { token } = options
 
+    if (payload?.token !== undefined) {
+        delete payload.token
+    }
+
     let header = {
         headers: {
             'Content-Type': 'application/json'

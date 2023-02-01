@@ -19,3 +19,7 @@ export async function getBarangays(url) {
     const data = await get(url);
     return data.data.barangays;
 }
+
+export async function saveAddress(url, payload) {
+
+}

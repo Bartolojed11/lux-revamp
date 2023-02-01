@@ -10,7 +10,6 @@ import HtmlHeader from './../../components/Header'
 
 // utils
 import { stateSetter } from "./../../utils/form"
-import { requestOptions } from "./../../utils/requestOptions"
 
 // http
 import { getRegions, getProvinces, getCities, getBarangays } from './../../http/locations'
@@ -34,6 +33,8 @@ const AddAddress = (params) => {
     useEffect(() => {
         getRegions('locations/regions').then((regions) => {
             setRegions(regions)
+        }).catch(() => {
+            resetAllLocationOptions()
         })
     }, [])
 
@@ -50,15 +51,15 @@ const AddAddress = (params) => {
         const regionCode = event.target.value
         stateSetter(event, setFormData)
         if (regionCode === null) {
-            setProvinces([])
-            setCities([])
-            setBarangays([])
+            resetAllLocationOptions();
             return;
         }
         getProvinces('locations/province/' + regionCode).then((province) => {
             setProvinces(province)
             setCities([])
             setBarangays([])
+        }).catch(() => {
+            resetAllLocationOptions()
         })
     }
 
@@ -73,6 +74,8 @@ const AddAddress = (params) => {
         getCities('locations/cities/' + provinceCode).then((cities) => {
             setCities(cities)
             setBarangays([])
+        }).catch(() => {
+            resetAllLocationOptions()
         })
     }
 
@@ -85,7 +88,15 @@ const AddAddress = (params) => {
         }
         getBarangays('locations/barangay/' + cityCode).then((brgy) => {
             setBarangays(brgy)
-        })
+        }).catch(() => {
+            resetAllLocationOptions()
+        });
+    }
+
+    function resetAllLocationOptions() {
+        setProvinces([])
+        setCities([])
+        setBarangays([])
     }
 
     return <>
