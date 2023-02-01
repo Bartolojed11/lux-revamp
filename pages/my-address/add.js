@@ -12,6 +12,9 @@ import HtmlHeader from './../../components/Header'
 import { stateSetter } from "./../../utils/form"
 import { requestOptions } from "./../../utils/requestOptions"
 
+// http
+import { getRegions, getProvinces, getCities, getBarangays } from './../../http/locations'
+
 const AddAddress = (params) => {
 
     const [formData, setFormData] = useState({
@@ -29,67 +32,10 @@ const AddAddress = (params) => {
     const [barangays, setBarangays] = useState([])
 
     useEffect(() => {
-        const url = process.env.apiUrl + 'locations/regions'
-        fetch(url, requestOptions())
-            .then(response => response.json())
-            .then((response) => {
-                setRegions(response.data.regions)
-            })
+        getRegions('locations/regions').then((regions) => {
+            setRegions(regions)
+        })
     }, [])
-
-    async function getProvinces(regionCode = null) {
-        const url = process.env.apiUrl + 'locations/province/' + regionCode
-        if (regionCode === null) {
-            setProvinces([])
-            setCities([])
-            setBarangays([])
-            return;
-        }
-
-        fetch(url, requestOptions())
-            .then(response => response.json())
-            .then((response) => {
-                setProvinces(response.data.provinces)
-                setCities([])
-                setBarangays([])
-            }).catch((err) => {
-
-            })
-    }
-
-    async function getCities(provinceCode = null) {
-        const url = process.env.apiUrl + 'locations/cities/' + provinceCode
-        if (provinceCode === null) {
-            setCities([])
-            setBarangays([])
-            return;
-        }
-
-        fetch(url, requestOptions())
-            .then(response => response.json())
-            .then((response) => {
-                setCities(response.data.cities)
-                setBarangays([])
-            }).catch((err) => {
-
-            })
-    }
-
-    function getBarangays(cityCode = null) {
-        const url = process.env.apiUrl + 'locations/barangay/' + cityCode
-        if (cityCode === null) {
-            setBarangays([])
-            return;
-        }
-
-        fetch(url, requestOptions())
-            .then(response => response.json())
-            .then((response) => {
-                setBarangays(response.data.barangays)
-            }).catch((err) => {
-
-            })
-    }
 
     function handleSubmit(event) {
         event.preventDefault()
@@ -101,18 +47,45 @@ const AddAddress = (params) => {
     }
 
     async function handleRegionChange(event) {
+        const regionCode = event.target.value
         stateSetter(event, setFormData)
-        await getProvinces(event.target.value)
+        if (regionCode === null) {
+            setProvinces([])
+            setCities([])
+            setBarangays([])
+            return;
+        }
+        getProvinces('locations/province/' + regionCode).then((province) => {
+            setProvinces(province)
+            setCities([])
+            setBarangays([])
+        })
     }
 
     async function handleProvinceChange(event) {
+        const provinceCode = event.target.value
         stateSetter(event, setFormData)
-        await getCities(event.target.value)
+        if (provinceCode === null) {
+            setCities([])
+            setBarangays([])
+            return;
+        }
+        getCities('locations/cities/' + provinceCode).then((cities) => {
+            setCities(cities)
+            setBarangays([])
+        })
     }
 
     async function handleCityChange(event) {
         stateSetter(event, setFormData)
-        await getBarangays(event.target.value)
+        const cityCode = event.target.value
+        if (cityCode === null) {
+            setBarangays([])
+            return;
+        }
+        getBarangays('locations/barangay/' + cityCode).then((brgy) => {
+            setBarangays(brgy)
+        })
     }
 
     return <>
@@ -126,7 +99,7 @@ const AddAddress = (params) => {
                         <Form.Select type="select" name="region" onChange={handleRegionChange} value={formData.region}>
                             <option>Select Region</option>
                             {
-                                regions.map((regionInfo) => {
+                                regions && regions.map((regionInfo) => {
                                     return <option key={regionInfo.region_code} value={regionInfo.region_code}>{regionInfo.region_name}</option>
                                 })
                             }
@@ -138,7 +111,7 @@ const AddAddress = (params) => {
                         <Form.Select type="select" name="province" value={formData.province} onChange={handleProvinceChange}>
                             <option>Select Province</option>
                             {
-                                provinces.map((provinceInfo) => {
+                                provinces && provinces.map((provinceInfo) => {
                                     return <option key={provinceInfo.province_code} value={provinceInfo.province_code}>{provinceInfo.province_name}</option>
                                 })
                             }
@@ -150,7 +123,7 @@ const AddAddress = (params) => {
                         <Form.Select type="select" name="city" value={formData.city} onChange={handleCityChange}>
                             <option>Select City</option>
                             {
-                                cities.map((cityInfo) => {
+                                cities && cities.map((cityInfo) => {
                                     return <option key={cityInfo.city_code} value={cityInfo.city_code}>{cityInfo.city_name}</option>
                                 })
                             }
@@ -162,7 +135,7 @@ const AddAddress = (params) => {
                         <Form.Select type="select" name="brgy" value={formData.brgy} onChange={handleOnChange}>
                             <option>Select Barangay</option>
                             {
-                                barangays.map((barangayInfo) => {
+                                barangays && barangays.map((barangayInfo) => {
                                     return <option key={barangayInfo.brgy_code} value={barangayInfo.brgy_code}>{barangayInfo.brgy_name}</option>
                                 })
                             }
