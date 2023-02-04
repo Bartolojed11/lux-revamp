@@ -1,25 +1,23 @@
 import { get } from './utils/api'
 
-export async function getRegions(url) {
-    const data = await get(url);
+const baseEndpoint = 'locations/'
+
+export async function getRegions() {
+    const data = await get(`${baseEndpoint}regions`);
     return data.data.regions;
 }
 
-export async function getProvinces(url) {
-    const data = await get(url);
+export async function getProvinces(payload) {
+    const data = await get(`${baseEndpoint}provinces/${payload}`);
     return data.data.provinces;
 }
 
-export async function getCities(url) {
-    const data = await get(url);
+export async function getCities(payload) {
+    const data = await get(`${baseEndpoint}cities/${payload}`);
     return data.data.cities;
 }
 
-export async function getBarangays(url) {
-    const data = await get(url);
+export async function getBarangays(payload) {
+    const data = await get(`${baseEndpoint}barangays/${payload}`);
     return data.data.barangays;
-}
-
-export async function saveAddress(url, payload) {
-
 }

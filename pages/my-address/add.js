@@ -31,7 +31,7 @@ const AddAddress = (params) => {
     const [barangays, setBarangays] = useState([])
 
     useEffect(() => {
-        getRegions('locations/regions').then((regions) => {
+        getRegions().then((regions) => {
             setRegions(regions)
         }).catch(() => {
             resetAllLocationOptions()
@@ -54,7 +54,7 @@ const AddAddress = (params) => {
             resetAllLocationOptions();
             return;
         }
-        getProvinces('locations/province/' + regionCode).then((province) => {
+        getProvinces(regionCode).then((province) => {
             setProvinces(province)
             setCities([])
             setBarangays([])
@@ -71,7 +71,7 @@ const AddAddress = (params) => {
             setBarangays([])
             return;
         }
-        getCities('locations/cities/' + provinceCode).then((cities) => {
+        getCities(provinceCode).then((cities) => {
             setCities(cities)
             setBarangays([])
         }).catch(() => {
@@ -86,7 +86,7 @@ const AddAddress = (params) => {
             setBarangays([])
             return;
         }
-        getBarangays('locations/barangay/' + cityCode).then((brgy) => {
+        getBarangays(cityCode).then((brgy) => {
             setBarangays(brgy)
         }).catch(() => {
             resetAllLocationOptions()
