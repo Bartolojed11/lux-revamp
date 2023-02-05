@@ -10,7 +10,6 @@ import PaymentDetailsCard from './../../components/PaymentDetailsCard'
 import HtmlHeader from './../../components/Header'
 
 // utils
-import { toastSuccess, toastError } from "../../utils/toasts"
 import { requestOptions } from "../../utils/requestOptions"
 
 // Icons
@@ -18,10 +17,12 @@ import { IoLocationSharp } from "react-icons/io5";
 
 // hooks
 import { useAuth } from './../../hooks/useAuth'
+import { useToast } from './../../hooks/useToast'
 
 const PlaceOrder = () => {
     const [selectedProducts, setSelectedProducts] = useState([])
     const [totalAmount, setTotalAmount] = useState(0)
+    const { toastSuccess, toastError } = useToast();
     const { token } = useAuth()
     const router = useRouter()
 

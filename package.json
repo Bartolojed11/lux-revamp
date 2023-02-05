@@ -19,12 +19,9 @@
     "react-bootstrap": "^2.4.0",
     "react-bootstrap-icons": "^1.8.4",
     "react-dom": "^18.2.0",
-    "react-hot-toast": "^2.2.0",
     "react-icons": "^4.4.0",
     "react-redux": "^8.0.2",
-    "react-slick": "^0.29.0",
-    "select-philippines-address": "^1.0.6",
-    "v8": "^0.1.0"
+    "react-toastify": "^9.1.1"
   },
   "devDependencies": {
     "eslint": "8.18.0",

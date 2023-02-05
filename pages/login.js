@@ -15,11 +15,11 @@ import HtmlHeader from './../components/Header'
 
 // utils
 import { stateSetter } from "../utils/form"
-import { toastSuccess, toastError } from "../utils/toasts"
-
+import { useToast } from "./../hooks/useToast";
 
 const Login = (props) => {
   const router = useRouter()
+  const { toastSuccess, toastError } = useToast()
   const [formData, setFormData] = useState({
     email: '',
     password: ''

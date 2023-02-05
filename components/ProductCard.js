@@ -14,7 +14,6 @@ export default function ProductCard(props) {
     useEffect(() => {
         setProducts(props.products)
     }, [searchQuery])
-    console.log('useEffect outside')
 
     function goTo(slug) {
         router.push(`${product_url}${slug}`)

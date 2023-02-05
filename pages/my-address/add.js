@@ -13,22 +13,29 @@ import { stateSetter } from "./../../utils/form"
 
 // http
 import { getRegions, getProvinces, getCities, getBarangays } from './../../http/locations'
+import { saveAddress } from './../../http/userAddress'
+
+// hooks
+import { useAuth } from "./../../hooks/useAuth";
+import { useToast } from "./../../hooks/useToast";
 
 const AddAddress = (params) => {
 
     const [formData, setFormData] = useState({
-        province: '',
-        region: '',
-        city: '',
-        brgy: '',
-        postalCode: '',
-        additionalAddress: '',
+        province_code: '',
+        region_code: '',
+        city_code: '',
+        brgy_code: '',
+        postal_code: '',
+        additional_address: '',
     })
 
+    const { token } = useAuth();
     const [regions, setRegions] = useState([])
     const [provinces, setProvinces] = useState([])
     const [cities, setCities] = useState([])
     const [barangays, setBarangays] = useState([])
+    const { toastSuccess, toastError } = useToast();
 
     useEffect(() => {
         getRegions().then((regions) => {
@@ -39,12 +46,31 @@ const AddAddress = (params) => {
     }, [])
 
     function handleSubmit(event) {
-        event.preventDefault()
+        event.preventDefault();
+        formData.token = token
+        saveAddress(formData).then((response) => {
+            clearInputFields()
+            toastSuccess(response.message)
+        }).catch(() => {
+            toastError('Something went wrong! Please try again.')
+        });
         console.log(formData)
     }
 
     async function handleOnChange(event) {
         stateSetter(event, setFormData)
+    }
+
+    // TODO: should be put inside a utils
+    function clearInputFields() {
+        setFormData({
+            province_code: '',
+            region_code: '',
+            city_code: '',
+            brgy_code: '',
+            postal_code: '',
+            additional_address: '',
+        })
     }
 
     async function handleRegionChange(event) {
@@ -107,7 +133,7 @@ const AddAddress = (params) => {
                 <Form onSubmit={handleSubmit} method="post">
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Region</Form.Label>
-                        <Form.Select type="select" name="region" onChange={handleRegionChange} value={formData.region}>
+                        <Form.Select type="select" name="region_code" onChange={handleRegionChange} value={formData.region}>
                             <option>Select Region</option>
                             {
                                 regions && regions.map((regionInfo) => {
@@ -117,9 +143,9 @@ const AddAddress = (params) => {
                         </Form.Select>
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" controlId="province_code">
                         <Form.Label>Province</Form.Label>
-                        <Form.Select type="select" name="province" value={formData.province} onChange={handleProvinceChange}>
+                        <Form.Select type="select" name="province_code" value={formData.province} onChange={handleProvinceChange}>
                             <option>Select Province</option>
                             {
                                 provinces && provinces.map((provinceInfo) => {
@@ -129,9 +155,9 @@ const AddAddress = (params) => {
                         </Form.Select>
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" controlId="city_code">
                         <Form.Label>City</Form.Label>
-                        <Form.Select type="select" name="city" value={formData.city} onChange={handleCityChange}>
+                        <Form.Select type="select" name="city_code" value={formData.city} onChange={handleCityChange}>
                             <option>Select City</option>
                             {
                                 cities && cities.map((cityInfo) => {
@@ -141,9 +167,9 @@ const AddAddress = (params) => {
                         </Form.Select>
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" controlId="brgy_code">
                         <Form.Label>Barangay</Form.Label>
-                        <Form.Select type="select" name="brgy" value={formData.brgy} onChange={handleOnChange}>
+                        <Form.Select type="select" name="brgy_code" value={formData.brgy} onChange={handleOnChange}>
                             <option>Select Barangay</option>
                             {
                                 barangays && barangays.map((barangayInfo) => {
@@ -153,25 +179,25 @@ const AddAddress = (params) => {
                         </Form.Select>
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" controlId="postal_code">
                         <Form.Label>Postal Code</Form.Label>
                         <Form.Control
                             type="text" placeholder=""
-                            name="postalCode"
+                            name="postal_code"
                             onChange={handleOnChange}
                             className="form-control-sm"
-                            value={formData.postalCode}
+                            value={formData.postal_code}
                         />
                     </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" controlId="additional_address">
                         <Form.Label>Additional address / Landmark</Form.Label>
                         <Form.Control
                             type="text" placeholder=""
-                            name="additionalAddress"
+                            name="additional_address"
                             onChange={handleOnChange}
                             className="form-control-sm"
-                            value={formData.additionalAddress}
+                            value={formData.additional_address}
                         />
                     </Form.Group>
 

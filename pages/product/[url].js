@@ -12,7 +12,6 @@ import { increment, initialCartCount } from '../../redux/features/cartCounterSli
 import shoes from './../../public/images/products/shoes-item.png'
 
 // utils
-import { toastSuccess, toastError } from "../../utils/toasts"
 import { requestOptions } from "../../utils/requestOptions"
 import { fn } from 'moment/moment'
 
@@ -21,9 +20,11 @@ import HtmlHeader from './../../components/Header'
 
 // hooks
 import { useAuth } from './../../hooks/useAuth'
+import { useToast } from './../../hooks/useToast'
 
 export default function Product({ product }) {
     const router = useRouter()
+    const { toastSuccess, toastError } = useToast()
     const cartCount = useSelector((state) => state.cartCounter.cart_count)
     const { isAuthenticated, token } = useAuth()
     const dispatch = useDispatch()
@@ -188,7 +189,7 @@ export default function Product({ product }) {
 // This function gets called at build time on server-side.
 // It may be called again, on a serverless function, if
 // revalidation is enabled and a new request comes in
-export async function getStaticProps(context) { 
+export async function getStaticProps(context) {
     const { url } = context.params
     const response = await fetch(process.env.apiUrl + 'products/' + url)
     const json = await response.json()

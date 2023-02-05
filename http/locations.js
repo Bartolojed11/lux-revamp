@@ -8,7 +8,7 @@ export async function getRegions() {
 }
 
 export async function getProvinces(payload) {
-    const data = await get(`${baseEndpoint}provinces/${payload}`);
+    const data = await get(`${baseEndpoint}province/${payload}`);
     return data.data.provinces;
 }
 
@@ -18,6 +18,6 @@ export async function getCities(payload) {
 }
 
 export async function getBarangays(payload) {
-    const data = await get(`${baseEndpoint}barangays/${payload}`);
+    const data = await get(`${baseEndpoint}barangay/${payload}`);
     return data.data.barangays;
 }
