@@ -14,7 +14,12 @@ import HtmlHeader from './../components/Header'
 
 // utils
 import { stateSetter } from "../utils/form"
-import { requestOptions } from "../utils/requestOptions"
+
+// http
+import { signUpUser } from '../http/user'
+
+// hooks
+import { useToast } from './../hooks/useToast'
 
 const SignUp = () => {
     const router = useRouter()
@@ -25,18 +30,19 @@ const SignUp = () => {
         first_name: '',
         last_name: ''
     })
-
-    const url = process.env.apiUrl + 'users'
+    const { toastSuccess, toastError } = useToast()
 
     function handleSubmit(event) {
         event.preventDefault()
-
-        fetch(url, requestOptions('POST', formData))
-            .then(response => response.json())
+        signUpUser(formData)
             .then((response) => {
-                // Trigger useEffect
-                if (response.status === 'success') {
-                    router.push('/login')
+                if (response.status == 'success') {
+                    toastSuccess(response.message)
+                    setTimeout(() => {
+                        router.push('/login')
+                    }, 3000)
+                } else {
+                    toastError(response.message)
                 }
             })
     }
@@ -76,7 +82,7 @@ const SignUp = () => {
                         defaultValue={formData.password}
                         onChange={handleInputChange}
                     />
-                    
+
                 </Form.Group>
 
                 <Form.Group

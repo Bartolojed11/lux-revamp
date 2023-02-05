@@ -8,9 +8,8 @@ import shoes from './../public/images/categories/Sneakers.png'
 import furniture from './../public/images/categories/Furniture.png'
 import kitchen from './../public/images/categories/Kitchen.png'
 
-// utils
-import { requestOptions } from "../utils/requestOptions"
-
+// http
+import { getCategories } from './../http/categories'
 
 export default function Categories() {
 
@@ -19,15 +18,9 @@ export default function Categories() {
     let [categories, setCategories] = useState([])
 
     useEffect(() => {
-        const url = process.env.apiUrl + 'categories'
-
-        fetch(url, requestOptions('GET'))
-            .then(response => response.json())
-            .then((response) => {
-
-                if (response.status === 'success') {
-                    setCategories(response.data.categories)
-                }
+        getCategories()
+            .then((categoryList) => {
+                setCategories(categoryList)
             })
     }, [])
 

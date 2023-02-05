@@ -10,7 +10,7 @@ export default function ProductCard(props) {
     const product_url = '/product/'
     const [products, setProducts] = useState(props.products || [])
     const { searchQuery } = props
-    
+
     useEffect(() => {
         setProducts(props.products)
     }, [searchQuery])
@@ -26,20 +26,20 @@ export default function ProductCard(props) {
                     products.map((product) => {
 
                         return <>
-                        <Card className='product-card col-lg-sm-6 cold-md-4 col-lg-3 col' onClick={() => goTo(product.url)}>
-                            <Card.Img variant="top" alt={shoes.src} src={shoes.src} />
-                            <Card.Body>
-                                <Card.Title>{product.name}</Card.Title>
-                                <Card.Footer className='product-card__footer'>
-                                    <div className='product-card__price'>P{product.price}</div>
-                                    <div className='product-card__sold'>1k sold</div>
-                                </Card.Footer>
-                            </Card.Body>
-                        </Card>
+                            <Card className='product-card col-lg-sm-6 cold-md-4 col-lg-3 col' onClick={() => goTo(product.url)}>
+                                <Card.Img variant="top" alt={shoes.src} src={shoes.src} />
+                                <Card.Body>
+                                    <Card.Title>{product.name}</Card.Title>
+                                    <Card.Footer className='product-card__footer'>
+                                        <div className='product-card__price'>P{product.price}</div>
+                                        <div className='product-card__sold'>1k sold</div>
+                                    </Card.Footer>
+                                </Card.Body>
+                            </Card>
                         </>
                     })
                 }
-                
+
                 <button className='shop-button' type='button'>See more</button>
             </div>
 

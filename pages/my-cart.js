@@ -7,37 +7,29 @@ import CartItem from '../components/CartItem'
 import MobileDetailTab from '../components/MobileDetailTab'
 import HtmlHeader from './../components/Header'
 
-// utils
-import { requestOptions } from './../utils/requestOptions'
-
 // hooks
 import { useAuth } from './../hooks/useAuth'
+
+// http
+import { getCartItems } from './../http/cart'
 
 const CartPage = () => {
     let [myCartItems, setMyCartItems] = useState([])
     let [fetchTriggered, setFetchTriggered] = useState(false)
-
     let [changesCount, setChangesCount] = useState(0)
-
     let [selectedProducts, setSelectedProducts] = useState([])
     let [selectedTotalAmount, setSelectedTotalAmount] = useState(0)
-
-    const url = process.env.apiUrl + 'cart'
     const { token } = useAuth()
 
     useEffect(() => {
         if (token !== undefined && !fetchTriggered) {
-            fetch(url, requestOptions('GET', {}, { token: token }))
-                .then(response => response.json())
-                .then((response) => {
+            getCartItems({ token })
+                .then((cartItemList) => {
                     setFetchTriggered(true)
-                    setMyCartItems(response.data.user_cart.cart_items || [])
+                    setMyCartItems(cartItemList || [])
                 })
-                    
         }
-
     }, [token])
-
 
     function CartFooter({ totalAmount, selectedProducts }) {
         const router = useRouter()
@@ -154,11 +146,9 @@ const CartPage = () => {
             <CartFooter
                 selectedProducts={selectedProducts}
                 totalAmount={selectedTotalAmount}
-
             />
         </div>
     )
 }
-
 
 export default CartPage

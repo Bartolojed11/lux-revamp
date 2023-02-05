@@ -12,7 +12,7 @@ const Home = (props) => {
 
   return (
     <div className="home-page">
-      <HtmlHeader/>
+      <HtmlHeader />
       <Navbar />
       <Banner />
       <Categories />
@@ -43,6 +43,5 @@ export async function getStaticProps() {
     revalidate: 10, // In seconds
   }
 }
-
 
 export default Home

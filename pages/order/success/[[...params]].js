@@ -12,14 +12,17 @@ import { BsCheckCircle } from "react-icons/bs"
 
 import shoes from './../../../public/images/products/shoes-item.png'
 
-// utils
-import { requestOptions } from "../../../utils/requestOptions"
-
+// hooks
 import { useAuth } from './../../../hooks/useAuth'
+import { useToast } from './../../../hooks/useToast'
+
+// Http
+import { getOrderByRef } from './../../../http/orders'
 
 const Success = () => {
     const router = useRouter()
     const { ref } = router.query
+    const { toastError } = useToast()
 
     const [myOrders, setMyOrders] = useState([])
     const [fetchTriggered, setFetchTriggered] = useState(false)
@@ -27,20 +30,16 @@ const Success = () => {
 
     useEffect(function () {
         if (token !== undefined && ref !== undefined && !fetchTriggered) {
-
-            fetch(process.env.apiUrl + 'orders/' + ref, requestOptions('GET', {}, { token: token }))
-                .then(response => response.json())
-                .then((response) => {
-                    setFetchTriggered(true)
-                    if (response.data.order === null || response.data === null) {
-                        // TODO: 404 page
-                    } else {
-                        setMyOrders(response.data.order)
-
-                    }
-                })
+            getOrderByRef({ token, ref })
+            then((orderInfo) => {
+                setFetchTriggered(true)
+                if (response.data.order === null || response.data === null) {
+                    toastError('Order not found')
+                } else {
+                    setMyOrders(orderInfo.data.order)
+                }
+            })
         }
-
     }, [ref, token, fetchTriggered])
 
     function OrderStatus() {
@@ -67,14 +66,11 @@ const Success = () => {
                         totalAmount={myOrders.total_amount}
                     />
                 }
-
-
             </div>
 
             <Footer />
         </div>
     )
 }
-
 
 export default Success

@@ -9,15 +9,15 @@ import PaymentCard from './../../components/PaymentCard'
 import PaymentDetailsCard from './../../components/PaymentDetailsCard'
 import HtmlHeader from './../../components/Header'
 
-// utils
-import { requestOptions } from "../../utils/requestOptions"
-
 // Icons
 import { IoLocationSharp } from "react-icons/io5";
 
 // hooks
 import { useAuth } from './../../hooks/useAuth'
 import { useToast } from './../../hooks/useToast'
+
+// http
+import { purchase } from '../../http/orders'
 
 const PlaceOrder = () => {
     const [selectedProducts, setSelectedProducts] = useState([])
@@ -54,9 +54,6 @@ const PlaceOrder = () => {
     }
 
     function placeOrder(selectedProducts, token, router) {
-
-        const url = process.env.apiUrl + 'orders'
-
         const order = {
             "ordered_items": selectedProducts,
             "notes": '',
@@ -65,21 +62,20 @@ const PlaceOrder = () => {
                 "region": '62d019d5da5e660674c72fe2',
                 "province": '62d01a48da5e660674c72fe9',
                 "city": '62d01a48da5e660674c72fe9'
-            }
+            },
+            "token": token
         }
 
-        fetch(url, requestOptions('POST', order, { token: token }))
-            .then(response => response.json())
-            .then((response) => {
-                if (response.status === 'success') {
-                    toastSuccess(response.message)
+        purchase(order)
+            .then((orderReponse) => {
+                if (orderReponse.status === 'success') {
+                    toastSuccess(orderReponse.message)
                     localStorage.removeItem('selected_products');
-                    router.push(`/order/success?ref=${response.data.order.ref_num}`)
+                    router.push(`/order/success?ref=${orderReponse.data.order.ref_num}`)
                 } else {
-                    toastError(response.message)
+                    toastError(orderReponse.message)
                 }
             })
-
     }
 
     return (
