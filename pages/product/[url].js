@@ -22,6 +22,9 @@ import HtmlHeader from './../../components/Header'
 import { useAuth } from './../../hooks/useAuth'
 import { useToast } from './../../hooks/useToast'
 
+// http
+import { getCartCount, saveToCart } from './../../http/cart'
+
 export default function Product({ product }) {
     const router = useRouter()
     const { toastSuccess, toastError } = useToast()
@@ -32,13 +35,9 @@ export default function Product({ product }) {
     useEffect(() => {
         const url = process.env.apiUrl + 'cart/count'
         if (isAuthenticated && token !== undefined) {
-
-            fetch(url, requestOptions('GET', {}, { token: token }))
-                .then(response => response.json())
-                .then((response) => {
-                    if (response.status === 'success') {
-                        dispatch(initialCartCount(response.total_count))
-                    }
+            getCartCount({ token })
+                .then((total_count) => {
+                    dispatch(initialCartCount(total_count));
                 })
         }
 
@@ -73,11 +72,11 @@ export default function Product({ product }) {
                 "quantity": 1,
                 "amount": product.price,
                 "total_amount": product.price
-            }
+            },
+            token
         }
 
-        fetch(url, requestOptions('POST', cart, { token: token }))
-            .then(response => response.json())
+        saveToCart(cart)
             .then((response) => {
                 if (response.status === 'success') {
                     dispatch(increment())

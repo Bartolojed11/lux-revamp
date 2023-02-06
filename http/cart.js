@@ -1,4 +1,4 @@
-import { get } from './utils/api'
+import { get, post } from './utils/api'
 
 const baseEndpoint = 'cart/'
 
@@ -10,4 +10,9 @@ export async function getCartCount(payload) {
 export async function getCartItems(payload) {
     const data = await get(`${baseEndpoint}`, payload);
     return data?.data?.user_cart?.cart_items;
+}
+
+export async function saveToCart(payload) {
+    const data = await post(`${baseEndpoint}`, payload);
+    return data
 }
