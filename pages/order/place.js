@@ -17,7 +17,11 @@ import { useAuth } from './../../hooks/useAuth'
 import { useToast } from './../../hooks/useToast'
 
 // http
-import { purchase } from '../../http/orders'
+import { purchase } from './../../http/orders'
+
+// utils
+import { formatAddress } from './../../utils/textFormatter'
+
 
 const PlaceOrder = () => {
     const [selectedProducts, setSelectedProducts] = useState([])
@@ -25,6 +29,9 @@ const PlaceOrder = () => {
     const { toastSuccess, toastError } = useToast();
     const { token } = useAuth()
     const router = useRouter()
+    const [shippingAddress, setShippingAddress] = useState({
+        ...JSON.parse(localStorage.getItem('default_shipping_address'))
+    })
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -40,28 +47,25 @@ const PlaceOrder = () => {
         }
     }, [])
 
-
-    function DeliveryAddress() {
+    function DeliveryAddress(props) {
         return (
             <div className="delivery-address">
                 <div className="delivery-address__header">
                     <span className="font-600 vertical-center"><IoLocationSharp className='font-red' />Delivery Address</span>
                     <Link href="/my-address/select" className='font-underline font-14'>Change Address</Link>
                 </div>
-                <div className='font-14'>Lorem, Ipsum, Dolor City, Negros Occidental, Lorem Ipsum</div>
+                <div className='font-14'>{formatAddress(props.shippingAddress)}</div>
             </div>
         )
     }
 
-    function placeOrder(selectedProducts, token, router) {
+    function placeOrder(params) {
+        const {selectedProducts, token, router, shippingAddress} = params
         const order = {
             "ordered_items": selectedProducts,
             "notes": '',
             "delivery_address": {
-                "address": 'address',
-                "region": '62d019d5da5e660674c72fe2',
-                "province": '62d01a48da5e660674c72fe9',
-                "city": '62d01a48da5e660674c72fe9'
+                ...shippingAddress
             },
             "token": token
         }
@@ -82,14 +86,12 @@ const PlaceOrder = () => {
         <div className='place-order__wrapper'>
             <HtmlHeader title='Place order' />
             <MobileDetailTab header="Checkout Order" />
-            <DeliveryAddress />
+            <DeliveryAddress shippingAddress={shippingAddress} />
             <div className='container-fluid'>
                 <PurchaseCard header={{ title: 'Order details' }}
                     items={[...selectedProducts]}
                     totalAmount={totalAmount}
                 />
-
-
                 <PaymentCard />
                 <PaymentDetailsCard totalAmount={totalAmount} />
             </div>
@@ -99,11 +101,12 @@ const PlaceOrder = () => {
                     <div>Total</div>
                     <div className='totalPrice'>P{totalAmount}</div>
                 </div>
-                <button type="button" onClick={() => placeOrder(selectedProducts, token, router)} className='btn-shop-primary btn-checkout'>Place Order</button>
+                <button type="button" onClick={() => placeOrder({
+                    selectedProducts, shippingAddress, token, router
+                })} className='btn-shop-primary btn-checkout'>Place Order</button>
             </div>
         </div>
     )
 }
-
 
 export default PlaceOrder

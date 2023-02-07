@@ -16,3 +16,10 @@ export async function getAddressList(payload) {
     });
     return data?.data?.address;
 }
+
+export async function getDefaultShippingAddress(payload) {
+    const data = await get(`${baseEndpoint}default-shipping-address`, {
+        ...payload
+    });
+    return data?.data?.defaultAddress;
+}

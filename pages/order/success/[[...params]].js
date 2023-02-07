@@ -22,6 +22,7 @@ import { getOrderByRef } from './../../../http/orders'
 const Success = () => {
     const router = useRouter()
     const { ref } = router.query
+
     const { toastError } = useToast()
 
     const [myOrders, setMyOrders] = useState([])
@@ -29,14 +30,14 @@ const Success = () => {
     const { token } = useAuth()
 
     useEffect(function () {
-        if (token !== undefined && ref !== undefined && !fetchTriggered) {
+        if (token && ref && !fetchTriggered) {
             getOrderByRef({ token, ref })
-            then((orderInfo) => {
+            .then((orderInfo) => {
                 setFetchTriggered(true)
-                if (response.data.order === null || response.data === null) {
-                    toastError('Order not found')
+                if (orderInfo) {
+                    setMyOrders(orderInfo)
                 } else {
-                    setMyOrders(orderInfo.data.order)
+                    toastError('Order not found')
                 }
             })
         }

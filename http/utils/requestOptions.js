@@ -13,12 +13,6 @@ export function requestOptions(method = 'GET', payload = {}, options = {}) {
         }
     }
 
-    if (Object.keys(payload).length !== 0) {
-        body = {
-            body: JSON.stringify(payload)
-        }
-    }
-
     if (token !== undefined) {
         auth = {
             'Authorization': 'Bearer ' + token
@@ -27,9 +21,14 @@ export function requestOptions(method = 'GET', payload = {}, options = {}) {
         header.headers = { ...header.headers, ...auth }
     }
 
-    return {
+    let returns = {
         method: method,
         ...header,
-        ...body
     }
+
+    if (method != 'GET' && Object.keys(payload).length !== 0) {
+        returns.body = JSON.stringify(payload)
+    }
+
+    return returns
 }

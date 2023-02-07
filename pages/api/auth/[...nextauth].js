@@ -63,7 +63,8 @@ export default NextAuth({
           status: user.data.status,
           user_id: user.data.id,
           phone_number: user.phone_number,
-          birthday: user.birthday
+          birthday: user.birthday,
+          defaultShippingAddress: user.data?.defaultShippingAddress || {}
         };
       }
 
@@ -82,6 +83,7 @@ export default NextAuth({
       session.user.user_id = token.user_id
       session.user.phone_number = token.phone_number
       session.user.birthday = token.birthday
+      session.user.defaultShippingAddress = token.defaultShippingAddress
       return session;
     },
   },

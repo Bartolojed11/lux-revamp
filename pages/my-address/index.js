@@ -16,7 +16,7 @@ import { getAddressList } from './../../http/userAddress'
 import { useAuth } from "./../../hooks/useAuth";
 
 // utils
-import { titleCase } from "./../../utils/words"
+import { formatAddress } from "./../../utils/textFormatter"
 
 const MyAddress = (params) => {
 
@@ -57,18 +57,6 @@ const MyAddress = (params) => {
                 </div>
             </Card.Body>
         </Card>
-    }
-
-    function formatAddress(address) {
-        const { province_name } = address
-        let city_name = address.city_name.toLowerCase()
-        city_name = city_name.includes('city') ? titleCase(city_name) : `${titleCase(city_name)} City`
-        const country = 'PH'
-        const brgy_name = address?.brgy_name !== undefined ? `Brgy ${address.brgy_name}, ` : ''
-        const postal_code = address?.postal_code !== undefined ? ` ${address.postal_code}, ` : ' '
-        const additional_address = address?.additional_address !== undefined ? `${address.additional_address}, ` : ''
-
-        return `${additional_address} ${brgy_name} ${city_name},${postal_code}${province_name}, ${country}`
     }
 
     return <>

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { useState } from 'react'
-import { signIn } from "next-auth/react"
+import { signIn, getSession } from "next-auth/react"
 import { useRouter } from 'next/router'
 
 // Third parties And Icons
@@ -36,17 +36,21 @@ const Login = (props) => {
       redirect: false,
       email: formData.email,
       password: formData.password
+    }).then((res) => {
+      console.log("🚀 ~ file: login.js:42 ~ handleSubmit ~ res", res)
+      if (res?.error) {
+        const error = JSON.parse(res?.error)
+        toastError(error.message)
+      } else {
+        toastSuccess("Login successfully!")
+        getSession().then((res) => {
+         localStorage.setItem('default_shipping_address', JSON.stringify(res.user.defaultShippingAddress))
+         router.push('/')
+        })
+      }
+    }).catch((err) => {
+      toastError("Something went wrong!")
     });
-    if (res?.error) {
-      const error = JSON.parse(res?.error)
-      toastError(error.message)
-    } else {
-      toastSuccess("Login succssfully!")
-      setTimeout(() => {
-        router.push('/')
-      }, 3000)
-
-    }
   }
 
   return (

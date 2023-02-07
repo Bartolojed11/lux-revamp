@@ -1,4 +1,4 @@
-import { get } from './utils/api'
+import { get, post } from './utils/api'
 
 const baseEndpoint = 'orders/'
 
@@ -8,8 +8,10 @@ export async function getOrders(payload) {
 }
 
 export async function getOrderByRef(payload) {
-    const data = await get(`${baseEndpoint}${payload.ref}`, payload);
-    return data?.data?.orders;
+    const data = await get(`${baseEndpoint}${payload.ref}`, {
+        ...payload
+    });
+    return data?.data?.order
 }
 
 export async function purchase(payload) {
