@@ -1,18 +1,28 @@
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-import Link from "next/link"
+import Link from 'next/link'
 
 // Third parties
-import { Bag, ChatDots, ChevronLeft, Heart, SlashSquareFill, StarFill } from "react-bootstrap-icons"
+import {
+    Bag,
+    ChatDots,
+    ChevronLeft,
+    Heart,
+    SlashSquareFill,
+    StarFill,
+} from 'react-bootstrap-icons'
 import { useSelector, useDispatch } from 'react-redux'
 
 // Redux
-import { increment, initialCartCount } from '../../redux/features/cartCounterSlice'
+import {
+    increment,
+    initialCartCount,
+} from '../../redux/features/cartCounterSlice'
 
 import shoes from './../../public/images/products/shoes-item.png'
 
 // utils
-import { requestOptions } from "../../utils/requestOptions"
+import { requestOptions } from '../../utils/requestOptions'
 import { fn } from 'moment/moment'
 
 // Components
@@ -35,14 +45,11 @@ export default function Product({ product }) {
     useEffect(() => {
         const url = process.env.apiUrl + 'cart/count'
         if (isAuthenticated && token !== undefined) {
-            getCartCount({ token })
-                .then((total_count) => {
-                    dispatch(initialCartCount(total_count));
-                })
+            getCartCount({ token }).then((total_count) => {
+                dispatch(initialCartCount(total_count))
+            })
         }
-
     }, [isAuthenticated, token])
-
 
     function Footer({ product, router, token }) {
         return (
@@ -51,42 +58,48 @@ export default function Product({ product }) {
                     <ChatDots />
                     <label>Chat</label>
                 </div>
-                <div className="v-separator">
-
-                </div>
-                <button type="button" className="btn-crystal product-footer__cart" onClick={() => addToCart(product, token)}>
+                <div className="v-separator"></div>
+                <button
+                    type="button"
+                    className="btn-crystal product-footer__cart"
+                    onClick={() => addToCart(product, token)}
+                >
                     <Bag />
                     <label>Add to cart</label>
                 </button>
-                <button type="button" className="product-footer__buynow btn-shop-primary" onClick={() => buyNow(product, token, router)}>Buy now</button>
+                <button
+                    type="button"
+                    className="product-footer__buynow btn-shop-primary"
+                    onClick={() => buyNow(product, token, router)}
+                >
+                    Buy now
+                </button>
             </div>
         )
     }
 
-
     async function addToCart(product, token, buyNow = false) {
         const url = process.env.apiUrl + 'cart'
         const cart = {
-            "cart_items": {
-                "product_id": product._id,
-                "quantity": 1,
-                "amount": product.price,
-                "total_amount": product.price
+            cart_items: {
+                product_id: product._id,
+                quantity: 1,
+                amount: product.price,
+                total_amount: product.price,
             },
-            token
+            token,
         }
 
-        saveToCart(cart)
-            .then((response) => {
-                if (response.status === 'success') {
-                    dispatch(increment())
-                    if (!buyNow) {
-                        toastSuccess(response.message)
-                    }
-                } else {
-                    toastError(response.message)
+        saveToCart(cart).then((response) => {
+            if (response.status === 'success') {
+                dispatch(increment())
+                if (!buyNow) {
+                    toastSuccess(response.message)
                 }
-            })
+            } else {
+                toastError(response.message)
+            }
+        })
     }
 
     async function buyNow(product, token, router) {
@@ -98,20 +111,25 @@ export default function Product({ product }) {
         qty += 1
         total_amount += product.price
 
-        localStorage.removeItem('selected_products');
-        localStorage.setItem('selected_products', JSON.stringify([{
-            product_selected: true,
-            product_id: product._id,
-            name: product.name,
-            quantity: qty,
-            amount: product.price,
-            total_amount: total_amount
-        }]))
+        localStorage.removeItem('selected_products')
+        localStorage.setItem(
+            'selected_products',
+            JSON.stringify([
+                {
+                    product_selected: true,
+                    product_id: product._id,
+                    name: product.name,
+                    quantity: qty,
+                    amount: product.price,
+                    total_amount: total_amount,
+                },
+            ])
+        )
         router.push('/order/place')
     }
 
     function getProductFromLocalStorage(product_id) {
-        let products = JSON.parse(localStorage.getItem('selected_products'));
+        let products = JSON.parse(localStorage.getItem('selected_products'))
 
         let selected_product = {}
         if (products !== null) {
@@ -130,11 +148,19 @@ export default function Product({ product }) {
             <HtmlHeader title={`Product | ${product.name}`} />
 
             <div className="product-wrapper__header">
-                <button className="round-button" type="button" onClick={() => router.back()}>
+                <button
+                    className="round-button"
+                    type="button"
+                    onClick={() => router.back()}
+                >
                     <ChevronLeft />
                 </button>
 
-                <button className="round-button header-cart-container" type="button" onClick={() => router.push('/my-cart')}>
+                <button
+                    className="round-button header-cart-container"
+                    type="button"
+                    onClick={() => router.push('/my-cart')}
+                >
                     <div className="header-cart-count">{cartCount}</div>
                     <Bag />
                 </button>
@@ -145,11 +171,11 @@ export default function Product({ product }) {
             <div className="product-price-wrapper">
                 <div className="product-price container-fluid">
                     <span className="product-price__discount">P400</span>
-                    <span className="product-price__original">P{product.price}</span>
+                    <span className="product-price__original">
+                        P{product.price}
+                    </span>
                 </div>
-                <div className="product-sale">
-                    SALE
-                </div>
+                <div className="product-sale">SALE</div>
             </div>
             <div className="product-info container-fluid mb-4">
                 <h1>{product.name}</h1>
@@ -166,9 +192,7 @@ export default function Product({ product }) {
                     </div>
                     <div className="rating__total">5</div>
                 </div>
-                <div className="sold-total">
-                    5k Sold
-                </div>
+                <div className="sold-total">5k Sold</div>
                 <div className="product-actions">
                     <button type="button" className="btn-crystal p-0">
                         <Heart />
@@ -204,12 +228,10 @@ export async function getStaticProps(context) {
     }
 }
 
-
 // This function gets called at build time on server-side.
 // It may be called again, on a serverless function, if
 // the path has not been generated.
 export async function getStaticPaths() {
-
     const response = await fetch(process.env.apiUrl + 'products/search')
     const json = await response.json()
     const { products } = json.data || {}
@@ -217,7 +239,7 @@ export async function getStaticPaths() {
     // Get the paths we want to pre-render based on posts
     const paths = products.map((product) => {
         return {
-            params: { url: product.url.toString() }
+            params: { url: product.url.toString() },
         }
     })
 

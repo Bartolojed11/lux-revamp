@@ -25,13 +25,11 @@ const MyPurchase = () => {
 
     useEffect(() => {
         if (token !== undefined && !fetchTriggered) {
-            getOrders({ token })
-                .then((orderList) => {
-                    setFetchTriggered(true)
-                    setMyOrders(orderList)
-                })
+            getOrders({ token }).then((orderList) => {
+                setFetchTriggered(true)
+                setMyOrders(orderList)
+            })
         }
-
     }, [token])
 
     function searchOrder(event) {
@@ -43,63 +41,95 @@ const MyPurchase = () => {
     }
 
     function PurchaseHeader() {
-        return <>
-            <HtmlHeader title='My Purchases' />
-            <div className='purchase-header'>
-                <div className='search-wrapper'>
-                    <Form action='/search/' method='get' onSubmit={searchOrder}>
-                        <Form.Control
-                            type='text'
-                            placeholder='Search by Reference no. or product'
-                            className='purchase-search'
-                            onChange={handleInput}
-                            value={orderKeyword}
-                        />
-                        <div className='search-icon'>
-                            <button type='submit' className='btn-crystal p-0'>
-                                <Search />
-                            </button>
-                        </div>
-                    </Form>
-                </div>
+        return (
+            <>
+                <HtmlHeader title="My Purchases" />
+                <div className="purchase-header">
+                    <div className="search-wrapper">
+                        <Form
+                            action="/search/"
+                            method="get"
+                            onSubmit={searchOrder}
+                        >
+                            <Form.Control
+                                type="text"
+                                placeholder="Search by Reference no. or product"
+                                className="purchase-search"
+                                onChange={handleInput}
+                                value={orderKeyword}
+                            />
+                            <div className="search-icon">
+                                <button
+                                    type="submit"
+                                    className="btn-crystal p-0"
+                                >
+                                    <Search />
+                                </button>
+                            </div>
+                        </Form>
+                    </div>
 
-                <div className='purchase-navigations'>
-                    <button type='button' className='btn no-border-radius btn-crystal pn-active'>To Pay</button>
-                    <button type='button' className='btn no-border-radius btn-crystal'>To Ship</button>
-                    <button type='button' className='btn no-border-radius btn-crystal'>To Receive</button>
-                    <button type='button' className='btn no-border-radius btn-crystal'>Completed</button>
+                    <div className="purchase-navigations">
+                        <button
+                            type="button"
+                            className="btn no-border-radius btn-crystal pn-active"
+                        >
+                            To Pay
+                        </button>
+                        <button
+                            type="button"
+                            className="btn no-border-radius btn-crystal"
+                        >
+                            To Ship
+                        </button>
+                        <button
+                            type="button"
+                            className="btn no-border-radius btn-crystal"
+                        >
+                            To Receive
+                        </button>
+                        <button
+                            type="button"
+                            className="btn no-border-radius btn-crystal"
+                        >
+                            Completed
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </>
+            </>
+        )
     }
 
     return (
-        <div className='my-purchase-page'>
-            <MobileDetailTab header='My Purchases' />
-            <PurchaseHeader page='my-purchase' />
-            <div className='container-fluid'>
-                {
-                    myOrders !== undefined && myOrders.map((order) => {
-                        return <div key={order._id}>
-                            <PurchaseCard header={
-                                {
-                                    title: 'Reference no.',
-                                    value: order.ref_num
-                                }
-                            }
-
-                                items={[...order.ordered_items]}
-
-                                totalAmount={order.total_amount}
-
-                            />
-                            <div className='flex just-between date-ordered-info'>
-                                <span>Date Ordered</span>
-                                <span><i>{Moment(order.date_ordered).format('MMM D, YYYY')}</i></span>
+        <div className="my-purchase-page">
+            <MobileDetailTab header="My Purchases" />
+            <PurchaseHeader page="my-purchase" />
+            <div className="container-fluid">
+                {myOrders !== undefined &&
+                    myOrders.map((order) => {
+                        return (
+                            <div key={order._id}>
+                                <PurchaseCard
+                                    header={{
+                                        title: 'Reference no.',
+                                        value: order.ref_num,
+                                    }}
+                                    items={[...order.ordered_items]}
+                                    totalAmount={order.total_amount}
+                                />
+                                <div className="flex just-between date-ordered-info">
+                                    <span>Date Ordered</span>
+                                    <span>
+                                        <i>
+                                            {Moment(order.date_ordered).format(
+                                                'MMM D, YYYY'
+                                            )}
+                                        </i>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                    })
-                }
+                        )
+                    })}
             </div>
             <Footer />
         </div>

@@ -23,11 +23,10 @@ const CartPage = () => {
 
     useEffect(() => {
         if (token !== undefined && !fetchTriggered) {
-            getCartItems({ token })
-                .then((cartItemList) => {
-                    setFetchTriggered(true)
-                    setMyCartItems(cartItemList || [])
-                })
+            getCartItems({ token }).then((cartItemList) => {
+                setFetchTriggered(true)
+                setMyCartItems(cartItemList || [])
+            })
         }
     }, [token])
 
@@ -35,46 +34,60 @@ const CartPage = () => {
         const router = useRouter()
 
         function placeOrder(selectedProducts) {
-            localStorage.removeItem('selected_products');
-            localStorage.setItem('selected_products', JSON.stringify(selectedProducts));
+            localStorage.removeItem('selected_products')
+            localStorage.setItem(
+                'selected_products',
+                JSON.stringify(selectedProducts)
+            )
             router.push('order/place')
         }
 
         return (
-            <div className='cart-footer'>
-                <div className='cart-footer__total-wrapper'>
+            <div className="cart-footer">
+                <div className="cart-footer__total-wrapper">
                     <div>Total</div>
-                    <div className='total-order-price'>P{totalAmount || 0}</div>
+                    <div className="total-order-price">P{totalAmount || 0}</div>
                 </div>
-                <button type="button" onClick={() => placeOrder(selectedProducts)} className='btn-shop-primary btn-checkout'>Checkout (<span>{selectedProducts.length}</span>)</button>
+                <button
+                    type="button"
+                    onClick={() => placeOrder(selectedProducts)}
+                    className="btn-shop-primary btn-checkout"
+                >
+                    Checkout (<span>{selectedProducts.length}</span>)
+                </button>
             </div>
         )
     }
 
     function CartHeader() {
-        return <>
-            <div className='cart-header'>
-                <div className='cart-navigations'>
-                    <Link href="/my-cart">
-                        All<span className='total-cart-items'>(2)</span>
-                    </Link>
+        return (
+            <>
+                <div className="cart-header">
+                    <div className="cart-navigations">
+                        <Link href="/my-cart">
+                            All<span className="total-cart-items">(2)</span>
+                        </Link>
 
-                    <Link href="/my-cart">
-                        Buy Again
-                    </Link>
+                        <Link href="/my-cart">Buy Again</Link>
+                    </div>
+                    <div className="cart-header__separator"></div>
+                    <div className="cart-select-all container-fluid">
+                        <input
+                            type="checkbox"
+                            id="select-all-item"
+                            className="select-all-item"
+                        />
+                        <label className="ml-2" htmlFor="select-all-item">
+                            Select all
+                        </label>
+                    </div>
                 </div>
-                <div className="cart-header__separator"></div>
-                <div className='cart-select-all container-fluid'>
-                    <input type="checkbox" id="select-all-item" className='select-all-item' />
-                    <label className='ml-2' htmlFor='select-all-item'>Select all</label>
-                </div>
-            </div>
-        </>
+            </>
+        )
     }
 
-
     function updateSelectedProducts(data) {
-        setChangesCount(changesCount => changesCount + 1)
+        setChangesCount((changesCount) => changesCount + 1)
 
         let products = []
         let isDuplicate = false
@@ -110,38 +123,40 @@ const CartPage = () => {
         }
     }
 
-    useEffect(function () {
-        let selectedAmount = 0
-        selectedProducts.map((product) => {
-            selectedAmount += product.total_amount
-            setSelectedTotalAmount((selectedTotalAmount) => {
-                selectedTotalAmount = selectedAmount
-                return selectedAmount
+    useEffect(
+        function () {
+            let selectedAmount = 0
+            selectedProducts.map((product) => {
+                selectedAmount += product.total_amount
+                setSelectedTotalAmount((selectedTotalAmount) => {
+                    selectedTotalAmount = selectedAmount
+                    return selectedAmount
+                })
             })
-        })
 
-        if (selectedProducts.length === 0) {
-            setSelectedTotalAmount(0)
-        }
-
-    }, [changesCount])
+            if (selectedProducts.length === 0) {
+                setSelectedTotalAmount(0)
+            }
+        },
+        [changesCount]
+    )
 
     return (
-        <div className='cart_page'>
-            <HtmlHeader title='Shopping Cart' />
+        <div className="cart_page">
+            <HtmlHeader title="Shopping Cart" />
             <MobileDetailTab header="Shopping Cart" />
             <CartHeader />
-            <div className='container-fluid cart'>
-                {
-                    myCartItems.map((item) => {
-                        return <>
+            <div className="container-fluid cart">
+                {myCartItems.map((item) => {
+                    return (
+                        <>
                             <CartItem
                                 updateSelectedProducts={updateSelectedProducts}
-                                {...item} />
+                                {...item}
+                            />
                         </>
-                    })
-                }
-
+                    )
+                })}
             </div>
             <CartFooter
                 selectedProducts={selectedProducts}

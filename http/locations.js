@@ -3,21 +3,21 @@ import { get } from './utils/api'
 const baseEndpoint = 'locations/'
 
 export async function getRegions() {
-    const data = await get(`${baseEndpoint}regions`);
-    return data.data.regions;
+    const data = await get(`${baseEndpoint}regions`)
+    return data.data.regions
 }
 
 export async function getProvinces(payload) {
-    const data = await get(`${baseEndpoint}province/${payload}`);
-    return data.data.provinces;
+    const data = await get(`${baseEndpoint}province/${payload}`)
+    return data.data.provinces
 }
 
 export async function getCities(payload) {
-    const data = await get(`${baseEndpoint}cities/${payload}`);
-    return data.data.cities;
+    const data = await get(`${baseEndpoint}cities/${payload}`)
+    return data.data.cities
 }
 
 export async function getBarangays(payload) {
-    const data = await get(`${baseEndpoint}barangay/${payload}`);
-    return data.data.barangays;
+    const data = await get(`${baseEndpoint}barangay/${payload}`)
+    return data.data.barangays
 }

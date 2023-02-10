@@ -1,20 +1,20 @@
-import { toast } from 'react-toastify';
+import { toast } from 'react-toastify'
 
 export function useToast() {
-    const toastSuccess = ((message, timeout = 3000) => {
+    const toastSuccess = (message, timeout = 3000) => {
         const type = 'success'
         toast[type](message, setToast(type, timeout))
-    });
+    }
 
-    const toastError = ((message, timeout = 3000) => {
+    const toastError = (message, timeout = 3000) => {
         const type = 'error'
         toast[type](message, setToast(type, timeout))
-    });
+    }
 
-    const toastWarning = ((message, timeout = 3000) => {
+    const toastWarning = (message, timeout = 3000) => {
         const type = 'warning'
         toast[type](message, setToast(type, timeout))
-    });
+    }
 
     const setToast = (type, timeout) => {
         const theme = type != 'error' ? 'light' : 'colored'
@@ -32,5 +32,5 @@ export function useToast() {
         return options
     }
 
-    return { toastSuccess, toastError, toastWarning };
+    return { toastSuccess, toastError, toastWarning }
 }

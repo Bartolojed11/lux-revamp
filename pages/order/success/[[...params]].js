@@ -8,7 +8,7 @@ import Footer from './../../../components/Footer'
 import HtmlHeader from './../../../components/Header'
 
 // icons
-import { BsCheckCircle } from "react-icons/bs"
+import { BsCheckCircle } from 'react-icons/bs'
 
 import shoes from './../../../public/images/products/shoes-item.png'
 
@@ -29,44 +29,49 @@ const Success = () => {
     const [fetchTriggered, setFetchTriggered] = useState(false)
     const { token } = useAuth()
 
-    useEffect(function () {
-        if (token && ref && !fetchTriggered) {
-            getOrderByRef({ token, ref })
-            .then((orderInfo) => {
-                setFetchTriggered(true)
-                if (orderInfo) {
-                    setMyOrders(orderInfo)
-                } else {
-                    toastError('Order not found')
-                }
-            })
-        }
-    }, [ref, token, fetchTriggered])
+    useEffect(
+        function () {
+            if (token && ref && !fetchTriggered) {
+                getOrderByRef({ token, ref }).then((orderInfo) => {
+                    setFetchTriggered(true)
+                    if (orderInfo) {
+                        setMyOrders(orderInfo)
+                    } else {
+                        toastError('Order not found')
+                    }
+                })
+            }
+        },
+        [ref, token, fetchTriggered]
+    )
 
     function OrderStatus() {
-        return <div className="order-status__wrapper">
-            <div className="order-status__icon">
-                <BsCheckCircle />
+        return (
+            <div className="order-status__wrapper">
+                <div className="order-status__icon">
+                    <BsCheckCircle />
+                </div>
+                <div className="order-status__message font-price">
+                    ORDER PLACED SUCCESSFULLY
+                </div>
             </div>
-            <div className="order-status__message font-price">
-                ORDER PLACED SUCCESSFULLY
-            </div>
-        </div>
+        )
     }
 
     return (
-        <div className='success-order__wrapper'>
-            <HtmlHeader title='Successful Order' />
+        <div className="success-order__wrapper">
+            <HtmlHeader title="Successful Order" />
             <MobileDetailTab header="Successful Order" />
 
-            <div className='container-fluid success-order-container'>
+            <div className="container-fluid success-order-container">
                 <OrderStatus />
-                {
-                    myOrders.ordered_items !== undefined && <PurchaseCard header={{ title: 'Reference number', value: ref }}
+                {myOrders.ordered_items !== undefined && (
+                    <PurchaseCard
+                        header={{ title: 'Reference number', value: ref }}
                         items={[...myOrders.ordered_items]}
                         totalAmount={myOrders.total_amount}
                     />
-                }
+                )}
             </div>
 
             <Footer />

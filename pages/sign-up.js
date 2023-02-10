@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 
 // Third parties And Icons
-import { Form } from "react-bootstrap"
-import { Person, People } from "react-bootstrap-icons"
-import { BsShieldLock } from "react-icons/bs"
-import { MdOutlineMail } from "react-icons/md";
+import { Form } from 'react-bootstrap'
+import { Person, People } from 'react-bootstrap-icons'
+import { BsShieldLock } from 'react-icons/bs'
+import { MdOutlineMail } from 'react-icons/md'
 
 // Components
 import Footer from './../components/Footer'
@@ -13,7 +13,7 @@ import OtherAuth from './../components/OtherAuth'
 import HtmlHeader from './../components/Header'
 
 // utils
-import { stateSetter } from "../utils/form"
+import { stateSetter } from '../utils/form'
 
 // http
 import { signUpUser } from '../http/user'
@@ -28,23 +28,22 @@ const SignUp = () => {
         password: '',
         passwordConfirm: '',
         first_name: '',
-        last_name: ''
+        last_name: '',
     })
     const { toastSuccess, toastError } = useToast()
 
     function handleSubmit(event) {
         event.preventDefault()
-        signUpUser(formData)
-            .then((response) => {
-                if (response.status == 'success') {
-                    toastSuccess(response.message)
-                    setTimeout(() => {
-                        router.push('/login')
-                    }, 3000)
-                } else {
-                    toastError(response.message)
-                }
-            })
+        signUpUser(formData).then((response) => {
+            if (response.status == 'success') {
+                toastSuccess(response.message)
+                setTimeout(() => {
+                    router.push('/login')
+                }, 3000)
+            } else {
+                toastError(response.message)
+            }
+        })
     }
 
     function handleInputChange(event) {
@@ -53,11 +52,14 @@ const SignUp = () => {
 
     return (
         <div className="signup-page">
-            <HtmlHeader title='Sign up' />
+            <HtmlHeader title="Sign up" />
             <Form className="signup-form" method="post" onSubmit={handleSubmit}>
                 <h1 className="text-center">Welcome!</h1>
                 <p className="text-center">Lorem ipsum</p>
-                <Form.Group className="form-group-email mb-3" controlId="formBasicEmail">
+                <Form.Group
+                    className="form-group-email mb-3"
+                    controlId="formBasicEmail"
+                >
                     <Form.Control
                         className="signup-email"
                         type="email"
@@ -77,12 +79,11 @@ const SignUp = () => {
                     <Form.Control
                         className="password"
                         type="password"
-                        placeholder='password'
+                        placeholder="password"
                         name="password"
                         defaultValue={formData.password}
                         onChange={handleInputChange}
                     />
-
                 </Form.Group>
 
                 <Form.Group
@@ -93,14 +94,17 @@ const SignUp = () => {
                     <Form.Control
                         className="password"
                         type="password"
-                        placeholder='confirm password'
+                        placeholder="confirm password"
                         name="passwordConfirm"
                         defaultValue={formData.passwordConfirm}
                         onChange={handleInputChange}
                     />
                 </Form.Group>
 
-                <Form.Group className="form-group-firstname mb-3" controlId="formBasicEmail">
+                <Form.Group
+                    className="form-group-firstname mb-3"
+                    controlId="formBasicEmail"
+                >
                     <Form.Control
                         className="signup-firstname"
                         type="text"
@@ -112,7 +116,10 @@ const SignUp = () => {
                     <Person className="firstname-left-icon" />
                 </Form.Group>
 
-                <Form.Group className="form-group-lastname mb-3" controlId="formBasicEmail">
+                <Form.Group
+                    className="form-group-lastname mb-3"
+                    controlId="formBasicEmail"
+                >
                     <Form.Control
                         className="signup-lastname"
                         type="text"

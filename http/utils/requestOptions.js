@@ -9,13 +9,13 @@ export function requestOptions(method = 'GET', payload = {}, options = {}) {
 
     let header = {
         headers: {
-            'Content-Type': 'application/json'
-        }
+            'Content-Type': 'application/json',
+        },
     }
 
     if (token !== undefined) {
         auth = {
-            'Authorization': 'Bearer ' + token
+            Authorization: 'Bearer ' + token,
         }
 
         header.headers = { ...header.headers, ...auth }
