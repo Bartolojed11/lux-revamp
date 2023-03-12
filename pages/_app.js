@@ -10,14 +10,10 @@ import './../styles/public.scss'
 import 'react-toastify/dist/ReactToastify.css'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
-    const DynamicComponent = dynamic(() =>
-        import('react-hot-toast').then((mod) => mod.Toaster)
-    )
 
     return (
         <SessionProvider session={session}>
             <Suspense fallback={`Loading...`}>
-                <DynamicComponent />
             </Suspense>
             <Provider store={store}>
                 <Component {...pageProps} />

@@ -9,7 +9,7 @@ import shoes from './../public/images/products/shoes-item.png'
 import { stateSetter } from './../utils/form'
 
 const CartItem = (props) => {
-    let [product, setProduct] = useState({
+    const [product, setProduct] = useState({
         product_selected: false,
         product_id: props.product[0]._id,
         name: props.product[0].name,
